@@ -15,6 +15,7 @@
 	</nav>
 
 	<div class="container">
+	  <img src="github.png">
 		{{> website_form}}
 		{{> website_list}}
 	</div>
@@ -56,7 +57,7 @@
 
 <!-- template that displays individual website entries -->
 <template name="website_item">
-<li>
+<li style="background: url(/webshots/{{ _id }}.png)">
 	<a href="{{url}}">{{title}}</a>
 	<p>
 		{{description}}

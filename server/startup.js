@@ -1,3 +1,5 @@
+console.log('Run start up js');
+
 Meteor.startup(function () {
   // code to run on server at startup
   if (!Websites.findOne()){
@@ -25,6 +27,11 @@ Meteor.startup(function () {
   		url:"http://www.google.com", 
   		description:"Popular search engine.", 
   		createdOn:new Date()
+  	});
+  	
+  	Websites.find({}).forEach(function (doc) {
+  	  console.log('Prepare screenshot: ', doc.url);
+  	  Meteor.call("webshot", doc.url, doc._id);
   	});
   }
 });
