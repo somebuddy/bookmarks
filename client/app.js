@@ -47,9 +47,23 @@ Template.website_form.events({
     var url = event.target.url.value;
     console.log("The url they entered is: "+url);
     
+  	Websites.insert({
+  		title: event.target.title.value, 
+  		url: url, 
+  		description: event.target.description.value,
+  		createdOn: new Date()
+  	}, function (error, result) {
+  	  if (result && !error) {
+  	    console.log('Calling webshot method: ', result);
+  	    Meteor.call("webshot", url, result);
+  	  } else {
+  	    console.log('Insert error: ', error);
+  	  }
+  	});
+  	
+    
     //  put your website saving code in here!	
 
     return false;// stop the form submit from reloading the page
-
   }
 });

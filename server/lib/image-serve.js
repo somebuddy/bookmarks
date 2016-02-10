@@ -7,6 +7,7 @@ Router.map(function() {
     action: function() {
       var self = this;
       var filePath = process.env.PWD + '/webshots/' + self.params[0];
+      console.log('Webshot requested: ' + self.params[0]);
       fs.stat(filePath, function(err, stat) {
         if (!err) {
           var data = fs.readFileSync(filePath);
@@ -16,8 +17,9 @@ Router.map(function() {
           self.response.write(data);
           self.response.end();
         } else {
+          console.log('Wrong requested: ' + self.params[0]);
           self.response.writeHead(404);
-          self.response.end(err);
+          self.response.end();
         }
       });
     }
