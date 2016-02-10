@@ -30,7 +30,6 @@ Meteor.startup(function () {
   	});
   	
   	Websites.find({}).forEach(function (doc) {
-  	  console.log('Prepare screenshot: ', doc.url);
   	  Meteor.call("webshot", doc.url, doc._id);
   	});
   }
