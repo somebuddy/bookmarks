@@ -13,6 +13,10 @@ Meteor.methods({
     var tmpfile = '/tmp/' + id + '.png';
 
     command = spawn(phantomjs.path, [
+      '--ignore-ssl-errors=true',
+      '--ssl-protocol=any',
+      '--debug=true',
+      '--web-security=false',
       'assets/app/phantomDriver.js',
       url, tmpfile]);
 
@@ -20,7 +24,7 @@ Meteor.methods({
       // todo: add logging
       console.log('[STDOUT]' + data);
     });
-    command.stderr.on('data', function (data) { 
+    command.stderr.on('data', function (data) {
       // todo: add logging
       console.log('[STDERR]' + data);
     });
