@@ -1,0 +1,109 @@
+@import 'mixins';
+@import 'flex';
+
+$line-height: 1.5rem !default;
+$secondary-opacity: 0.6 !default;
+$nav-height: 4.5rem;
+
+.page > nav {
+  margin-bottom: 0;
+  border-radius: 0;
+
+  > .container-fluid {
+    min-height: $nav-height;
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  /* menu button */
+  .hamburger-button {
+    &:after {
+      font-family: 'Glyphicons Halflings';
+      content: "\e236";
+    }
+  }
+
+  /* brand icon and text */
+  .brand {
+    display: inline-flex;
+    line-height: $nav-height;
+    margin-right: auto;
+    
+    > .logo {
+      margin-right: 1rem;
+    }
+  }
+  
+  a.brand {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* Menu */
+  .navbar-collapse {
+    padding: 0;
+    flex: 1 1 100%;
+    z-index: 1000;
+    
+    border-bottom: 1px solid transparentize(white, .8);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  }
+
+  .nav.navbar-nav {
+    margin: 0;
+    padding: 1.5rem 1rem;
+
+    background-color: rgba(0,0,0,0.3);
+  }
+  
+  /* Menu items */
+  .nav.navbar-nav li a {
+    @include flex-center;
+    padding: 0 1rem;
+    line-height: $line-height;
+    min-height: $line-height * 2;
+    color: white;
+    opacity: $secondary-opacity;
+    transition: opacity .3s ease;
+
+    &:hover, &:active, &:focus {
+      outline: none;
+      background: transparent;
+      opacity: 1;
+    }
+  }
+
+  .nav.navbar-nav li.active a {
+    opacity: 1;
+    font-weight: 600;
+    border-left: 1px solid white;
+    background: transparentize(white, 0.9);
+    text-shadow: 1px 1px rgba(0,0,0,0.3);
+  }
+
+  @media (min-width: 768px) {
+    > .container-fluid {
+      flex-wrap: nowrap;
+    }
+
+    .navbar-collapse {
+      flex: 0 0 auto;
+      border-bottom: none;
+      box-shadow: none;
+    }
+
+    .nav.navbar-nav {
+      padding: 0;
+      background: transparent;
+    }
+
+    .nav.navbar-nav li a {
+      min-height: $nav-height;
+    }
+
+    .nav.navbar-nav li.active a {
+      border-left: none;
+      border-bottom: 1px solid white;
+    }
+  }
+}
