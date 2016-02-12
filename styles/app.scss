@@ -1,6 +1,7 @@
 @import url(//fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 
 @import 'typography/typography';
+@import 'layout/layout';
 
 html, body {
   width: 100%;
@@ -15,4 +16,14 @@ html {
 
 body {
   font-size: 100%;
+}
+
+// App specific styles
+.page {
+  background-color: #ECEFF1;
+
+  > header {
+    background-color: #78a300;
+    color: white;
+  }
 }
