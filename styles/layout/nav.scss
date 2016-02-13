@@ -15,14 +15,6 @@ $nav-height: 4.5rem;
     flex-flow: row wrap;
   }
   
-  /* menu button */
-  .hamburger-button {
-    &:after {
-      font-family: 'Glyphicons Halflings';
-      content: "\e236";
-    }
-  }
-
   /* brand icon and text */
   .brand {
     display: inline-flex;
