@@ -1,5 +1,7 @@
 <head>
   <title>siteace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
 </head>
 
 <body>
@@ -59,8 +61,12 @@
 
 <template name="page_content">
   <section class="content wide">
-    {{> website_form}}
-    {{> website_list}}
+    <div class="board grid">
+      <header>
+        {{> website_form}}
+      </header>
+      {{> website_list}}
+    </div>
   </section>
 </template>
 
@@ -89,17 +95,15 @@
 
 <!-- template that displays several website items -->
 <template name="website_list">
-  <ol>
-    {{#each websites}}
-      {{>website_item}}
-    {{/each}}
-  </ol>
+  {{#each websites}}
+    {{>website_item}}
+  {{/each}}
 </template>
 
 <!-- template that displays individual website entries -->
 <template name="website_item">
-  <li>
-    <a href="{{ url }}"><img src="/webshots/{{ _id }}.png"></a>
+  <article class="box">
+    <!--<a href="{{ url }}"><img src="/webshots/{{ _id }}.png"></a>-->
     <a href="{{url}}">{{title}}</a>
     <p>{{description}}</p>
     <a href="#" class="btn btn-default js-upvote">
@@ -109,5 +113,5 @@
       <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
     </a>
     <!-- you will be putting your up and down vote buttons in here! -->
-  </li>
+  </article>
 </template>
