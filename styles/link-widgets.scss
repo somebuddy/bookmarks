@@ -62,12 +62,13 @@ $board-space: .5rem;
     font-size: .875rem;
     line-height: $line-height;
     white-space: normal;
-    opacity: 0.6;
     display: flex;
     overflow: hidden;
     transition: opacity .3s ease;
     
-    > .description {
+    > .description,
+    > .tags {
+      opacity: 0.6;
       max-height: $line-height;
       overflow: hidden;
       transition: max-height .5s ease;
@@ -75,9 +76,10 @@ $board-space: .5rem;
   }
   
   &:hover > .secondary {
-    opacity: 1;
     
-    & > .description {
+    & > .description,
+    & > .tags {
+      opacity: 1;
       max-height: $line-height * 3;
     }
   }
