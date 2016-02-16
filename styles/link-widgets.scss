@@ -1,0 +1,84 @@
+@import 'layout/board';
+
+$line-height: 1.5rem !default;
+$widget-height: 12rem + $line-height * 4;
+$column-width: 1rem !default;
+$widget-width: 20rem;
+$board-space: .5rem;
+
+.websites.grid {
+  @include board-grid($widget-width, $board-space);
+}
+
+.website.widget {
+  @include flex-column;
+  justify-content: flex-end;
+  min-height: $widget-height;
+  padding: 0;
+  
+  > .background {
+    @include absolute(0, 0, 0, 0);
+    width: 100%;
+    height: auto;
+    opacity: .6;
+    z-index: 0;
+    transition: transform 1s ease, opacity .5s ease;
+    
+    & ~ * {
+      z-index: 1;
+    }
+  }
+  
+  &:hover > .background {
+    opacity: .9;
+    transform: scale(1.2);
+  }
+  
+  > .main, > .secondary {
+    padding: 0 $column-width;
+    background: white;
+  }
+  
+  > .main {
+    display: flex;
+    order: -1;
+    padding-top: .75rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+
+    .title {
+      white-space: normal;
+      min-height: $line-height;
+      overflow-y: hidden;
+      overflow-x: visible;
+      flex: 1 1 auto;
+      font-size: 1rem;
+      line-height: $line-height;
+      overflow: hidden;
+    }
+  }
+  
+  > .secondary {
+    display: flex;
+    font-size: .875rem;
+    line-height: $line-height;
+    white-space: normal;
+    opacity: 0.6;
+    display: flex;
+    overflow: hidden;
+    transition: opacity .3s ease;
+    
+    > .description {
+      max-height: $line-height;
+      overflow: hidden;
+      transition: max-height .5s ease;
+    }
+  }
+  
+  &:hover > .secondary {
+    opacity: 1;
+    
+    & > .description {
+      max-height: $line-height * 3;
+    }
+  }
+}

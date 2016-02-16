@@ -61,8 +61,8 @@
 
 <template name="page_content">
   <section class="content wide">
-    <div class="board grid">
-      <header>
+    <div class="websites grid">
+      <header class="box full-row widget">
         {{> website_form}}
       </header>
       {{> website_list}}
@@ -102,16 +102,26 @@
 
 <!-- template that displays individual website entries -->
 <template name="website_item">
-  <article class="box widget">
-    <!--<a href="{{ url }}"><img src="/webshots/{{ _id }}.png"></a>-->
-    <a href="{{url}}">{{title}}</a>
-    <p>{{description}}</p>
-    <a href="#" class="btn btn-default js-upvote">
-      <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-    </a>
-    <a href="#" class="btn btn-default js-downvote">
-      <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-    </a>
+  <article class="website box widget">
+    <img class="background" src="/webshots/{{ _id }}.png" />
+    <div class="main">
+      <a class="title" href="{{url}}">{{ title }}</a>
+    </div>
+    <div class="secondary">
+      <div class="description">{{description}}</div>
+    </div>
+    <div class="secondary tags"></div>
+    <div class="secondary rating">
+      <a href="#" class="button js-upvote">
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+      </a>
+      <a href="#" class="button js-downvote">
+        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+      </a>
+      <a href="#" class="button js-downvote">
+        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      </a>
+    </div>
     <!-- you will be putting your up and down vote buttons in here! -->
   </article>
 </template>
