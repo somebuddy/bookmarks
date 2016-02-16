@@ -1,5 +1,6 @@
 @import 'mixins';
 @import 'flex';
+@import '../helpers/no-select';
 
 $line-height: 1.5rem !default;
 $board-max-cols: 10;
@@ -86,4 +87,5 @@ $screen-space: 1rem;
   border: 1px solid rgba(0,0,0,.2);
   border-radius: 4px;
   background: white;
+  @include no-select;
 }
