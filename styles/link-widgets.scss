@@ -1,7 +1,7 @@
 @import 'layout/board';
 
 $line-height: 1.5rem !default;
-$widget-height: 12rem + $line-height * 4;
+$widget-height: 12rem + $line-height * 5;
 $column-width: 1rem !default;
 $widget-width: 20rem;
 $board-space: .5rem;
@@ -15,7 +15,7 @@ $board-space: .5rem;
   justify-content: flex-end;
   min-height: $widget-height;
   padding: 0;
-  
+
   > .background {
     @include absolute(0, 0, 0, 0);
     width: 100%;
@@ -23,22 +23,22 @@ $board-space: .5rem;
     opacity: .6;
     z-index: 0;
     transition: transform 1s ease, opacity .5s ease;
-    
+
     & ~ * {
       z-index: 1;
     }
   }
-  
+
   &:hover > .background {
     opacity: .9;
     transform: scale(1.2);
   }
-  
+
   > .main, > .secondary {
     padding: 0 $column-width;
     background: white;
   }
-  
+
   > .main {
     display: flex;
     order: -1;
@@ -51,12 +51,15 @@ $board-space: .5rem;
       overflow-y: hidden;
       overflow-x: visible;
       flex: 1 1 auto;
-      font-size: 1rem;
+      font-size: 1.125rem;
       line-height: $line-height;
       overflow: hidden;
+
+      color: black;
+      text-decoration: none;
     }
   }
-  
+
   > .secondary {
     display: flex;
     font-size: .875rem;
@@ -65,7 +68,7 @@ $board-space: .5rem;
     display: flex;
     overflow: hidden;
     transition: opacity .3s ease;
-    
+
     > .description,
     > .tags {
       opacity: 0.6;
@@ -74,13 +77,56 @@ $board-space: .5rem;
       transition: max-height .5s ease;
     }
   }
-  
+
+  > .secondary.rating {
+    padding: 0 .5rem;
+
+    > .button {
+      height: $line-height * 2;
+      margin: 0;
+      color: rgba(0,0,0,0.8);
+    }
+
+    > .comment-button {
+      order: 99;
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
+
   &:hover > .secondary {
-    
+
     & > .description,
     & > .tags {
       opacity: 1;
       max-height: $line-height * 3;
     }
+  }
+}
+
+.button.with-badge {
+  @include flex-center;
+  opacity: .4;
+  padding: 0 1rem;
+  transition: opacity .5s ease;
+
+  > .icon {
+    order: 0;
+    margin-right: ($column-width / 2);
+    font-size: 1.125rem;
+    line-height: $line-height;
+  }
+
+  > .badge {
+    order: 1;
+    color: inherit;
+    background: transparent;
+    padding: 0;
+    line-height: $line-height / 2;
+    font-size: $line-height / 2;
+  }
+
+  &:hover {
+    opacity: 1;
   }
 }

@@ -104,6 +104,7 @@
 <template name="website_item">
   <article class="website box widget">
     <img class="background" src="/webshots/{{ _id }}.png" />
+    <div class="cover"></div>
     <div class="main">
       <a class="title" href="{{url}}">{{ title }}</a>
     </div>
@@ -120,15 +121,18 @@
       </div>
     </div>
     <div class="secondary rating">
-      <a href="#" class="button js-upvote">
-        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-      </a>
-      <a href="#" class="button js-downvote">
-        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-      </a>
-      <a href="#" class="button js-downvote">
-        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-      </a>
+      <div class="button with-badge js-upvote">
+        <span class="icon glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+        <span class="badge">5</span>
+      </div>
+      <div class="button with-badge js-downvote">
+        <span class="icon glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+        <span class="badge">5</span>
+      </div>
+      <div class="button with-badge comment-button js-comment">
+        <span class="icon glyphicon glyphicon-comment" aria-hidden="true"></span>
+        <span class="badge">5</span>
+      </div>
     </div>
     <!-- you will be putting your up and down vote buttons in here! -->
   </article>
