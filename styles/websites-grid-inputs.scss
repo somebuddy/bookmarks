@@ -1,0 +1,88 @@
+@import 'layout/flex';
+@import 'layout/mixins';
+
+$line-height: 1.5rem !default;
+
+.websites.grid header.inputs {
+  position: relative;
+  height: 4.5rem;
+  @include flex-row;
+  
+  .state {
+    @include absolute(0, 0, 0, 0);
+    max-width: 4.5rem;
+    min-width: 4.5rem;
+    transition: all .5s ease;
+    z-index: 0;
+    
+    .icon {
+      flex: 0 0 auto;
+      @include flex-center;
+      align-self: center;
+      font-size: 2rem;
+      opacity: .6;
+      width: 4.5rem;
+      height: 4.5rem;
+    }
+
+    &.active {
+      max-width: 100%;
+    }
+  }
+  
+  .state.search {
+    right: 100%;
+    background: rgba(255,255,255, .5);
+    color: rgba(0,0,0,.7);
+
+    &.active {
+      right: 4.75rem;
+    }
+    
+    .icon {
+      background: rgba(255,255,255, .5);
+    }
+  }
+  
+  .state.add {
+    color: white;
+    left: calc(100% - 4.5rem);
+    background: rgba(0,0,0, .3);
+    color: rgba(255,255,255,.8);
+    justify-content: flex-end;
+
+    &.active {
+      left: 4.75rem;
+    }
+    
+    .icon {
+      background: rgba(0,0,0, .3);
+      margin-left: auto;
+    }
+  }
+  
+  .input {
+    @include flex-center;
+    flex: 1 1 auto;
+    align-self: stretch;
+    margin: 0 4.5rem;
+    padding: 0.75rem 1rem;
+    position: relative;
+    align-self: stretch;
+    z-index: 1;
+
+    input {
+      flex: 1 1 auto;
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: $line-height * 1.5;
+      line-height: $line-height * 2;
+      font-weight: 100;
+      text-align: center;
+    }
+  }
+}

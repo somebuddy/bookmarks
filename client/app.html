@@ -62,7 +62,7 @@
 <template name="page_content">
   <section class="content wide">
     <div class="websites grid">
-      <header class="box full-row widget">
+      <header class="box full-row inputs">
         {{> website_form}}
       </header>
       {{> website_list}}
@@ -71,26 +71,39 @@
 </template>
 
 <template name="website_form">
-  <a class="btn btn-default js-toggle-website-form" href="#">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-  </a>
-  <div id="website_form" class="hidden_div">
-    <form class="js-save-website-form">
-      <div class="form-group">
-        <label for="url">Site address</label>
-        <input type="text" class="form-control" id="url" placeholder="http://www.mysite.com">
-      </div>
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" placeholder="Mysite">
-      </div>
-        <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="I found this site really useful for ...">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+  <div class="state search active">
+    <div class="icon">
+      <div class="glyphicon glyphicon-search"></div>
+    </div>
   </div>
+  <div class="input">
+    <input type="text" name="website-search" />
+  </div>
+  <div class="state add">
+    <div class="icon">
+      <div class="glyphicon glyphicon-plus"></div>
+    </div>
+  </div>
+  <!--<a class="btn btn-default js-toggle-website-form" href="#">-->
+  <!--    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
+  <!--</a>-->
+  <!--<div id="website_form" class="hidden_div">-->
+  <!--  <form class="js-save-website-form">-->
+  <!--    <div class="form-group">-->
+  <!--      <label for="url">Site address</label>-->
+  <!--      <input type="text" class="form-control" id="url" placeholder="http://www.mysite.com">-->
+  <!--    </div>-->
+  <!--    <div class="form-group">-->
+  <!--      <label for="title">Title</label>-->
+  <!--      <input type="text" class="form-control" id="title" placeholder="Mysite">-->
+  <!--    </div>-->
+  <!--      <div class="form-group">-->
+  <!--      <label for="description">Description</label>-->
+  <!--      <input type="text" class="form-control" id="description" placeholder="I found this site really useful for ...">-->
+  <!--    </div>-->
+  <!--    <button type="submit" class="btn btn-default">Submit</button>-->
+  <!--  </form>-->
+  <!--</div>-->
 </template>
 
 <!-- template that displays several website items -->
