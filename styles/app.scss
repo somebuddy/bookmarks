@@ -21,11 +21,19 @@ body {
 // App specific styles
 .page {
   background-color: #ECEFF1;
-  
+
   > nav,
   > nav .navbar-collapse,
   > header {
     background-color: #78a300;
     color: white;
+  }
+
+  &.overlap-header {
+    > header {
+      + .content {
+        margin-top: -12rem;
+      }
+    }
   }
 }

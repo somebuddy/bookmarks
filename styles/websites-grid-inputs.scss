@@ -9,6 +9,7 @@ $secondary-opacity: .6 !default;
   // Layout
   position: relative;
   @include flex-row;
+  margin-bottom: $line-height;
 
   .state {
     @include absolute(0, auto, 0, auto);
@@ -58,48 +59,52 @@ $secondary-opacity: .6 !default;
       text-align: center;
     }
   }
+}
 
-  // Sizes
-  
-  @mixin search-add-inputs-sizes($base-size: 1.5rem) {
-    $size: $base-size;
-    $font-size: $size / 3;
-    
-    margin: 0 ($size / 2);
-    height: $size;
-  
-    .state {
-      max-width: $size;
-      min-width: $size;
-  
-      .icon {
-        font-size: $size / 2;
-        width: $size;
-        height: $size;
-      }
-  
-      &.search {
-        margin-left: -$size / 2;
-      }
-  
-      &.add {
-        margin-right: -$size / 2;
-      }
+// Sizes
+@mixin search-add-inputs-sizes($base-size: 1.5rem) {
+  $size: $base-size * 3;
+  $font-size: $size / 3;
+
+  margin-left: ($size / 2);
+  margin-right: ($size / 2);
+  height: $size;
+
+  .state {
+    max-width: $size;
+    min-width: $size;
+
+    .icon {
+      font-size: $size / 2;
+      width: $size;
+      height: $size;
     }
-  
-    .input {
-      margin: 0 $size;
-      padding: ($line-height / 2) 0;
-      
-      input {
-        font-size: $line-height * 1.5;
-        line-height: $line-height * 2;
-      }
+
+    &.search {
+      margin-left: -$size / 2;
+    }
+
+    &.add {
+      margin-right: -$size / 2;
     }
   }
-  
-  @include search-add-inputs-sizes(4.5rem);
 
+  .input {
+    margin: 0 $size;
+    padding: ($base-size / 2) 0;
+
+    input {
+      font-size: $base-size * 1.5;
+      line-height: $base-size * 2;
+    }
+  }
+}
+
+.search-add-inputs {
+  @include search-add-inputs-sizes(1rem);
+}
+
+.search-add-inputs {
   // Color schema
   .state.search {
     background: rgba(255,255,255, .5);
@@ -134,7 +139,7 @@ $secondary-opacity: .6 !default;
 
 @mixin search-icon-size($size: 2rem) {
   @include size($size, $size);
-  
+
   &:before {
     left: (1 + sqrt(0.5)) * $size / 2;
     top: (1 + sqrt(0.5)) * $size / 2;
@@ -158,13 +163,13 @@ $secondary-opacity: .6 !default;
     transform-origin: 0 0;
     box-sizing: content-box;
   }
-  
-  @include search-icon-size(1.5rem);
+
+  @include search-icon-size(.75rem);
 }
 
 .state.add > .icon {
   position: relative;
-  
+
   &:after, &:before {
     content: '';
     position: absolute;
@@ -183,5 +188,15 @@ $secondary-opacity: .6 !default;
   &:after {
     width: 50%;
     height: 2px;
+  }
+}
+
+@media (min-width: 40rem) {
+  .search-add-inputs {
+    @include search-add-inputs-sizes(1.5rem);
+  }
+
+  .search-icon {
+    @include search-icon-size(1.5rem);
   }
 }
