@@ -2,79 +2,55 @@
 @import 'layout/mixins';
 
 $line-height: 1.5rem !default;
+$secondary-opacity: .6 !default;
 
-.websites.grid header.inputs {
+$input-icon-size: 4.5rem;
+
+.search-add-inputs {
+  // Layout
   position: relative;
-  height: 4.5rem;
   @include flex-row;
-  
+
   .state {
-    @include absolute(0, 0, 0, 0);
-    max-width: 4.5rem;
-    min-width: 4.5rem;
-    transition: all .5s ease;
+    @include absolute(0, auto, 0, auto);
     z-index: 0;
-    
+    opacity: $secondary-opacity;
+    width: 100%;
+    transition: all .5s ease;
+
     .icon {
       flex: 0 0 auto;
       @include flex-center;
       align-self: center;
-      font-size: 2rem;
-      opacity: .6;
-      width: 4.5rem;
-      height: 4.5rem;
+      opacity: $secondary-opacity;
+      cursor: pointer;
     }
 
-    &.active {
-      max-width: 100%;
+    &.search {
+      left: 0;
     }
-  }
-  
-  .state.search {
-    right: 100%;
-    background: rgba(255,255,255, .5);
-    color: rgba(0,0,0,.7);
 
-    &.active {
-      right: 4.75rem;
-    }
-    
-    .icon {
-      background: rgba(255,255,255, .5);
-    }
-  }
-  
-  .state.add {
-    color: white;
-    left: calc(100% - 4.5rem);
-    background: rgba(0,0,0, .3);
-    color: rgba(255,255,255,.8);
-    justify-content: flex-end;
+    &.add {
+      right: 0;
 
-    &.active {
-      left: 4.75rem;
-    }
-    
-    .icon {
-      background: rgba(0,0,0, .3);
-      margin-left: auto;
+      .icon {
+        margin-left: auto;
+      }
     }
   }
-  
+
+  &.search > .state.search,
+  &.add > .state.add {
+    max-width: 100%;
+  }
+
   .input {
-    @include flex-center;
     flex: 1 1 auto;
-    align-self: stretch;
-    margin: 0 4.5rem;
-    padding: 0.75rem 1rem;
-    position: relative;
+    @include flex-center;
     align-self: stretch;
     z-index: 1;
 
     input {
-      flex: 1 1 auto;
-      min-width: 0;
-      max-width: 100%;
       width: 100%;
       background: transparent;
       border: none;
@@ -85,4 +61,64 @@ $line-height: 1.5rem !default;
       text-align: center;
     }
   }
+
+  // Sizes
+  margin: 0 ($input-icon-size / 2);
+  height: $input-icon-size;
+
+  .state {
+    max-width: $input-icon-size;
+    min-width: $input-icon-size;
+
+    .icon {
+      font-size: $input-icon-size / 2;
+      width: $input-icon-size;
+      height: $input-icon-size;
+    }
+
+    &.search {
+      margin-left: -$input-icon-size / 2;
+    }
+
+    &.add {
+      margin-right: -$input-icon-size / 2;
+    }
+  }
+
+  .input {
+    margin: 0 $input-icon-size;
+    padding: ($line-height / 2) 0;
+  }
+
+  // Color schema
+  .state.search {
+    background: rgba(255,255,255, .5);
+    color: rgba(0,0,0,.7);
+
+    .icon {
+      background: rgba(255,255,255, .5);
+    }
+  }
+
+  &.search {
+    input {
+      color: rgba(0,0,0,.7);
+    }
+  }
+
+  .state.add {
+    background: rgba(0,0,0, .3);
+    color: rgba(255,255,255,.9);
+
+    .icon {
+      background: rgba(0,0,0, .3);
+    }
+  }
+
+  &.add {
+    input {
+      color: rgba(255,255,255,.8);
+    }
+  }
+
 }
