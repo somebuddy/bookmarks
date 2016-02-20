@@ -1,19 +1,36 @@
 /*global Websites */
 
+var cheerio = Meteor.npmRequire('cheerio');
+
 Meteor.methods({
   addWebsite: function (website) {
-    console.log('Adding website', website);
-    Websites.insert({
-      // title: event.target.title.value,
+    // checking website
+    var data = HTTP.get(website);
+
+    // parsing data
+    var $ = cheerio.load(data.content);
+
+    // Creating document object
+    var doc = {
+      title: $('head title').text().trim() || website,
   		url: website,
-  		// description: event.target.description.value,
   		createdOn: new Date()
-  	}, function (error, result) {
-  	  if (result && !error) {
-  	    console.log('Calling webshot method: ', result);
-  	    Meteor.call("webshot", website, result);
-  	  } else {
-  	    console.log('Insert error: ', error);
+    }
+
+    // Adding description if it exists in meta tag
+    var description = $('head meta[name="description"]').attr('content');
+    if (description && description.length) {
+      doc.description = description.trim();
+    }
+
+    // inseting document
+    Websites.insert(doc, function (error, result) {
+      if (result && !error) {
+        console.log('Calling webshot method: ', result);
+        // making screenshot of website
+        Meteor.call("webshot", website, result);
+      } else {
+        console.log('Insert error: ', error);
   	  }
   	});
   }
