@@ -1,6 +1,7 @@
 @import 'layout/flex';
 @import 'layout/mixins';
 @import 'helpers/sqrt';
+@import 'helpers/placeholder';
 
 $line-height: 1.5rem !default;
 $secondary-opacity: .6 !default;
@@ -118,6 +119,11 @@ $secondary-opacity: .6 !default;
   &.search {
     input {
       color: rgba(0,0,0,.9);
+
+      @include placeholder {
+        color: rgba(0,0,0,.9);
+        transition: color .1s ease .3s;
+      }
     }
   }
 
@@ -133,6 +139,11 @@ $secondary-opacity: .6 !default;
   &.add {
     input {
       color: rgba(255,255,255,.9);
+
+      @include placeholder {
+        color: rgba(255,255,255,.9);
+        transition: color .1s ease .3s;
+      }
     }
   }
 }
