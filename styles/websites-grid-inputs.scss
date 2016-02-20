@@ -58,6 +58,43 @@ $secondary-opacity: .6 !default;
       outline: none;
       font-weight: 100;
       text-align: center;
+      transition: transform .3s ease;
+    }
+
+    &.has-feedback > input {
+      transform: scale(.6) translateY(-25%);
+    }
+
+    .feedback {
+      @include absolute(auto, 10%, 0, 10%);
+      padding: .125rem .5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      font-size: $line-height / 2;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-align: center;
+
+      opacity: 0;
+      transition: opacity .5s ease;
+
+      &.error {
+        color: #ffcdd2;
+      }
+
+      &.success {
+        color: #CCFF90;
+      }
+
+      &.hint {
+        color: #E1F5FE;
+      }
+    }
+
+    &.has-feedback > .feedback {
+      opacity: 1;
     }
   }
 }
