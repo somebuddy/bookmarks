@@ -9,7 +9,6 @@ Template.website_list.helpers({
   }
 });
 
-
 /////
 // template events 
 /////
