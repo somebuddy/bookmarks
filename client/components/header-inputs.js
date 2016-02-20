@@ -53,9 +53,14 @@ Template.header_inputs.events({
       setInputInAddState(template.find('input'));
       return false;
     } else if (key === 13) {
-      console.log('Add website', template.find('input').value);
-      setInputInAddState(template.find('input'));
-      return false;
+      var website = template.find('input').value;
+      Meteor.call("addWebsite", website, function (error, result) {
+        if (!error) {
+          console.log(result);
+          setInputInAddState(template.find('input'));
+          return false;
+        }
+      });
     }
   }
 });
