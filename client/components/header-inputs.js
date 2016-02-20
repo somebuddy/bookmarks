@@ -59,6 +59,8 @@ Template.header_inputs.events({
           console.log(result);
           setInputInAddState(template.find('input'));
           return false;
+        } else {
+          console.error(error);
         }
       });
     }

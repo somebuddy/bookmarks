@@ -5,7 +5,24 @@ var cheerio = Meteor.npmRequire('cheerio');
 Meteor.methods({
   addWebsite: function (website) {
     // checking website
-    var data = HTTP.get(website);
+    if (!website || typeof website !== 'string' || website.length < 3) {
+      var parseError = new Meteor.Error("empty-link", "You must insert some website link");
+      throw parseError;
+    }
+    
+    // checking protocol
+    if (website.indexOf("http://") * website.indexOf("https://") !== 0) {
+      website = "http://" + website;
+      console.log("Fixed missed protocol");
+    }
+    
+    // loading remote data
+    try {
+      var data = HTTP.get(website);
+    } catch (error) {
+      var parseError = new Meteor.Error("parsing-error", "Can't read website: " + website, error.message);
+      throw parseError;
+    }
 
     // parsing data
     var $ = cheerio.load(data.content);
@@ -33,5 +50,7 @@ Meteor.methods({
         console.log('Insert error: ', error);
   	  }
   	});
+  	
+  	return data.statusCode;
   }
 });
