@@ -25,7 +25,10 @@ Router.route('/bookmark/:_id', {
     'details_content': {to: 'content'}
   },
   waitOn: function () {
-    return Meteor.subscribe('siteComments', this.params._id);
+    return [
+      Meteor.subscribe('siteComments', this.params._id),
+      Meteor.subscribe('website', this.params._id),
+    ];
   },
   data: function () {
     var site = Websites.findOne({_id: this.params._id});
