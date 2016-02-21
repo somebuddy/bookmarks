@@ -117,6 +117,33 @@ $board-space: .5rem;
       transition: max-height .5s ease;
     }
   }
+  
+  > .secondary.rating {
+    padding: 0 .5rem;
+  
+    > .date {
+      align-self: center;
+      white-space: nowrap;
+      margin-right: auto;
+      color: rgba(0,0,0,0.6);
+      padding: 0 .5rem;
+      font-size: .75rem;
+      line-height: $line-height;
+      font-weight: 400;
+    }
+  
+    > .button {
+      height: $line-height * 2;
+      margin: 0;
+      color: rgba(0,0,0,0.8);
+    }
+  
+    > .comment-button {
+      order: 99;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
 
   &:hover > .secondary {
     & > .description,
@@ -127,32 +154,6 @@ $board-space: .5rem;
   }
 }
 
-.secondary.rating {
-  padding: 0 .5rem;
-
-  > .date {
-    align-self: center;
-    white-space: nowrap;
-    margin-right: auto;
-    color: rgba(0,0,0,0.6);
-    padding: 0 .5rem;
-    font-size: .75rem;
-    line-height: $line-height;
-    font-weight: 400;
-  }
-
-  > .button {
-    height: $line-height * 2;
-    margin: 0;
-    color: rgba(0,0,0,0.8);
-  }
-
-  > .comment-button {
-    order: 99;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
 
 .button.with-badge {
   @include flex-center;

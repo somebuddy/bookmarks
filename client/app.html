@@ -110,10 +110,8 @@
     <div class="secondary rating">
       <div class="date">{{ timePassed createdOn }}</div>
       {{> website_votes }}
-      <div class="button with-badge comment-button js-comment">
-        <span class="icon glyphicon glyphicon-comment" aria-hidden="true"></span>
-        <span class="badge">5</span>
-      </div>
+      {{> comment_indicator site=_id }}
+
     </div>
     <!-- you will be putting your up and down vote buttons in here! -->
   </article>
