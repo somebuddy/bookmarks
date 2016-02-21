@@ -28,4 +28,5 @@ iron:router
 random
 fourseven:scss
 fortawesome:fontawesome
+momentjs:moment
 http
