@@ -1,20 +1,38 @@
 <template name="details">
   <div class="details">
-    <h1>This details template</h1>
+    <div class="close-button"></div>
     {{> yield 'header' }}
     {{> yield 'content' }}
   </div>
 </template>
 
 <template name="details_header">
-  <header class="text-center">
-    <h1>Website details</h1>
-    <section class="description"></section>
+  <header>
+    <section class="webshot">
+      <img src="/webshots/{{ _id }}.png" />
+    </section>
+    <section class="info">
+      <div class="title">{{ title }}</div>
+      <div class="description">{{ description }}</div>
+      <div class="rating">
+        <div class="date">{{ timePassed createdOn }}</div>
+        {{> website_votes }}
+      </div>
+    </section>
   </header>
 </template>
 
 <template name="details_content">
-  <section class="content wide">
-    <h2>Here's website data</h2>
-  </section>
+  <main class="content wide">
+    <section class="comments">
+      <header>
+        <h3>Comments</h3>
+      </header>
+    </section>
+    <section class="recommendations">
+      <header>
+        <h3>Recommendations</h3>
+      </header>
+    </section>
+  </main>
 </template>

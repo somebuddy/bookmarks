@@ -1,0 +1,74 @@
+@import 'layout/flex';
+@import 'layout/mixins';
+
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+
+.details {
+  padding: $line-height * 4 $column-width;
+  @include flex-column;
+
+  > header,
+  > main.content {
+    @include flex-column;
+
+    > section {
+      flex: 1 1 100%;
+      padding: ($line-height / 2) $column-width;
+    }
+
+    @media (min-width: 60rem) {
+      flex-direction: row;
+
+      section.webshot,
+      section.recommendations {
+        flex: 0 0 32rem;
+      }
+
+      section.info,
+      section.comments {
+        flex: 1 1 auto;
+      }
+    }
+
+    .webshot,
+    .recommendations {
+      order: 0;
+    }
+
+    .info,
+    .comments {
+      order: 1;
+    }
+  }
+}
+
+.details section.info {
+  .rating {
+    @include flex-row;
+    padding: 0 .5rem;
+
+    > .date {
+      align-self: center;
+      white-space: nowrap;
+      margin-right: auto;
+      color: rgba(0,0,0,0.6);
+      padding: 0 .5rem;
+      font-size: .75rem;
+      line-height: $line-height;
+      font-weight: 400;
+    }
+
+    > .button {
+      height: $line-height * 2;
+      margin: 0;
+      color: rgba(0,0,0,0.8);
+    }
+
+    > .comment-button {
+      order: 99;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

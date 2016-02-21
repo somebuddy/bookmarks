@@ -1,4 +1,4 @@
-/*global Router*/
+/*global Router, Websites*/
 
 Router.configure({
   layoutTemplate: 'page'
@@ -15,6 +15,11 @@ Router.route('/bookmark/:_id', {
   yieldRegions: {
     'details_header': {to: 'header'},
     'details_content': {to: 'content'}
+  },
+  data: function () {
+    var site = Websites.findOne({_id: this.params._id});
+    console.log(site);
+    return site;
   },
   action: function () {
     this.render();

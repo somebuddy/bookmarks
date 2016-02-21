@@ -49,3 +49,8 @@
   align-items: stretch;
   justify-content: flex-start;
 }
+
+@mixin flex-columns {
+  @include flex-column;
+  flex-wrap: wrap;
+}

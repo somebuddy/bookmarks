@@ -33,6 +33,6 @@ Template.website_item.events({
     setTimeout(function () {
       Router.go('/bookmark/' + self._id);
       el.remove();
-    }, 2000);
+    }, 500);
   }
 });
