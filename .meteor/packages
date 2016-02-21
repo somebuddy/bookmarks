@@ -27,4 +27,5 @@ npm-container
 iron:router
 random
 fourseven:scss
+fortawesome:fontawesome
 http
