@@ -6,7 +6,10 @@ Router.configure({
 
 Router.route('/', {
   waitOn: function () {
-    return Meteor.subscribe('comments');
+    return [
+      Meteor.subscribe('comments'),
+      Meteor.subscribe('searchWebsites')
+    ];
   },
   action: function () {
     this.render('navbar', {to: "nav"});

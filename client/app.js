@@ -1,7 +1,5 @@
 /*global moment, Websites, Router */
 
-Meteor.subscribe("websites");
-
 // template helpers
 
 Template.registerHelper('timePassed', function(date) {
@@ -9,8 +7,13 @@ Template.registerHelper('timePassed', function(date) {
 });
 
 // helper function that returns all available websites
+
 Template.website_list.helpers({
   websites:function(){
+    var searchQuery = Meteor.subscribe('searchWebsites', Session.get('searchQuery'));
+    if (Session.get('searchQuery')) {
+      return Websites.find({ score: { $exists: true} }, { sort: [['score', 'desc']] });
+    }
     return Websites.find({}, {sort: {voteUp:-1}});
   }
 });

@@ -15,3 +15,26 @@ Meteor.publish('comments', function() {
 Meteor.publish('siteComments', function(site) {
   return Comments.find({site: site});
 });
+
+Meteor.publish('searchWebsites', function(query) {
+  if (query) {
+    return Websites.find({
+      $text: {
+        $search: query
+      }
+    }, {
+      fields: {
+        score: {
+          $meta: 'textScore'
+        }
+      },
+      sort: {
+        score: {
+          $meta: 'textScore'
+        }
+      }
+    });
+  } else {
+    return Websites.find();
+  }
+});

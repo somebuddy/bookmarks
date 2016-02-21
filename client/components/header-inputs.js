@@ -74,6 +74,7 @@ Template.header_inputs.events({
   },
   'keyup .search-add-inputs.search input': function(e, template) {
     removeFeedback(template);
+    Session.set('searchQuery', template.find('input').value);
     return handleInputKey(e, function () {
       console.log('Search website', template.find('input').value);
     }, function () {
