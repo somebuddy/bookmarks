@@ -28,11 +28,15 @@ Template.website_item.events({
       opacity: 1,
       width: '100%',
       height: '100%',
-    }, 200);
+    }, 300);
 
     setTimeout(function () {
       Router.go('/bookmark/' + self._id);
-      el.remove();
-    }, 500);
+      el.animate({
+        opacity: 0,
+      }, 500, function () {
+        el.remove();
+      });
+    }, 300);
   }
 });
