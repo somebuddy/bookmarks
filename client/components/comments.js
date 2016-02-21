@@ -6,6 +6,12 @@ Template.comments_list.helpers({
   }
 });
 
+Template.comment_indicator.helpers({
+  'count': function () {
+    return Comments.find({site: this.site}).count();
+  }
+});
+
 Template.comment_add_form.events({
   'click .js-post-comment': function (event, template) {
     var text = template.find('textarea[name="comment"]').value;
