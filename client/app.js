@@ -1,5 +1,7 @@
 /*global moment, Websites */
 
+Meteor.subscribe("websites");
+
 // template helpers 
 
 Template.registerHelper('timePassed', function(date) {
