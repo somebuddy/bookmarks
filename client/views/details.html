@@ -1,3 +1,11 @@
+<template name="details">
+  <div class="details">
+    <h1>This details template</h1>
+    {{> yield 'header' }}
+    {{> yield 'content' }}
+  </div>
+</template>
+
 <template name="details_header">
   <header class="text-center">
     <h1>Website details</h1>

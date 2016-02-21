@@ -1,1 +1,7 @@
 /* CSS declarations go here */
+.route-stub {
+  position: fixed;
+  z-index: 1000;
+  background: white;
+  opacity: 0;
+}
