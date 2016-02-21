@@ -38,7 +38,7 @@ $board-space: .5rem;
     padding: 0 $column-width;
     background: white;
   }
-  
+
   > .cover {
     @include flex-center;
     position: relative;
@@ -47,31 +47,31 @@ $board-space: .5rem;
     background: rgba(0,0,0,.05);
     opacity: 0;
     transition: opacity .5s ease 2s, background 1.5s ease;
-    
+
     > .button {
       display: flex;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.3);
       border-color: rgba(255, 255, 255, 0.3);
     }
-    
+
     > .button.main {
       font-size: 1.2rem;
       width: 3rem;
       height: 3rem;
     }
-    
+
     > .button.secondary {
       font-size: 0.75rem;
       width: 2rem;
       height: 2rem;
     }
-    
+
     > .button.secondary.pin {
       @include absolute($right: .25rem, $bottom: .25rem);
     }
   }
-  
+
   &:hover > .cover {
     opacity: 1;
     background: rgba(0,0,0,.8);
@@ -167,5 +167,25 @@ $board-space: .5rem;
 
   &:hover {
     opacity: 1;
+  }
+}
+
+.js-upvote {
+  .icon::before {
+    content: "\f164";
+  }
+
+  &.empty .icon::before {
+    content: "\f087";
+  }
+}
+
+.js-downvote {
+  .icon::before {
+    content: "\f165";
+  }
+
+  &.empty .icon::before {
+    content: "\f088";
   }
 }

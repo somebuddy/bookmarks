@@ -1,8 +1,8 @@
 Template.website_votes.helpers({
-  'site': function () {
-    
+  'checkEmpty': function (votes) {
+    return votes ? '' : 'empty';
   }
-})
+});
 
 Template.website_votes.events({
   "click .js-upvote":function(event){
