@@ -1,4 +1,4 @@
-/*global moment, Websites */
+/*global moment, Websites, Router */
 
 Meteor.subscribe("websites");
 
@@ -14,3 +14,9 @@ Template.website_list.helpers({
     return Websites.find({}, {sort: {voteUp:-1}});
   }
 });
+
+Template.website_item.events({
+  'click .js-open-details': function(event, template) {
+    Router.go('/bookmark/' + this._id);
+  }
+})
