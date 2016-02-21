@@ -1,23 +1,58 @@
 
-function resetInput (input, placeholder) {
-  input.placeholder  = placeholder || '';
+// Helpers: input
+function cleanInput(template, placeholder) {
+  var input = template.find('input');
+  input.placeholder  = placeholder || input.placeholder || '';
   input.value = '';
   input.focus();
 }
 
-function setInputInSearchState(input) {
-  resetInput(input, 'Search website');
+// Helpers: feedback
+function removeFeedback(template) {
+  var ip = $(template.find('.search-add-inputs .input'));
+  ip.removeClass('has-feedback');
+  ip.find('.feedback').removeClass('error hint success');
+  ip.find('.feedback').text("");
+}
+
+function setFeedback(template, cls, text) {
+  removeFeedback(template);
+
+  var ip = $(template.find('.search-add-inputs .input'));
+  ip.addClass('has-feedback');
+  ip.find('.feedback').addClass(cls);
+  ip.find('.feedback').text(text);
+}
+
+// Helpers: states
+function setInputInSearchState(template) {
+  /* Set template input in intial state for search action */
+  removeFeedback(template);
+  cleanInput(template, 'Search website');
   Session.set('headerInputType', 'search');
 }
 
-function setInputInAddState(input) {
-  resetInput(input, 'Add new website');
+function setInputInAddState(template) {
+  /* Set template input in intial state for add action */
+  cleanInput(template, 'Add new website');
+  setFeedback(template, 'hint', 'Insert website link and press [Enter]');
   Session.set('headerInputType', 'add');
 }
 
+function handleInputKey(e, enter, esc){
+  var key = e.which || e.keyCode || 0;
+  if (key === 27 && (typeof esc === 'function')) {
+    esc();
+    return false;
+  } else if (key === 13 && (typeof enter === 'function')) {
+    enter();
+    return false;
+  }
+}
+
+// Template
 Template.header_inputs.onRendered(function (p) {
-  Session.set('headerInputType', 'search');
-  resetInput(this.find('input'), 'Search website');
+  setInputInSearchState(this);
 });
 
 Template.header_inputs.helpers({
@@ -29,58 +64,37 @@ Template.header_inputs.helpers({
 Template.header_inputs.events({
   'click .state.search': function(event, template) {
     if (Session.get('headerInputType') !== 'search') {
-      setInputInSearchState(template.find('input'));
-
-      $(template.find('.input > .feedback')).removeClass('error hint success');
-      template.find('.input > .feedback').innerHTML = "";
-      $(template.find('.input')).removeClass('has-feedback');
+      setInputInSearchState(template);
     }
   },
   'click .state.add': function(event, template) {
     if (Session.get('headerInputType') !== 'add') {
-      setInputInAddState(template.find('input'));
-
-      $(template.find('.input > .feedback')).removeClass('error hint success');
-      template.find('.input > .feedback').innerHTML = "Insert website link and press [Enter]";
-      $(template.find('.input')).addClass('has-feedback');
-      $(template.find('.input > .feedback')).addClass('hint');
+      setInputInAddState(template);
     }
   },
   'keyup .search-add-inputs.search input': function(e, template) {
-    var key = e.which || e.keyCode || 0;
-    if (key === 27) {
-      setInputInSearchState(template.find('input'));
-      return false;
-    } else if (key === 13) {
+    removeFeedback(template);
+    return handleInputKey(e, function () {
       console.log('Search website', template.find('input').value);
-      return false;
-    }
+    }, function () {
+      cleanInput(template);
+    });
   },
   'keyup .search-add-inputs.add input': function(e, template) {
-    $(template.find('.input')).removeClass('has-feedback');
-    $(template.find('.input > .feedback')).removeClass('error hint success');
-    var key = e.which || e.keyCode || 0;
-    if (key === 27) {
-      setInputInAddState(template.find('input'));
-      return false;
-    } else if (key === 13) {
+    removeFeedback(template);
+    handleInputKey(e, function () {
       var website = template.find('input').value;
-      Meteor.call("addWebsite", website, function (error, result) {
-        console.log('Error: ', error);
-        console.log('result: ', result);
-        if (!error) {
-          template.find('.input > .feedback').innerHTML = "Successfully added";
-          $(template.find('.input')).addClass('has-feedback');
-          $(template.find('.input > .feedback')).addClass('success');
-          setInputInAddState(template.find('input'));
-          return false;
+      Meteor.call("addWebsite", website, function (e) {
+        if (!e) {
+          setFeedback(template, 'success', 'Successfully added');
+          cleanInput(template);
         } else {
-          template.find('.input > .feedback').innerHTML = error.message + " (" + error.details + ")";
-          $(template.find('.input')).addClass('has-feedback');
-          $(template.find('.input > .feedback')).addClass('error');
-          return false;
+          console.error(e);
+          setFeedback(template, 'error', e.message + " (" + e.details + ")");
         }
       });
-    }
+    }, function () {
+      cleanInput(template);
+    });
   }
 });
