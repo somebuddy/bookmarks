@@ -1,8 +1,12 @@
 <template name="comments_list">
   {{#each comments }}
-    <p>{{ comment }}</p>
+    <article class="comment">
+      <header>anonymous user</header>
+      <div class="content">{{ comment }}</div>
+      <footer>{{ timePassed createdAt }}</footer>
+    </article>
   {{else}}
-    <h6 class="text-center no-comments">No comments here yet.</h6>
+    <div class="text-center no-comments">No comments here yet.</div>
   {{/each}}
 </template>
 
@@ -18,8 +22,9 @@
 </template>
 
 <template name="comment_add_form">
-  <div class="input-group">
-    <textarea name="comment"></textarea>
+  <div class="add-comment">
+    <header>new comment:</header>
+    <textarea name="comment" rows=5></textarea>
     <div class="button primary js-post-comment">Post</div>
   </div>
 </template>
