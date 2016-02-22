@@ -3,12 +3,13 @@
 
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
+$secondary-opacity: .6;
 
 .details {
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: $line-height * 4 $column-width;
+  padding: $line-height * 3 $column-width;
   @include size(100%, 100%);
 
   > nav {
@@ -27,6 +28,10 @@ $column-width: 1rem !default;
     > section {
       // flex: 1 1 100%;
       padding: ($line-height / 2) $column-width;
+    }
+
+    section.webshot {
+      align-self: center;
     }
 
     @media (min-width: 60rem) {
@@ -53,19 +58,84 @@ $column-width: 1rem !default;
       order: 1;
     }
   }
+  
+  > header {
+    background: #ECEFF1;
+    padding: $line-height $column-width;
+    margin: 0 (-$column-width) $line-height;
+  }
 }
 
 .details section.info {
-  .rating {
+  .title {
+    font-size: $line-height;
+    line-height: $line-height;
+    margin-bottom: $line-height / 2;
+    color: rgba(0,0,0,.9);
+    
+    &:hover {
+      color: #0277BD;
+      cursor: pointer;
+    }
+  }
+  
+  .url {
+    font-size: .75rem;
+    line-height: $line-height;
+    margin-bottom: $line-height / 2;
+    opacity: $secondary-opacity;
+    color: #0277BD;
+    cursor: pointer;
+    transition: opacity .2s ease;
+    
+    &:before {
+      content: "\f0c1";
+      font-family: FontAwesome;
+      margin-right: $column-width;
+    }
+    
+    &:hover {
+      opacity: 1;
+
+      &:before {
+        text-decoration: none;
+      }
+    }
+  }
+  
+  .description {
+    font-size: 1rem;
+    line-height: $line-height;
+    margin: ($line-height / 2) 0;
+    color: rgba(0,0,0, $secondary-opacity);
+  }
+  
+  .category.tags > .tag {
+    background: #EF6C00;
+    border-color: #DD2C00;
+  }
+  
+  .tags {
+    opacity: $secondary-opacity;
+    margin: $line-height 0;
+    
+    > header {
+      flex: 1 1 100%;
+      font-size: .75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+  
+  .statistics {
     @include flex-row;
-    padding: 0 .5rem;
+    border-top: 1px solid rgba(0,0,0,.1);
 
     > .date {
       align-self: center;
       white-space: nowrap;
       margin-right: auto;
       color: rgba(0,0,0,0.6);
-      padding: 0 .5rem;
       font-size: .75rem;
       line-height: $line-height;
       font-weight: 400;

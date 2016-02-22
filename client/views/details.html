@@ -15,9 +15,22 @@
     </section>
     <section class="info">
       <div class="title">{{ title }}</div>
+      <div class="url">{{ url }}</div>
       <div class="description">{{ description }}</div>
-      <div class="rating">
-        <div class="date">{{ timePassed createdOn }}</div>
+      <div class="category tags">
+        <header>category: </header>
+        <div class="tag">study</div>
+      </div>
+      <div class="tags">
+        <header>tags: </header>
+        <div class="tag">study</div>
+        <div class="tag">search</div>
+        <div class="tag">web development</div>
+        <div class="tag">meteor js</div>
+        <div class="tag">university</div>
+      </div>
+      <div class="statistics">
+        <div class="date"><strong>added:</strong> {{ timePassed createdOn }}</div>
         {{> website_votes }}
       </div>
     </section>
