@@ -5,15 +5,27 @@ $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 
 .details {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: $line-height * 4 $column-width;
-  @include flex-column;
+  @include size(100%, 100%);
+
+  > nav {
+    @include flex-row;
+    @include absolute(0, 0, null, 0);
+
+    > .close-button {
+      margin-left: auto;
+    }
+  }
 
   > header,
   > main.content {
     @include flex-column;
 
     > section {
-      flex: 1 1 100%;
+      // flex: 1 1 100%;
       padding: ($line-height / 2) $column-width;
     }
 
@@ -70,5 +82,35 @@ $column-width: 1rem !default;
       margin-left: 0;
       margin-right: 0;
     }
+  }
+}
+
+.close-button {
+  display: inline-flex;
+  cursor: pointer;
+  position: relative;
+  margin: 0.75rem 1rem;
+  width: 3rem;
+  height: 3rem;
+  opacity: .4;
+  transition: all .3s ease;
+
+  &:after, &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: rgba(0,0,0,.3);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transform-origin: 50% 50%;
+    transition: all .3s ease;
+  }
+
+  &:before { @include size(2px, 75%); }
+  &:after { @include size(75%, 2px); }
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.25);
   }
 }

@@ -1,12 +1,14 @@
 <template name="details">
   <div class="details">
-    <div class="close-button"></div>
     {{> yield 'header' }}
     {{> yield 'content' }}
   </div>
 </template>
 
 <template name="details_header">
+  <nav class="nav">
+    <div class="close-button"></div>
+  </nav>
   <header>
     <section class="webshot">
       <img src="/webshots/{{ _id }}.png" />
