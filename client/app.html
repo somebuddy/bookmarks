@@ -14,7 +14,7 @@
     {{> yield "content" }}
   </div>
 </template>
-  
+
 <template name="navbar">
   <nav class="navbar">
     <div class="container-fluid">
@@ -35,16 +35,16 @@
         </div>
       </div>
 
+
       <div class="collapse navbar-collapse pull-right" id="main_navbar">
         <ul class="nav navbar-nav">
           <li class="active"><a href="/">Bookmarks</a></li>
           <li><a href="/about">About</a></li>
-          <li><a href="#">Sign in</a></li>
-          <li><a href="#">Sign up</a></li>
+          <li>{{> loginButtons }}</li>
           <li><a href="https://github.com/somebuddy/bookmarks" target="_blank"><img src="/github.png"></a></li>
         </ul>
       </div>
-      
+
     </div>
   </nav>
 </template>
