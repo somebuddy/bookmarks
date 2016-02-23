@@ -53,6 +53,7 @@ function handleInputKey(e, enter, esc){
 // Template
 Template.header_inputs.onRendered(function (p) {
   setInputInSearchState(this);
+  this.$('.state.add.disabled').tooltip();
 });
 
 Template.header_inputs.helpers({
@@ -68,7 +69,7 @@ Template.header_inputs.events({
     }
   },
   'click .state.add': function(event, template) {
-    if (Session.get('headerInputType') !== 'add') {
+    if (Session.get('headerInputType') !== 'add' && Meteor.user()) {
       setInputInAddState(template);
     }
   },

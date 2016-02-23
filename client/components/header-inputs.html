@@ -9,8 +9,16 @@
       <input type="text" name="website-search" />
       <div class="feedback"></div>
     </div>
+    {{#if currentUser }}
     <div class="state add">
       <div class="icon"></div>
     </div>
+    {{else}}
+    <div class="state add disabled"
+      data-toggle="tooltip" data-placement="bottom" title="You must sign in to add websites">
+      <div class="icon"></div>
+    </div>
+    {{/if}}
+
   </div>
 </template>

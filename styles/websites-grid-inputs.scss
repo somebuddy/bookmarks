@@ -38,6 +38,11 @@ $secondary-opacity: .6 !default;
         margin-left: auto;
       }
     }
+
+    &.disabled {
+      opacity: .2 !important;
+      cursor: not-allowed;
+    }
   }
 
   &.search > .state.search,

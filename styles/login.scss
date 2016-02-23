@@ -1,7 +1,8 @@
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 
-#login-buttons #login-sign-in-link {
+#login-buttons #login-sign-in-link,
+#login-buttons #login-name-link, {
   text-decoration: none;
 }
 
@@ -14,7 +15,7 @@ $column-width: 1rem !default;
   &, a {
     color: rgba(0,0,0,.8);
   }
-  
+
   a,
   a#signup-link,
   a#forgot-password-link {

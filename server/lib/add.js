@@ -4,18 +4,23 @@ var cheerio = Meteor.npmRequire('cheerio');
 
 Meteor.methods({
   addWebsite: function (website) {
+    if (!Meteor.user()) {
+      var userError = new Meteor.Error("not-allowed", "Anonymous user detected", "You must sign in to add websites");
+      throw userError;
+    }
+
     // checking website
     if (!website || typeof website !== 'string' || website.length < 3) {
       var parseError = new Meteor.Error("empty-link", "You must insert some website link");
       throw parseError;
     }
-    
+
     // checking protocol
     if (website.indexOf("http://") * website.indexOf("https://") !== 0) {
       website = "http://" + website;
       console.log("Fixed missed protocol");
     }
-    
+
     // loading remote data
     try {
       var data = HTTP.get(website);
@@ -50,7 +55,7 @@ Meteor.methods({
         console.log('Insert error: ', error);
   	  }
   	});
-  	
+
   	return data.statusCode;
   }
 });
