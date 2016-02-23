@@ -34,6 +34,16 @@ $secondary-opacity: .6;
       align-self: center;
     }
 
+    .webshot,
+    .comments {
+      order: 0;
+    }
+
+    .info,
+    .recommendations {
+      order: 1;
+    }
+
     @media (min-width: 60rem) {
       flex-direction: row;
 
@@ -46,16 +56,16 @@ $secondary-opacity: .6;
       section.comments {
         flex: 1 1 auto;
       }
-    }
 
-    .webshot,
-    .recommendations {
-      order: 0;
-    }
+      .webshot,
+      .recommendations {
+        order: 0;
+      }
 
-    .info,
-    .comments {
-      order: 1;
+      .info,
+      .comments {
+        order: 1;
+      }
     }
   }
 
