@@ -3,3 +3,10 @@
     <span class="glyphicon glyphicon-link"></span>
   </div>
 </template>
+
+<template name="visits_counter">
+  <div class="button with-badge visits-counter {{#unless visits}}empty{{/unless}}">
+    <span class="icon fa"></span>
+    <span class="badge">{{ visits }}</span>
+  </div>
+</template>

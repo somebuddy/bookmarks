@@ -151,6 +151,14 @@ $secondary-opacity: .6;
       font-weight: 400;
     }
 
+    > .splitter {
+      align-self: center;
+      width: 1px;
+      height: 1rem;
+      margin: 0 $column-width;
+      background: rgba(0,0,0,.2);
+    }
+
     > .button {
       height: $line-height * 2;
       margin: 0;

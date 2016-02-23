@@ -201,3 +201,13 @@ $board-space: .5rem;
     content: "\f088";
   }
 }
+
+.visits-counter {
+  .icon::before {
+    content: "\f06e";
+  }
+
+  &.empty {
+    opacity: .2;
+  }
+}
