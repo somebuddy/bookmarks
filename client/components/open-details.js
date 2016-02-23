@@ -7,15 +7,15 @@ Template.open_details.events({
     $("body").append(el);
     $(".page").css({overflow: 'hidden'});
     el = $("body > .route-stub");
-    
+
     // initial state
     el.css({
-      left: event.clientX, 
+      left: event.clientX,
       top: event.clientY,
       right: $( window ).width() - event.clientX,
       bottom: $( window ).height() - event.clientY
     });
-    
+
     // final state
     el.animate({
       left: "1rem",
