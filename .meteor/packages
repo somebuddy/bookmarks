@@ -30,3 +30,7 @@ iron:router
 random
 momentjs:moment
 http
+
+accounts-ui
+accounts-password
+accounts-google
