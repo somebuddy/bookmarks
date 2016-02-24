@@ -4,13 +4,25 @@ Template.website_votes.helpers({
   }
 });
 
+Template.website_votes.onRendered(function() {
+  if (!Meteor.user()) {
+    this.$('.button').tooltip({
+      title: 'You must sign in to vote'
+    });
+  }
+})
+
 Template.website_votes.events({
-  "click .js-upvote":function(event){
-    Meteor.call("upVote", this._id);
+  "click .js-upvote":function(event, template){
+    if (Meteor.user()) {
+      Meteor.call("upVote", this._id);
+    }
     return false;
   }, 
   "click .js-downvote":function(event){
-    Meteor.call("downVote", this._id);
+    if (Meteor.user()) {
+      Meteor.call("downVote", this._id);
+    }
     return false;
   }
 });
