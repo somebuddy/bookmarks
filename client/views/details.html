@@ -46,7 +46,9 @@
         <h4>Comments</h4>
       </header>
       {{> comments_list site=_id }}
-      {{> comment_add_form site=_id }}
+      {{#if currentUser }}
+        {{> comment_add_form site=_id }}
+      {{/if}}
     </section>
     <section class="recommendations">
       <header>
