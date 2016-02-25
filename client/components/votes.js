@@ -14,15 +14,11 @@ Template.website_votes.onRendered(function() {
 
 Template.website_votes.events({
   "click .js-upvote":function(event, template){
-    if (Meteor.user()) {
-      Meteor.call("upVote", this._id);
-    }
+    Meteor.call("upVote", this._id);
     return false;
   }, 
   "click .js-downvote":function(event){
-    if (Meteor.user()) {
-      Meteor.call("downVote", this._id);
-    }
+    Meteor.call("downVote", this._id);
     return false;
   }
 });

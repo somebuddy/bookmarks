@@ -1,6 +1,6 @@
-/*global Router*/
+/*global Router, openWebsiteDetails*/
 
-function openWebsiteDetails(event) {
+openWebsiteDetails = function (event) {
   var website_id = this._id;
 
   var el = $('<div class="route-stub"></div>');
@@ -39,10 +39,4 @@ function openWebsiteDetails(event) {
 
 Template.open_details.events({
   'click .js-open-details': openWebsiteDetails
-});
-
-Template.website_item.events({
-  'click .main': openWebsiteDetails,
-  'click .cover': openWebsiteDetails,
-  'click .secondary .description': openWebsiteDetails,
 });

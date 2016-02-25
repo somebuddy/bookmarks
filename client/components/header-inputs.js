@@ -80,6 +80,7 @@ Template.header_inputs.events({
       console.log('Search website', template.find('input').value);
     }, function () {
       cleanInput(template);
+      Session.set('searchQuery', template.find('input').value);
     });
   },
   'keyup .search-add-inputs.add input': function(e, template) {

@@ -1,29 +1,12 @@
-/*global history, Websites*/
-
-function trackUrl(id, url) {
-  Meteor.call("trackVisit", id);
-  if (url) {
-    window.open(url,'_blank');
-    window.focus();
-  }
-}
+/*global history, Websites, trackUrl*/
 
 Template.details_header.events({
   'click .close-button': function() {
     history.back();
   },
-  'click .info .title': function(event, template) {
-    trackUrl(this._id, this.url);
-    return false;
-  },
-  'click .info .url': function(event, template) {
-    trackUrl(this._id, this.url);
-    return false;
-  },
-  'click .webshot': function(event, template) {
-    trackUrl(this._id, this.url);
-    return false;
-  }
+  'click .info .title': trackUrl,
+  'click .info .url': trackUrl,
+  'click .webshot': trackUrl
 });
 
 Template.recommendations_list.helpers({

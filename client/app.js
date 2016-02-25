@@ -1,4 +1,4 @@
-/*global moment, Websites, Router */
+/*global moment, Websites, Router, openWebsiteDetails */
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -28,4 +28,10 @@ Template.website_list.helpers({
     }
     return Websites.find({}, {sort: {voteUp:-1}});
   }
+});
+
+Template.website_item.events({
+  'click .main': openWebsiteDetails,
+  'click .cover': openWebsiteDetails,
+  'click .secondary .description': openWebsiteDetails,
 });
