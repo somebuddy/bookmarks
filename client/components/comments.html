@@ -1,7 +1,7 @@
 <template name="comments_list">
   {{#each comments }}
     <article class="comment">
-      <header>anonymous user</header>
+      <header>{{ getUser createdBy }}</header>
       <div class="content">{{ comment }}</div>
       <footer>{{ timePassed createdAt }}</footer>
     </article>

@@ -18,7 +18,8 @@ Meteor.methods({
       Comments.insert({
         site: site,
         comment: comment,
-        createdAt: new Date()
+        createdAt: new Date(),
+        createdBy: Meteor.user()._id,
       }, function () {
         console.log('Comment inserted');
       });

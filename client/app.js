@@ -10,6 +10,14 @@ Template.registerHelper('timePassed', function(date) {
   return moment(date).fromNow();
 });
 
+Template.registerHelper('getUser', function(user_id) {
+  var user = Meteor.users.findOne({ _id: user_id });
+  if (user) {
+    return user.username;
+  }
+  return 'anonymous user';
+});
+
 // helper function that returns all available websites
 
 Template.website_list.helpers({
