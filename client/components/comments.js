@@ -14,7 +14,13 @@ Template.comment_indicator.helpers({
 
 Template.comment_add_form.events({
   'click .js-post-comment': function (event, template) {
-    var text = template.find('textarea[name="comment"]').value;
-    Meteor.call("postComment", this.site, text);
+    var el = template.find('textarea[name="comment"]')
+    Meteor.call("postComment", this.site, el.value, function(error, result) {
+      if (error) {
+        console.error(error);
+      } else {
+        el.value = '';
+      }
+    });
   }
 });
