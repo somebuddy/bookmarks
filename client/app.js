@@ -4,7 +4,7 @@ Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
 });
 
-// template helpers
+// global template helpers
 
 Template.registerHelper('timePassed', function(date) {
   return moment(date).fromNow();

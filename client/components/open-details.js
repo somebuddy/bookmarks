@@ -1,37 +1,48 @@
 /*global Router*/
 
-Template.open_details.events({
-  'click .js-open-details': function(event, template) {
-    var id = this._id;
-    var el = $('<div class="route-stub"></div>');
-    $("body").append(el);
-    $(".page").css({overflow: 'hidden'});
-    el = $("body > .route-stub");
+function openWebsiteDetails(event) {
+  var website_id = this._id;
 
-    // initial state
-    el.css({
-      left: event.clientX,
-      top: event.clientY,
-      right: $( window ).width() - event.clientX,
-      bottom: $( window ).height() - event.clientY
-    });
+  var el = $('<div class="route-stub"></div>');
+  $("body").append(el);
+  $(".page").css({overflow: 'hidden'});
+  el = $("body > .route-stub");
 
-    // final state
+  // initial state
+  el.css({
+    left: event.clientX,
+    top: event.clientY,
+    right: $( window ).width() - event.clientX,
+    bottom: $( window ).height() - event.clientY
+  });
+
+  // final state
+  el.animate({
+    left: "1rem",
+    top: "1rem",
+    opacity: 1,
+    right: "1rem",
+    bottom: "1rem"
+  }, 300);
+
+  setTimeout(function () {
+    Router.go('/bookmark/' + website_id);
     el.animate({
-      left: "1rem",
-      top: "1rem",
-      opacity: 1,
-      right: "1rem",
-      bottom: "1rem"
-    }, 300);
+      opacity: 0,
+    }, 500, function () {
+      el.remove();
+    });
+  }, 300);
 
-    setTimeout(function () {
-      Router.go('/bookmark/' + id);
-      el.animate({
-        opacity: 0,
-      }, 500, function () {
-        el.remove();
-      });
-    }, 300);
-  }
+  return false;
+}
+
+Template.open_details.events({
+  'click .js-open-details': openWebsiteDetails
+});
+
+Template.website_item.events({
+  'click .main': openWebsiteDetails,
+  'click .cover': openWebsiteDetails,
+  'click .secondary .description': openWebsiteDetails,
 });
