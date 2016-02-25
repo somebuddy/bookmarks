@@ -1,0 +1,32 @@
+<template name="website_widget">
+  <article class="website box widget">
+    <img class="background" src="/webshots/{{ _id }}.png" />
+    <div class="cover">
+      {{ > open_website }}
+      {{ > open_details }}
+      <div class="button secondary pin">
+        <span class="glyphicon glyphicon-pushpin"></span>
+      </div>
+    </div>
+    <div class="main">
+      <a class="title" href="{{url}}">{{ title }}</a>
+    </div>
+    <div class="secondary">
+      <div class="description">{{description}}</div>
+    </div>
+    <div class="secondary">
+      <div class="tags">
+        <div class="tag">study</div>
+        <div class="tag">search</div>
+        <div class="tag">web development</div>
+        <div class="tag">meteor js</div>
+        <div class="tag">university</div>
+      </div>
+    </div>
+    <div class="secondary rating">
+      <div class="date">{{ timePassed createdOn }} by <strong>{{ getUser createdBy }}</strong></div>
+      {{> website_votes }}
+      {{> comment_indicator site=_id }}
+    </div>
+  </article>
+</template>

@@ -30,12 +30,6 @@ Template.website_list.helpers({
   }
 });
 
-Template.website_item.events({
-  'click .main': openWebsiteDetails,
-  'click .cover': openWebsiteDetails,
-  'click .secondary .description': openWebsiteDetails,
-});
-
 // Infinite scroll
 Session.set("websitesLimit", 8);
 
