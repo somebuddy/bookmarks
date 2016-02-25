@@ -59,9 +59,11 @@
 
 <template name="recommendations_list">
   {{#each sites}}
-    <header>
-      <h4>You may also like</h4>
-    </header>
+    {{#unless @index }}
+      <header>
+        <h4>You may also like</h4>
+      </header>
+    {{/unless}}
     <article class="website widget small">
       <img class="background" src="/webshots/{{ _id }}.png" />
       <div class="cover">
