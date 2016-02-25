@@ -36,7 +36,8 @@ Meteor.methods({
     var doc = {
       title: $('head title').text().trim() || website,
   		url: website,
-  		createdOn: new Date()
+  		createdOn: new Date(),
+  		createdBy: Meteor.user()._id
     }
 
     // Adding description if it exists in meta tag

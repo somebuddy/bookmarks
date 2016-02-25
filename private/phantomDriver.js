@@ -43,5 +43,5 @@ page.open(url, function (){
     page.render(filename, {format: 'png', quality: '100'});
     console.log('Render finished');
     phantom.exit();
-  }, 200);
+  }, 5000);
 });
