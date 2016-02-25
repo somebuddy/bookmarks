@@ -1,5 +1,9 @@
 /*global moment, Websites, Router */
 
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_AND_EMAIL'
+});
+
 // template helpers
 
 Template.registerHelper('timePassed', function(date) {
