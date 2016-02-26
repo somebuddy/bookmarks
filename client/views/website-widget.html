@@ -1,6 +1,8 @@
 <template name="website_widget">
   <article class="website box widget">
-    <img class="background" src="/webshots/{{ _id }}.png" />
+    {{#if getWebshotFileName _id }}
+      <img class="background" src="/webshots/{{ getWebshotFileName _id }}" />
+    {{/if}}
     <div class="cover">
       {{ > open_website }}
       {{ > open_details }}

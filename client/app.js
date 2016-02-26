@@ -1,4 +1,4 @@
-/*global moment, Websites, Router, openWebsiteDetails */
+/*global moment, Websites, Webshots */
 
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -8,6 +8,12 @@ Accounts.ui.config({
 
 Template.registerHelper('timePassed', function(date) {
   return moment(date).fromNow();
+});
+
+Template.registerHelper('getWebshotFileName', function(id) {
+  Meteor.subscribe('webshot', id);
+  var webshot = Webshots.findOne({ for_site: id });
+  return webshot ? webshot.image_name : null;
 });
 
 Template.registerHelper('getUser', function(user_id) {

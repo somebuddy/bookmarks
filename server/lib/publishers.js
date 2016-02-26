@@ -40,5 +40,5 @@ Meteor.publish('siteComments', function(site) {
 });
 
 Meteor.publish('webshot', function(for_site) {
-  return Webshots.findOne({for_site: for_site});
+  return Webshots.find({for_site: for_site});
 });
