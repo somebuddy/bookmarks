@@ -1,3 +1,5 @@
+/*global Router, getWebshotsPath*/
+
 var fs = Npm.require('fs');
 
 Router.map(function() {
@@ -6,7 +8,7 @@ Router.map(function() {
     path: /^\/webshots\/(.*)$/,
     action: function() {
       var self = this;
-      var filePath = process.env.PWD + '/webshots/' + self.params[0];
+      var filePath = getWebshotsPath() + self.params[0];
       console.log('Webshot requested: ' + self.params[0]);
       fs.stat(filePath, function(err, stat) {
         if (!err) {
