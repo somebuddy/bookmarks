@@ -51,7 +51,7 @@ Meteor.methods({
       if (result && !error) {
         console.log('Calling webshot method: ', result);
         // making screenshot of website
-        Meteor.call("webshot", website, result);
+        Meteor.call("webshot", result, website);
       } else {
         console.log('Insert error: ', error);
   	  }

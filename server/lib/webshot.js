@@ -1,4 +1,4 @@
-/*global getWebshotsPath, command, Random*/
+/*global getWebshotsPath, command, Random, Webshots*/
 
 var phantomjs = Meteor.npmRequire('phantomjs');
 var fs = Meteor.npmRequire('fs');
@@ -26,12 +26,13 @@ getWebshotsPath = function () {
 }
 
 Meteor.methods({
-  webshot: function (url, id) {
-    id = id || Random.id();
+  webshot: function (site_id, url) {
+    var file_id = Random.id();
+    var filename = file_id + '.png';
 
     var path = getWebshotsPath();
-    var filename = path + id + '.png';
-    var tmpfile = '/tmp/' + id + '.png';
+    var filepath = path + filename;
+    var tmpfile = '/tmp/' + filename;
 
     command = spawn(phantomjs.path, [
       '--ignore-ssl-errors=true',
@@ -50,28 +51,35 @@ Meteor.methods({
       console.log('[STDERR]' + data);
     });
 
-    command.on('exit', function (code) {
+    command.on('exit', Meteor.bindEnvironment(function (code) {
       if (code == 0) {
-        fs.stat(tmpfile, function(err, stat) {
+        fs.stat(tmpfile, Meteor.bindEnvironment(function(err, stat) {
           if (!err) {
-            console.log('Compressing image: ', tmpfile, ' to ', filename);
+            console.log('Compressing image: ', tmpfile, ' to ', filepath);
             sharp(tmpfile)
               .resize(480, null)
               .png()
               .compressionLevel(9)
-              .toFile(filename, function(err) {
+              .toFile(filepath, Meteor.bindEnvironment(function(err) {
                 // todo: save errors in log
                 if (err) {
                   console.log('File ' + tmpfile + ' compression finished with ', err);
+                } else {
+                  // todo: saving into collection
+                  Webshots.insert({
+                    for_site: site_id,
+                    image_name: filename,
+                    createAt: new Date()
+                  });
                 }
                 console.log('Deleting temporary file: ' + tmpfile);
                 fs.unlinkSync(tmpfile);
-              })
+              }));
           }
-        });
+        }));
       } else {
         // todo: save errors in log
       }
-    });
+    }));
   }
 });

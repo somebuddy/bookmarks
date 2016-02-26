@@ -1,4 +1,4 @@
-console.log('Run start up js');
+/*global Websites*/
 
 Meteor.startup(function () {
   // code to run on server at startup
@@ -42,7 +42,7 @@ Meteor.startup(function () {
     });
 
     Websites.find({}).forEach(function (doc) {
-      Meteor.call("webshot", doc.url, doc._id);
+      Meteor.call("webshot", doc._id, doc.url);
     });
   }
 });
