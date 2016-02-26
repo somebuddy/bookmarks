@@ -290,6 +290,8 @@ $secondary-opacity: .6;
 
     > .title {
       @include flex-center;
+      align-items: flex-start;
+      text-align: center;
       font-size: .75rem;
       line-height: .75rem;
       min-height: 1.5rem;

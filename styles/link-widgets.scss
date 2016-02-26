@@ -91,9 +91,10 @@ $board-space: .5rem;
       overflow-y: hidden;
       overflow-x: visible;
       flex: 1 1 auto;
-      font-size: 1.125rem;
       line-height: $line-height;
       overflow: hidden;
+      font-size: 1.25rem;
+      font-family: 'Roboto Condensed', 'Roboto', 'Open Sans', sans-serif;
 
       color: black;
       text-decoration: none;
