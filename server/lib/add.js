@@ -21,6 +21,12 @@ Meteor.methods({
       console.log("Fixed missed protocol");
     }
 
+    // checking if exists
+    if (Websites.findOne({ url: website })) {
+      var duplicatesError = new Meteor.Error("link-exists", "Link already exists");
+      throw duplicatesError;
+    }
+
     // loading remote data
     try {
       var data = HTTP.get(website);

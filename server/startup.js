@@ -1,6 +1,8 @@
 /*global Websites*/
 
 Meteor.startup(function () {
+  Websites._ensureIndex({ "url": 1});
+
   // code to run on server at startup
   if (!Websites.findOne()){
     console.log("No websites yet. Creating starter data.");
