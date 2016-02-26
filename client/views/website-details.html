@@ -11,7 +11,9 @@
   </nav>
   <header>
     <section class="webshot">
-      <img src="/webshots/{{ _id }}.png" />
+      {{#if getWebshotFileName _id }}
+        <img src="/webshots/{{ getWebshotFileName _id }}" />
+      {{/if}}
     </section>
     <section class="info">
       <div class="title">{{ title }}</div>
@@ -65,7 +67,9 @@
       </header>
     {{/unless}}
     <article class="website widget small">
-      <img class="background" src="/webshots/{{ _id }}.png" />
+      {{#if getWebshotFileName _id }}
+        <img class="background" src="/webshots/{{ getWebshotFileName _id }}" />
+      {{/if}}
       <div class="cover">
         {{ > open_website }}
         {{ > open_details }}
