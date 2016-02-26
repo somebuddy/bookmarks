@@ -71,6 +71,7 @@ Template.header_inputs.events({
   'click .state.add': function(event, template) {
     if (Session.get('headerInputType') !== 'add' && Meteor.user()) {
       setInputInAddState(template);
+      Session.set('searchQuery', undefined);
     }
   },
   'keyup .search-add-inputs.search input': function(e, template) {
