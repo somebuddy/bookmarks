@@ -1,4 +1,4 @@
-/*global Websites, Comments */
+/*global Websites, Comments, Webshots */
 
 Meteor.publish('websites', function() {
   return Websites.find();
@@ -6,14 +6,6 @@ Meteor.publish('websites', function() {
 
 Meteor.publish('website', function(id) {
   return Websites.find({_id: id});
-});
-
-Meteor.publish('comments', function() {
-  return Comments.find();
-});
-
-Meteor.publish('siteComments', function(site) {
-  return Comments.find({site: site});
 });
 
 Meteor.publish('searchWebsites', function(query) {
@@ -37,4 +29,16 @@ Meteor.publish('searchWebsites', function(query) {
   } else {
     return Websites.find();
   }
+});
+
+Meteor.publish('comments', function() {
+  return Comments.find();
+});
+
+Meteor.publish('siteComments', function(site) {
+  return Comments.find({site: site});
+});
+
+Meteor.publish('webshot', function(for_site) {
+  return Webshots.findOne({for_site: for_site});
 });
