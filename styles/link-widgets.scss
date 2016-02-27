@@ -20,7 +20,6 @@ $board-space: .5rem;
     @include absolute(0, 0, 0, 0);
     width: 100%;
     height: auto;
-    opacity: .6;
     z-index: 0;
     transition: transform 1s ease, opacity .5s ease;
 
