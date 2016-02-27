@@ -25,6 +25,37 @@ getWebshotsPath = function () {
   return path;
 }
 
+var prepareImage = function (filename) {
+  return sharp(filename).resize(480, null)
+    .background({r: 255, g: 255, b: 255, a: 1})
+    .flatten();
+}
+
+var loadImage = function (filename) {
+  return prepareImage(filename)
+    .grayscale()
+    .raw()
+    .toBuffer()
+    .then(function(outputBuffer) {
+      var val = 0;
+      for (var i = 0; i < outputBuffer.length; i++) {
+        val += outputBuffer[i];
+      }
+      var avgColor = val / outputBuffer.length;
+      return avgColor >= 128 ? 'light' : 'dark';
+    });
+};
+
+var saveImageToFile = function (fromFile, toFile) {
+  return prepareImage(fromFile)
+    .png()
+    .compressionLevel(9)
+    .toFile(toFile)
+    .then(function (info) {
+      return info.size;
+    });
+};
+
 Meteor.methods({
   webshot: function (site_id, url) {
     var file_id = Random.id();
@@ -56,25 +87,22 @@ Meteor.methods({
         fs.stat(tmpfile, Meteor.bindEnvironment(function(err, stat) {
           if (!err) {
             console.log('Compressing image: ', tmpfile, ' to ', filepath);
-            sharp(tmpfile)
-              .resize(480, null)
-              .png()
-              .compressionLevel(9)
-              .toFile(filepath, Meteor.bindEnvironment(function(err) {
-                // todo: save errors in log
-                if (err) {
-                  console.log('File ' + tmpfile + ' compression finished with ', err);
-                } else {
-                  // todo: saving into collection
-                  Webshots.insert({
-                    for_site: site_id,
-                    image_name: filename,
-                    createAt: new Date()
-                  });
-                }
-                console.log('Deleting temporary file: ' + tmpfile);
-                fs.unlinkSync(tmpfile);
-              }));
+
+            Promise.all([
+              loadImage(tmpfile), saveImageToFile(tmpfile, filepath)
+            ]).then(Meteor.bindEnvironment(function(values) {
+              console.log('All values:', values)
+              // saving imformation about file
+              Webshots.insert({
+                for_site: site_id,
+                image_name: filename,
+                createAt: new Date(),
+                colorSchema: values[0]
+              });
+
+              // deleting temporary file
+              fs.unlinkSync(tmpfile);
+            }));
           }
         }));
       } else {
