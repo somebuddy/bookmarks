@@ -97,10 +97,9 @@ Meteor.methods({
         fs.stat(tmpfile, Meteor.bindEnvironment(function(err, stat) {
           if (!err) {
             Promise.all([
-              loadImage(tmpfile), 
+              loadImage(tmpfile),
               saveImageToFile(tmpfile, filepath)
             ]).then(Meteor.bindEnvironment(function(values) {
-              console.log('All values:', values)
               // saving imformation about file
               if (!values[0].mono) {
                 Webshots.insert({

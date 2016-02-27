@@ -4,7 +4,7 @@ var cheerio = Meteor.npmRequire('cheerio');
 
 Meteor.methods({
   addWebsite: function (website) {
-    if (!Meteor.user()) {
+    if (!Meteor.user() && this.connection) {
       var userError = new Meteor.Error("not-allowed", "Anonymous user detected", "You must sign in to add websites");
       throw userError;
     }
@@ -43,7 +43,7 @@ Meteor.methods({
       title: $('head title').text().trim() || website,
   		url: website,
   		createdOn: new Date(),
-  		createdBy: Meteor.user()._id
+  		createdBy: Meteor.user() ? Meteor.user()._id : null
     }
 
     // Adding description if it exists in meta tag

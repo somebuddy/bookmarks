@@ -5,46 +5,24 @@ Meteor.startup(function () {
 
   // code to run on server at startup
   if (!Websites.findOne()){
-    console.log("No websites yet. Creating starter data.");
-    Websites.insert({
-      title:"Goldsmiths Computing Department",
-      url:"http://www.gold.ac.uk/computing/",
-      description:"This is where this course was developed.",
-      createdOn:new Date()
-    });
-    Websites.insert({
-      title:"University of London",
-      url:"http://www.londoninternational.ac.uk/courses/undergraduate/goldsmiths/bsc-creative-computing-bsc-diploma-work-entry-route",
-      description:"University of London International Programme.",
-      createdOn:new Date()
-    });
-    Websites.insert({
-      title:"Coursera",
-      url:"http://www.coursera.org",
-      description:"Universal access to the world’s best education.",
-      createdOn:new Date()
-    });
-    Websites.insert({
-      title:"Google",
-      url:"http://www.google.com",
-      description:"Popular search engine.",
-      createdOn:new Date()
-    });
-    Websites.insert({
-      title:"The Meteor Chef",
-      url:"https://themeteorchef.com/",
-      description:"Popular search engine.",
-      createdOn:new Date()
-    });
-    Websites.insert({
-      title:"Atmosphere",
-      url:"https://atmospherejs.com",
-      description:"Popular search engine.",
-      createdOn:new Date()
-    });
-
-    Websites.find({}).forEach(function (doc) {
-      Meteor.call("webshot", doc._id, doc.url);
-    });
+    Meteor.call("addWebsite", "gold.ac.uk/computing");
+    Meteor.call("addWebsite", "londoninternational.ac.uk/courses/undergraduate/goldsmiths/bsc-creative-computing-bsc-diploma-work-entry-route");
+    Meteor.call("addWebsite", "coursera.org");
+    Meteor.call("addWebsite", "google.com");
+    Meteor.call("addWebsite", "themeteorchef.com");
+    Meteor.call("addWebsite", "atmospherejs.com");
+    Meteor.call("addWebsite", "themeteorchef.slack.com");
+    Meteor.call("addWebsite", "workshape.io");
+    Meteor.call("addWebsite", "hacksummit.org");
+    Meteor.call("addWebsite", "openshift.com");
+    Meteor.call("addWebsite", "heroku.com");
+    Meteor.call("addWebsite", "meetup.com");
+    Meteor.call("addWebsite", "slack.com");
+    Meteor.call("addWebsite", "iron.io");
+    Meteor.call("addWebsite", "hackerrank.com");
+    Meteor.call("addWebsite", "gitlab.com");
+    Meteor.call("addWebsite", "github.org");
+    Meteor.call("addWebsite", "bitbucket.org");
+    Meteor.call("addWebsite", "doctorwhotv.co.uk");
   }
 });
