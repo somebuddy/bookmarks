@@ -37,16 +37,26 @@ var loadImage = function (filename) {
     .raw()
     .toBuffer()
     .then(function(outputBuffer) {
+      if (!outputBuffer || !outputBuffer.length) {
+        return 'light';
+      }
       var val = 0;
+      var color = outputBuffer[0];
+      var mono = true;
       for (var i = 0; i < outputBuffer.length; i++) {
+        mono = mono && (color === outputBuffer[i]);
         val += outputBuffer[i];
       }
       var avgColor = val / outputBuffer.length;
-      return avgColor >= 128 ? 'light' : 'dark';
+      return {
+        brightness: avgColor >= 128 ? 'light' : 'dark',
+        mono: mono
+      }
     });
 };
 
 var saveImageToFile = function (fromFile, toFile) {
+  console.log('Compressing image: ', fromFile, ' to ', toFile);
   return prepareImage(fromFile)
     .png()
     .compressionLevel(9)
@@ -86,19 +96,23 @@ Meteor.methods({
       if (code == 0) {
         fs.stat(tmpfile, Meteor.bindEnvironment(function(err, stat) {
           if (!err) {
-            console.log('Compressing image: ', tmpfile, ' to ', filepath);
-
             Promise.all([
-              loadImage(tmpfile), saveImageToFile(tmpfile, filepath)
+              loadImage(tmpfile), 
+              saveImageToFile(tmpfile, filepath)
             ]).then(Meteor.bindEnvironment(function(values) {
               console.log('All values:', values)
               // saving imformation about file
-              Webshots.insert({
-                for_site: site_id,
-                image_name: filename,
-                createAt: new Date(),
-                colorSchema: values[0]
-              });
+              if (!values[0].mono) {
+                Webshots.insert({
+                  for_site: site_id,
+                  image_name: filename,
+                  createAt: new Date(),
+                  colorSchema: values[0].brightness
+                });
+              } else {
+                fs.unlinkSync(filepath);
+                console.error('Image for ', url ,' was not saved because it is empty');
+              }
 
               // deleting temporary file
               fs.unlinkSync(tmpfile);
