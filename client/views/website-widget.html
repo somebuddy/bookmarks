@@ -17,13 +17,7 @@
       <div class="description">{{description}}</div>
     </div>
     <div class="secondary">
-      <div class="tags">
-        <div class="tag">study</div>
-        <div class="tag">search</div>
-        <div class="tag">web development</div>
-        <div class="tag">meteor js</div>
-        <div class="tag">university</div>
-      </div>
+      {{ > tags }}
     </div>
     <div class="secondary rating">
       <div class="date">{{ timePassed createdOn }} by <strong>{{ getUser createdBy }}</strong></div>
