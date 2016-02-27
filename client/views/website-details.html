@@ -24,14 +24,7 @@
         <header>category: </header>
         <div class="tag">study</div>
       </div>
-      <div class="tags">
-        <header>tags: </header>
-        <div class="tag">study</div>
-        <div class="tag">search</div>
-        <div class="tag">web development</div>
-        <div class="tag">meteor js</div>
-        <div class="tag">university</div>
-      </div>
+      {{ > tags }}
       <div class="statistics">
         <div class="date"><strong>added:</strong> {{ timePassed createdOn }}</div>
         {{> visits_counter }}

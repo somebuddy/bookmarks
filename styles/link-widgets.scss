@@ -117,11 +117,15 @@ $board-space: .5rem;
       overflow: hidden;
       transition: max-height .5s ease;
     }
+
+    > .tags > header {
+      display: none;
+    }
   }
-  
+
   > .secondary.rating {
     padding: 0 .5rem;
-  
+
     > .date {
       align-self: center;
       white-space: nowrap;
@@ -132,13 +136,13 @@ $board-space: .5rem;
       line-height: $line-height;
       font-weight: 400;
     }
-  
+
     > .button {
       height: $line-height * 2;
       margin: 0;
       color: rgba(0,0,0,0.8);
     }
-  
+
     > .comment-button {
       order: 99;
       margin-left: 0;
@@ -154,7 +158,6 @@ $board-space: .5rem;
     }
   }
 }
-
 
 .button.with-badge {
   @include flex-center;
