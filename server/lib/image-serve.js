@@ -19,7 +19,6 @@ Router.map(function() {
           self.response.write(data);
           self.response.end();
         } else {
-          console.log('Wrong requested: ' + self.params[0]);
           self.response.writeHead(404);
           self.response.end();
         }

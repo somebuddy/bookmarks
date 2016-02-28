@@ -1,5 +1,7 @@
 /*global moment, Websites, Webshots */
 
+Meteor.subscribe('users');
+
 Accounts.ui.config({
   passwordSignupFields: 'USERNAME_AND_EMAIL'
 });
