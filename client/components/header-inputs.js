@@ -51,9 +51,25 @@ function handleInputKey(e, enter, esc){
 }
 
 // Template
+
+// Meteor.logout(function () {
+//   Session.set('searchQuery', undefined);
+//   Session.set('headerInputType', 'search');
+// })
+
 Template.header_inputs.onRendered(function (p) {
   setInputInSearchState(this);
-  this.$('.state.add.disabled').tooltip();
+
+  var self = this;
+  self.autorun(function() {
+    if (!Meteor.user()) {
+      Session.set('searchQuery', undefined);
+      setInputInSearchState(self);
+      self.$('.state.add.disabled').tooltip();
+    } else {
+      self.$('.state.add').tooltip('destroy');
+    }
+  });
 });
 
 Template.header_inputs.helpers({
