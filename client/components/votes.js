@@ -1,6 +1,18 @@
+/*global UserWebsites */
+
 Template.website_votes.helpers({
   'checkEmpty': function (votes) {
     return votes ? '' : 'empty';
+  },
+  'isVotedUp': function () {
+    Meteor.subscribe('userWebsiteData', this._id);
+    var doc = UserWebsites.findOne({ user: Meteor.userId(), site: this._id });
+    return doc && doc.vote == 1;
+  },
+  'isVotedDown': function () {
+    Meteor.subscribe('userWebsiteData', this._id);
+    var doc = UserWebsites.findOne({ user: Meteor.userId(), site: this._id });
+    return doc && doc.vote == -1;
   }
 });
 
@@ -10,7 +22,7 @@ Template.website_votes.onRendered(function() {
       title: 'You must sign in to vote'
     });
   }
-})
+});
 
 Template.website_votes.events({
   "click .js-upvote":function(event, template){

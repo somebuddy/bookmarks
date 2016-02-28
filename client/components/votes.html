@@ -1,9 +1,9 @@
 <template name="website_votes">
-  <div class="button with-badge js-upvote {{checkEmpty voteUp }}">
+  <div class="button with-badge js-upvote {{checkEmpty voteUp }} {{#if isVotedUp}}voted{{/if}}">
     <span class="icon fa"></span>
     <span class="badge">{{ voteUp }}</span>
   </div>
-  <div class="button with-badge js-downvote {{checkEmpty voteDown }}">
+  <div class="button with-badge js-downvote {{checkEmpty voteDown }} {{#if isVotedDown}}voted{{/if}}">
     <span class="icon fa"></span>
     <span class="badge">{{ voteDown }}</span>
   </div>

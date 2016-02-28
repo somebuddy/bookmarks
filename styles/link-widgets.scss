@@ -193,6 +193,10 @@ $board-space: .5rem;
   &.empty .icon::before {
     content: "\f087";
   }
+
+  &.voted {
+    color: #0277BD !important;
+  }
 }
 
 .js-downvote {
@@ -202,6 +206,10 @@ $board-space: .5rem;
 
   &.empty .icon::before {
     content: "\f088";
+  }
+
+  &.voted {
+    color: #d50000 !important;
   }
 }
 
