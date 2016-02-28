@@ -65,7 +65,7 @@ Template.header_inputs.onRendered(function (p) {
     if (!Meteor.user()) {
       Session.set('searchQuery', undefined);
       setInputInSearchState(self);
-      self.$('.state.add.disabled').tooltip();
+      self.$('.state.add').tooltip();
     } else {
       self.$('.state.add').tooltip('destroy');
     }

@@ -1,4 +1,4 @@
-/*global Websites, Comments, Webshots */
+/*global Websites, UserWebsites, Comments, Webshots */
 
 Meteor.publish('users', function() {
   return Meteor.users.find();
@@ -10,6 +10,10 @@ Meteor.publish('websites', function() {
 
 Meteor.publish('website', function(id) {
   return Websites.find({_id: id});
+});
+
+Meteor.publish('userWebsiteData', function(site) {
+  return UserWebsites.find({ site: site, user: Meteor.userId() });
 });
 
 Meteor.publish('searchWebsites', function(query) {
