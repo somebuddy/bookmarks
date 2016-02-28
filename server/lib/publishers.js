@@ -13,7 +13,7 @@ Meteor.publish('website', function(id) {
 });
 
 Meteor.publish('userWebsiteData', function(site) {
-  return UserWebsites.find({ site: site, user: Meteor.userId() });
+  return UserWebsites.find({ site: site, user: this.userId });
 });
 
 Meteor.publish('searchWebsites', function(query) {
