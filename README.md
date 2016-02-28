@@ -1,22 +1,15 @@
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+Final assignment for Coursera "Introduction to Meteor.js Development"
+
+https://www.coursera.org/learn/meteor-development/home/welcome
 
 
-Welcome to your Meteor project on Cloud9 IDE!
+## Preview links
 
-To run your new app open your terminal and type:
-   
-    $ meteor --port $IP:$PORT
+Active workspace:
 
+https://coursera-meteor-intro-somebuddy.c9users.io/
 
-Happy coding!
-The Cloud9 IDE team
+On meteor.com:
 
-## Support & Documentation
-
-Meteor documentation can be found at http://docs.meteor.com/
+http://inbox-bookmarks.meteor.com/
