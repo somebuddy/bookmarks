@@ -1,3 +1,4 @@
 webshots
 node_modules
-packages
+packages/*
+!packages/npm-container/
