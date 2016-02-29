@@ -7,12 +7,12 @@ Template.website_votes.helpers({
   'isVotedUp': function () {
     Meteor.subscribe('userWebsiteData', this._id);
     var doc = UserWebsites.findOne({ user: Meteor.userId(), site: this._id });
-    return doc && doc.vote == 1;
+    return doc && doc.voteUp;
   },
   'isVotedDown': function () {
     Meteor.subscribe('userWebsiteData', this._id);
     var doc = UserWebsites.findOne({ user: Meteor.userId(), site: this._id });
-    return doc && doc.vote == -1;
+    return doc && doc.voteDown;
   }
 });
 
