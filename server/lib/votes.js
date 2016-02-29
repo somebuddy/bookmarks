@@ -9,8 +9,8 @@ var voteChanges = function (o, s) {
 
   // values for counter
   var delta = {
-    voteUp: n.voteUp - o.voteUp,
-    voteDown: n.voteDown - o.voteDown,
+    voteUp: n.voteUp - !!o.voteUp,
+    voteDown: n.voteDown - !!o.voteDown,
   };
   delta.voteTotal = delta.voteUp - delta.voteDown;
 
@@ -25,7 +25,7 @@ var saveUserVote = function (site, up, down) {
   var counter = { voteUp: up + 0, voteDown: down + 0, voteTotal: up - down };
   if (doc) {
     // update early voted
-    var changes = voteChanges(doc, { voteUp: up, voteDown: down});
+    var changes = voteChanges(doc, { voteUp: up, voteDown: down });
     UserWebsites.update({ _id: doc._id }, { $set: changes.user } );
     counter = changes.counter;
   } else {
