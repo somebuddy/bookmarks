@@ -1,4 +1,12 @@
-/*global history, Websites, trackUrl*/
+/*global history, Websites, trackUrl, UserWebsites*/
+
+Template.details_header.helpers({
+  'getLastVisit': function () {
+    Meteor.subscribe('userWebsiteData', this._id);
+    var doc = UserWebsites.findOne({ user: Meteor.userId(), site: this._id });
+    return doc ? doc.lastVisit : undefined;
+  }
+})
 
 Template.details_header.events({
   'click .close-button': function() {
@@ -17,5 +25,5 @@ Template.recommendations_list.helpers({
       return sites;
     }
     return [];
-  }
+  },
 })
