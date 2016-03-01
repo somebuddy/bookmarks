@@ -1,0 +1,10 @@
+<template name="websites_grid">
+  <div class="websites grid">
+    <header class="box full-row">
+      {{> header_inputs}}
+    </header>
+    {{#each websites}}
+      {{ > website_widget }}
+    {{/each}}
+  </div>
+</template>

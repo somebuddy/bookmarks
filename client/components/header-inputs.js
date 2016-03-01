@@ -71,7 +71,9 @@ Template.header_inputs.events({
     setSearchState(template);
   },
   'click .state.add': function(e, template) {
-    setAddState(template);
+    if (Meteor.user()) {
+      setAddState(template);
+    }
   },
   'keyup .search-add-inputs.search input': function(e, template) {
     setFeedback(template);

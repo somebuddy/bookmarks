@@ -60,17 +60,6 @@
 
 <template name="page_content">
   <section class="content wide">
-    <div class="websites grid">
-      <header class="box full-row">
-        {{> header_inputs}}
-      </header>
-      {{> website_list}}
-    </div>
+    {{> websites_grid}}
   </section>
-</template>
-
-<template name="website_list">
-  {{#each websites}}
-    {{ > website_widget }}
-  {{/each}}
 </template>
