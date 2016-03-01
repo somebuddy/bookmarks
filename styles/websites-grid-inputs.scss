@@ -10,7 +10,6 @@ $secondary-opacity: .6 !default;
   // Layout
   position: relative;
   @include flex-row;
-  margin-bottom: $line-height;
 
   .state {
     @include absolute(0, auto, 0, auto);

@@ -1,8 +1,27 @@
+@mixin flex-container($display: flex, $direction: row, $wrap: nowrap) {
+  display: $display;
+  flex-flow: $direction $wrap;
+}
+
+@mixin flex-align($align: stretch, $align-content: flex-start, $justify: flex-start) {
+  align-content: $align-content;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin flex-child-fixed {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+@mixin flex-child-fluid($weight: 1) {
+  flex-grow: $weight;
+  flex-shrink: $weight;
+}
+
 @mixin flex-inline {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  align-content: center;
-  align-items: center;
+  @include flex-container(inline-flex);
+  @include flex-align(center, center);
 }
 
 @mixin flex-inline-center {

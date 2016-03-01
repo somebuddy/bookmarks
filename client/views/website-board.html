@@ -3,6 +3,13 @@
     <header class="box full-row">
       {{> header_inputs}}
     </header>
+    <header class="row">
+      <div class="filler"></div>
+      <div class="cell static">Filter:</div>
+      <div class="cell">&lt; None &gt;</div>
+      <div class="splitter"></div>
+      <div class="cell static">Order:</div>
+    </header>
     {{#each websites}}
       {{ > website_widget }}
     {{/each}}
