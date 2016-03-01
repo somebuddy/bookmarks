@@ -1,4 +1,3 @@
-
 // Helpers: input
 function cleanInput(template, placeholder) {
   var input = template.find('input');
@@ -8,63 +7,52 @@ function cleanInput(template, placeholder) {
 }
 
 // Helpers: feedback
-function removeFeedback(template) {
-  var ip = $(template.find('.search-add-inputs .input'));
-  ip.removeClass('has-feedback');
-  ip.find('.feedback').removeClass('error hint success');
-  ip.find('.feedback').text("");
-}
-
 function setFeedback(template, cls, text) {
-  removeFeedback(template);
-
   var ip = $(template.find('.search-add-inputs .input'));
-  ip.addClass('has-feedback');
-  ip.find('.feedback').addClass(cls);
-  ip.find('.feedback').text(text);
+  var fb = ip.find('.feedback');
+  text ? ip.addClass('has-feedback') : ip.removeClass('has-feedback');
+  cls ? fb.addClass(cls) : fb.removeClass('error hint success');
+  text ? fb.text(text) : fb.text("");
 }
 
 // Helpers: states
-function setInputInSearchState(template) {
-  /* Set template input in intial state for search action */
-  removeFeedback(template);
-  cleanInput(template, 'Search website');
-  Session.set('headerInputType', 'search');
+function getStateSetter(state, placeholder, hint) {
+  return function (template) {
+    if (Session.get('headerInputType') === state) return;
+    cleanInput(template, placeholder);
+    hint && hint.length ? setFeedback(template, 'hint', hint) : setFeedback(template);
+    Session.set('searchQuery', undefined);
+    Session.set('headerInputType', state);
+  };
 }
 
-function setInputInAddState(template) {
-  /* Set template input in intial state for add action */
-  cleanInput(template, 'Add new website');
-  setFeedback(template, 'hint', 'Insert website link and press [Enter]');
-  Session.set('headerInputType', 'add');
+var setSearchState = getStateSetter('search', 'Search website');
+var setAddState = getStateSetter('add', 'Add new website', 'Insert website link and press [Enter]');
+
+// Helpers: key press handler
+function getKeyHander (key) {
+  return function (value, fnc) {
+    (value === key && (typeof fnc === 'function')) ? fnc() : undefined;
+  };
 }
+
+var enterCatcher = getKeyHander(13);
+var escCatcher = getKeyHander(27);
 
 function handleInputKey(e, enter, esc){
   var key = e.which || e.keyCode || 0;
-  if (key === 27 && (typeof esc === 'function')) {
-    esc();
-    return false;
-  } else if (key === 13 && (typeof enter === 'function')) {
-    enter();
-    return false;
-  }
+  enterCatcher(key, enter);
+  escCatcher(key, esc);
 }
 
 // Template
 
-// Meteor.logout(function () {
-//   Session.set('searchQuery', undefined);
-//   Session.set('headerInputType', 'search');
-// })
-
 Template.header_inputs.onRendered(function (p) {
-  setInputInSearchState(this);
-
   var self = this;
+  setSearchState(self);
   self.autorun(function() {
     if (!Meteor.user()) {
-      Session.set('searchQuery', undefined);
-      setInputInSearchState(self);
+      setSearchState(self);
       self.$('.state.add').tooltip();
     } else {
       self.$('.state.add').tooltip('destroy');
@@ -79,39 +67,31 @@ Template.header_inputs.helpers({
 });
 
 Template.header_inputs.events({
-  'click .state.search': function(event, template) {
-    if (Session.get('headerInputType') !== 'search') {
-      setInputInSearchState(template);
-    }
+  'click .state.search': function(e, template) {
+    setSearchState(template);
   },
-  'click .state.add': function(event, template) {
-    if (Session.get('headerInputType') !== 'add' && Meteor.user()) {
-      setInputInAddState(template);
-      Session.set('searchQuery', undefined);
-    }
+  'click .state.add': function(e, template) {
+    setAddState(template);
   },
   'keyup .search-add-inputs.search input': function(e, template) {
-    removeFeedback(template);
+    setFeedback(template);
     Session.set('searchQuery', template.find('input').value);
-    return handleInputKey(e, function () {
-      console.log('Search website', template.find('input').value);
-    }, function () {
+    return handleInputKey(e, undefined, function () {
       cleanInput(template);
-      Session.set('searchQuery', template.find('input').value);
+      Session.set('searchQuery', undefined);
     });
   },
   'keyup .search-add-inputs.add input': function(e, template) {
-    removeFeedback(template);
+    setFeedback(template);
     handleInputKey(e, function () {
       var website = template.find('input').value;
       Meteor.call("addWebsite", website, function (e) {
-        if (!e) {
-          setFeedback(template, 'success', 'Successfully added');
-          cleanInput(template);
-        } else {
-          console.error(e);
-          setFeedback(template, 'error', e.message + " (" + e.details + ")");
+        if (e) {
+          setFeedback(template, 'error', e.message + (e.details ? " (" + e.details + ")" : ""));
+          return;
         }
+        setFeedback(template, 'success', 'Successfully added');
+        cleanInput(template);
       });
     }, function () {
       cleanInput(template);
