@@ -35,7 +35,7 @@ openWebsiteDetails = function (event) {
   }, 300);
 
   return false;
-}
+};
 
 Template.open_details.events({
   'click .js-open-details': openWebsiteDetails
