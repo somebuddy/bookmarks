@@ -8,9 +8,7 @@ Meteor.methods({
       UserWebsites.update({ _id: doc._id }, { $set: { lastVisit: new Date() } } );
     } else {
       // new vote
-      UserWebsites.insert({
-        user: Meteor.userId(), site: id, lastVisit: new Date()
-      });
+      UserWebsites.insert({ user: Meteor.userId(), site: id, lastVisit: new Date() });
     }
     Websites.update({_id: id}, {$inc: {visits: 1}});
   }

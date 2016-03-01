@@ -1,4 +1,4 @@
-/*global getWebshotsPath, command, Random, Webshots*/
+/*global getWebshotsPath, Random, Webshots*/
 
 var phantomjs = Meteor.npmRequire('phantomjs');
 var fs = Meteor.npmRequire('fs');
@@ -75,7 +75,7 @@ Meteor.methods({
     var filepath = path + filename;
     var tmpfile = '/tmp/' + filename;
 
-    command = spawn(phantomjs.path, [
+    var command = spawn(phantomjs.path, [
       '--ignore-ssl-errors=true',
       '--ssl-protocol=any',
       '--debug=true',
@@ -85,11 +85,11 @@ Meteor.methods({
 
     command.stdout.on('data', function (data) {
       // todo: save in log
-      console.log('[STDOUT]' + data);
+      // console.log('[STDOUT]' + data);
     });
     command.stderr.on('data', function (data) {
       // todo: save in log
-      console.log('[STDERR]' + data);
+      // console.log('[STDERR]' + data);
     });
 
     command.on('exit', Meteor.bindEnvironment(function (code) {
@@ -120,6 +120,7 @@ Meteor.methods({
         }));
       } else {
         // todo: save errors in log
+        console.log('Making screenshot for url [' + url + '] finished with code ' + code);
       }
     }));
   }

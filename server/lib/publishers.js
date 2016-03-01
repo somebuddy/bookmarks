@@ -24,14 +24,10 @@ Meteor.publish('searchWebsites', function(query) {
       }
     }, {
       fields: {
-        score: {
-          $meta: 'textScore'
-        }
+        score: { $meta: 'textScore' }
       },
       sort: {
-        score: {
-          $meta: 'textScore'
-        }
+        score: { $meta: 'textScore' }
       }
     });
   } else {

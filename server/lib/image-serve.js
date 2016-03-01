@@ -9,19 +9,14 @@ Router.map(function() {
     action: function() {
       var self = this;
       var filePath = getWebshotsPath() + self.params[0];
-      console.log('Webshot requested: ' + self.params[0]);
-      fs.stat(filePath, function(err, stat) {
-        if (!err) {
-          var data = fs.readFileSync(filePath);
-          self.response.writeHead(200, {
-            'Content-Type': 'image'
-          });
-          self.response.write(data);
-          self.response.end();
-        } else {
+      fs.stat(filePath, function(err) {
+        if (err) {
           self.response.writeHead(404);
-          self.response.end();
+        } else {
+          self.response.writeHead(200, { 'Content-Type': 'image' });
+          self.response.write(fs.readFileSync(filePath));
         }
+        self.response.end();
       });
     }
   });
