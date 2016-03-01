@@ -1,4 +1,4 @@
-/*global Comments */
+/*global Websites, Comments */
 
 Meteor.methods({
   postComment: function (site, comment) {
@@ -7,21 +7,27 @@ Meteor.methods({
       throw userError;
     }
 
-    // clean up comment
-    comment = comment || '';
-    comment = comment.trim();
+    // check that website exits
+    var doc = Websites.findOne({_id: site});
+    if (!doc) {
+      var notFoundError = new Meteor.Error("not-found", "Website didn't find");
+      throw notFoundError;
+    }
 
-    console.log('Trying to insert comment', site, comment);
+    // clean up comment
+    comment = (comment || '').trim();
+    if (!comment.length) {
+      var emptyError = new Meteor.Error("empty-comment", "Say something nice before press post button");
+      throw emptyError;
+    }
 
     // check if still has text
     if (site && comment.length) {
-      Comments.insert({
+      return Comments.insert({
         site: site,
         comment: comment,
         createdAt: new Date(),
         createdBy: Meteor.user()._id,
-      }, function () {
-        console.log('Comment inserted');
       });
     }
   }

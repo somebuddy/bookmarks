@@ -40,15 +40,7 @@
 
 <template name="details_content">
   <main class="content wide">
-    <section class="comments">
-      <header>
-        <h4>Comments</h4>
-      </header>
-      {{> comments_list site=_id }}
-      {{#if currentUser }}
-        {{> comment_add_form site=_id }}
-      {{/if}}
-    </section>
+    {{> comments_list site=_id }}
     <section class="recommendations">
       {{> recommendations_list site=this }}
     </section>

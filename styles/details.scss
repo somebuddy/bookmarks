@@ -112,7 +112,7 @@ $secondary-opacity: .6;
       }
     }
   }
-  
+
   .user {
     font-size: .75rem;
     line-height: $line-height;
@@ -263,6 +263,26 @@ $secondary-opacity: .6;
     padding: ($line-height / 2) $column-width;
     font-weight: 300;
     transition: transform .3s ease;
+  }
+
+  .feedback {
+    @include flex-row;
+    text-transform: uppercase;
+    font-size: .625rem;
+    font-weight: 600;
+    color: #37474F;
+
+    &.error {
+      color: #d50000;
+    }
+
+    &.success {
+      color: #1B5E20;
+    }
+
+    &.info {
+      color: #0D47A1;
+    }
   }
 }
 
