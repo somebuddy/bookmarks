@@ -3,12 +3,24 @@
     <header class="box full-row">
       {{> header_inputs}}
     </header>
-    <header class="row">
+    <header class="row filter">
       <div class="filler"></div>
-      <div class="cell static">Filter:</div>
+      <div class="static">Filter:</div>
       <div class="cell">&lt; None &gt;</div>
       <div class="splitter"></div>
-      <div class="cell static">Order:</div>
+      <div class="static">Order:</div>
+      <div class="cell">&lt; Votes Up &gt;</div>
+      <div class="splitter"></div>
+      <div class="cell">
+        <div class="glyphicon glyphicon-th-large"></div>
+      </div>
+      <div class="cell">
+        <div class="glyphicon glyphicon-th-list"></div>
+      </div>
+      <div class="splitter"></div>
+      <div class="cell">
+        <div class="glyphicon glyphicon-cog"></div>
+      </div>
     </header>
     {{#each websites}}
       {{ > website_widget }}

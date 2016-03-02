@@ -22,18 +22,22 @@ body {
 // App specific styles
 .page {
   background-color: #ECEFF1;
+  color: rgba(0,0,0,.8);
 
   > nav,
   > nav .navbar-collapse,
   > header {
-    background-color: #99cc00;
-    color: white;
+    // background-color: #99cc00;
+    // color: white;
   }
 
   &.overlap-header {
     > header {
+      padding-bottom: 7.5rem;
+      box-shadow: none;
+
       + .content {
-        margin-top: -12rem;
+        margin-top: -7.5rem;
       }
     }
   }

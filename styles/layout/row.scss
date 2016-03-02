@@ -1,4 +1,4 @@
-/* 
+/*
 ** Styles for one row container
 */
 
@@ -19,7 +19,7 @@ $secondary-opacity: .6;
   padding: 0 0 0 $row-padding;
   margin: 0;
   line-height: $line-height;
-  
+
   /* Default child styles */
   > * {
     @include flex-container(inline-flex);
@@ -72,10 +72,8 @@ $secondary-opacity: .6;
   margin-left: -$row-child-margin;
   &:first-child { margin-left: -$row-padding; }
 
-  & + .cell,
-  & + .splitter,
   & + .block,
-  & + .button {
+  & + .cell {
     margin-left: 0;
   }
 }
@@ -93,13 +91,13 @@ $secondary-opacity: .6;
   flex-basis: 1px;
   align-self: center;
   height: $line-height;
-  margin: 0 $row-child-margin/2 0 calc(-#{$row-child-margin/2} + 1px);
-  background-color: rgba(0,0,0,.15);
 
+  margin: 0 calc(#{$row-child-margin} + 1px) 0 0;
   & + .cell, & + .block, & + .button {
-    margin-left: -$column-width/2;
+    margin-left: -$row-child-margin;
   }
 
+  background-color: rgba(0,0,0,.15);
   &.dark  { background-color: rgba(0,0,0,.3); }
   &.light { background-color: rgba(255,255,255,.2); }
 }
@@ -122,7 +120,7 @@ $secondary-opacity: .6;
   &.right {
     > .row-icon { order: 999; }
   }
-  
+
   > .static {
     opacity: $secondary-opacity;
   }
@@ -136,5 +134,5 @@ $secondary-opacity: .6;
   @include row-components;
   width: 100%;
   min-height: $line-height*2;
-  
+
 }
