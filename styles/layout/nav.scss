@@ -29,7 +29,8 @@ $nav-height: 4.5rem;
     align-self: center;
     z-index: 1001;
 
-    #login-name-link {
+    #login-name-link,
+    #login-sign-in-link {
       text-transform: uppercase;
       font-size: .75rem;
     }

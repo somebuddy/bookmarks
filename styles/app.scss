@@ -1,5 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Roboto:400,300,500,700,100);
 @import url(//fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+@import url(https://fonts.googleapis.com/css?family=Teko:700);
 
 @import 'typography/typography';
 @import 'layout/layout';
@@ -23,6 +24,19 @@ body {
 .page {
   background-color: #ECEFF1;
   color: rgba(0,0,0,.8);
+
+  > header {
+    > .title {
+      font-family: Teko;
+      font-weight: 900;
+      // color: #d50000;
+      color: #37474F;
+    }
+
+    > .description {
+      padding: 0 1rem;
+    }
+  }
 
   > nav,
   > nav .navbar-collapse,
