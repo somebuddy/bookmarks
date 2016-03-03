@@ -25,35 +25,28 @@
 }
 
 @mixin flex-inline-center {
-  @include flex-inline;
-  justify-content: center;
+  @include flex-container(inline-flex);
+  @include flex-align(center, center, center);
 }
 
 @mixin flex-inline-column {
-  display: inline-flex;
-  flex-direction: column;
-  align-content: stretch;
-  align-items: stretch;
+  @include flex-container(inline-flex, column);
+  @include flex-align(stretch, stretch);
 }
 
 @mixin flex-vertical-center {
-  display: flex;
-  flex-flow: row nowrap;
-  align-content: center;
-  align-items: center;
+  @include flex-container;
+  @include flex-align(center, center);
 }
 
 @mixin flex-center {
-  @include flex-vertical-center;
-  justify-content: center;
+  @include flex-container;
+  @include flex-align(center, center, center);
 }
 
 @mixin flex-row {
-  display: flex;
-  flex-flow: row nowrap;
-  align-content: stretch;
-  align-items: stretch;
-  justify-content: flex-start;
+  @include flex-container;
+  @include flex-align(stretch, stretch);
 }
 
 @mixin flex-rows {
@@ -62,11 +55,8 @@
 }
 
 @mixin flex-column {
-  display: flex;
-  flex-flow: column nowrap;
-  align-content: stretch;
-  align-items: stretch;
-  justify-content: flex-start;
+  @include flex-container($directon: column);
+  @include flex-align(stretch, stretch);
 }
 
 @mixin flex-columns {
