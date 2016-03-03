@@ -73,7 +73,8 @@ $secondary-opacity: .6;
   &:first-child { margin-left: -$row-padding; }
 
   & + .block,
-  & + .cell {
+  & + .cell,
+  & + .button {
     margin-left: 0;
   }
 }
@@ -83,6 +84,14 @@ $secondary-opacity: .6;
   @include row-cell;
   align-self: center;
   &:last-child { margin-right: $row-padding; }
+}
+
+@mixin row-button {
+  @include row-cell;
+  color: inherit;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
 }
 
 @mixin row-splitter {
@@ -116,6 +125,7 @@ $secondary-opacity: .6;
   > .cell, > .toolbar, > nav { @include row-cell; }
   > .splitter { @include row-splitter; }
   > .block { @include row-block; }
+  > .button { @include row-button; }
 
   &.right {
     > .row-icon { order: 999; }
