@@ -55,7 +55,7 @@
 }
 
 @mixin flex-column {
-  @include flex-container($directon: column);
+  @include flex-container($direction: column);
   @include flex-align(stretch, stretch);
 }
 

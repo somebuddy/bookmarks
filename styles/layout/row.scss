@@ -90,7 +90,7 @@ $secondary-opacity: .6;
   @include row-cell;
   color: inherit;
   background: transparent;
-  border: none;
+  border-color: transparent;
   font-size: 1rem;
 }
 
@@ -144,5 +144,4 @@ $secondary-opacity: .6;
   @include row-components;
   width: 100%;
   min-height: $line-height*2;
-
 }
