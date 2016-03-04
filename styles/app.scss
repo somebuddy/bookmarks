@@ -47,6 +47,14 @@ body {
     // color: white;
   }
 
+  .brand:hover {
+    color: #FF3C00;
+  }
+
+  .nav.navbar-nav li.active {
+    color: #FF3C00;
+  }
+
   &.overlap-header {
     > header {
       padding-bottom: 7.5rem;

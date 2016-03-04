@@ -13,7 +13,7 @@ $column-width: 1rem !default;
   @include flex-inline();
   opacity: $secondary-opacity;
   margin: ($line-height / 2) $column-width;
-  transition: opacity .5s ease;
+  transition: opacity .5s ease .3s, color .3s ease;
 
   > .icon, > .logo {
     @include flex-center;
@@ -28,6 +28,7 @@ $column-width: 1rem !default;
 
   &:hover, &:active, &:focus {
     opacity: $main-opacity;
+    transition: opacity .5s ease, color .3s ease .5s;
   }
 }
 
