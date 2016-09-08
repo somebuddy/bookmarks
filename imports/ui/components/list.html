@@ -1,0 +1,13 @@
+<template name="bookmarks_list">
+  <div class="websites grid">
+    <header class="box full-row">
+      {{ > list_inputs }}
+    </header>
+    <header class="row filter">
+      {{ > list_filter }}
+    </header>
+    {{#each websites}}
+      {{ > website_widget }}
+    {{/each}}
+  </div>
+</template>

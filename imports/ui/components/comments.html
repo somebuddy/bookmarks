@@ -1,0 +1,26 @@
+<template name="comments">
+  <section class="comments">
+    <header>
+      <h4>Comments</h4>
+    </header>
+    {{#each comments }}
+      <article class="comment">
+        <header>{{ getUser createdBy }}</header>
+        <div class="content">{{ comment }}</div>
+        <footer>{{ timePassed createdAt }}</footer>
+      </article>
+    {{else}}
+      <div class="text-center no-comments">No comments here yet.</div>
+    {{/each}}
+    {{> comment_add_form site=for }}
+  </section>
+</template>
+
+<template name="comment_add_form">
+  <div class="add-comment">
+    <header>new comment:</header>
+    <textarea name="comment" rows=5></textarea>
+    <div class="feedback"></div>
+    <div class="button primary js-post-comment">Post</div>
+  </div>
+</template>

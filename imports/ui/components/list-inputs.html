@@ -1,0 +1,17 @@
+<template name="list_inputs">
+  <div class="search-add-inputs {{ currentInput }}">
+    <div class="state search">
+      <div class="icon">
+        <div class="search-icon"></div>
+      </div>
+    </div>
+    <div class="input">
+      <input type="text" name="website-search" />
+      <div class="feedback"></div>
+    </div>
+    <div class="state add {{#unless currentUser }}disabled{{/unless}}"
+      data-toggle="tooltip" data-placement="bottom" title="You must sign in to add websites">
+      <div class="icon"></div>
+    </div>
+  </div>
+</template>

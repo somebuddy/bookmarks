@@ -1,0 +1,32 @@
+<template name="recommendations">
+  <section class="recommendations">
+    {{#each sites}}
+      {{#unless @index }}
+        <header>
+          <h4>You may also like</h4>
+        </header>
+      {{/unless}}
+      <article class="website widget small">
+        {{#if getWebshotFileName _id }}
+          <img class="background" src="/webshots/{{ getWebshotFileName _id }}" />
+        {{/if}}
+        <div class="cover">
+          {{ > open_website }}
+          {{ > open_details }}
+          <div class="button secondary pin">
+            <span class="glyphicon glyphicon-pushpin"></span>
+          </div>
+        </div>
+        <div class="main">
+          <a class="title" href="{{url}}">{{ title }}</a>
+        </div>
+        <div class="secondary">
+          <div class="description">{{description}}</div>
+        </div>
+        <div class="secondary">
+          <div class="description">{{score}}</div>
+        </div>
+      </article>
+    {{/each}}
+  </section>
+</template>

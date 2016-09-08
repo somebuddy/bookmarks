@@ -1,0 +1,10 @@
+<template name="comment_indicator">
+  <div class="button with-badge comment-button js-comment
+    {{#unless count}}empty{{/unless}}
+    {{#if isHighlighted}}highlight{{/if}}">
+    <span class="icon fa fa-comments" aria-hidden="true"></span>
+    {{#if count }}
+      <span class="badge">{{ count }}</span>
+    {{/if}}
+  </div>
+</template>

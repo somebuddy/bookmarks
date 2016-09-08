@@ -1,0 +1,34 @@
+<template name="nav">
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a class="brand" href="/">
+        <span class="logo logo-reviews">
+            <span class="glyphicon glyphicon-bookmark"></span>
+        </span>
+        <span class="name">Site Ace</span>
+      </a>
+
+      <div class="user">{{> loginButtons }}</div>
+
+      <div class="navbar-header">
+        <div class="navbar-toggle collapsed"
+          data-toggle="collapse"
+          data-target="#main_navbar"
+          aria-expanded="false">
+          <div class="hamburger-button">
+            <div class="lines"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="collapse navbar-collapse pull-right" id="main_navbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Bookmarks</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="https://github.com/somebuddy/bookmarks" target="_blank"><img src="/github-dark.png"></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>

@@ -1,0 +1,13 @@
+{
+  "name": "met14",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "meteor-node-stubs": "~0.2.0",
+    "phantomjs-prebuilt": "^2.1.12",
+    "sharp": "^0.16.0"
+  }
+}

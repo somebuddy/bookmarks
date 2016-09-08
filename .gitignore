@@ -1,4 +1,4 @@
-webshots
+/webshots
 node_modules
 packages/*
 !packages/npm-container/

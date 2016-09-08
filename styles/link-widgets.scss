@@ -135,6 +135,7 @@ $board-space: .5rem;
     padding: 0 .5rem;
 
     > .date {
+      display: inline;
       align-self: center;
       white-space: nowrap;
       margin-right: auto;
@@ -229,5 +230,19 @@ $board-space: .5rem;
 
   &.empty {
     opacity: .2;
+  }
+}
+
+.js-comment {
+  .icon::before {
+    content: "\f086";
+  }
+
+  &.empty .icon::before {
+    content: "\f0e5";
+  }
+
+  &.highlight {
+    color: #0277BD !important;
   }
 }

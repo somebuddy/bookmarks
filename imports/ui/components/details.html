@@ -1,0 +1,52 @@
+<template name="bookmark_details">
+  <div class="details">
+    {{ > bookmark_details_nav }}
+    {{ > bookmark_details_header bookmark=bookmark }}
+    {{ > bookmark_details_content bookmark=bookmark }}
+  </div>
+</template>
+
+<template name="bookmark_details_nav">
+  <nav class="nav">
+    <div class="close-button"></div>
+  </nav>
+</template>
+
+<template name="bookmark_details_header">
+  {{#with bookmark}}
+    <header>
+      <section class="webshot">
+        {{#if getWebshotFileName _id }}
+          <img src="/webshots/{{ getWebshotFileName _id }}" />
+        {{/if}}
+      </section>
+      <section class="info">
+        <div class="title">{{ title }}</div>
+        <div class="url">{{ url }}</div>
+        <div class="user">added by <strong> {{ getUser createdBy }} </strong></div>
+        <div class="description">{{ description }}</div>
+        <div class="category tags">
+          <header>category: </header>
+          <div class="tag">study</div>
+        </div>
+        {{ > tags }}
+        <div class="row statistics">
+          <div class="date"><strong>added: </strong> {{ timePassed createdOn }}</div>
+          {{#if getLastVisit }}
+          <div class="date"><strong>last visit: </strong> {{ timePassed getLastVisit }}</div>
+          {{/if}}
+          {{ > visits_counter }}
+          <div class="splitter"></div>
+          {{ > website_votes }}
+        </div>
+      </section>
+    </header>
+  {{/with}}
+</template>
+
+<template name="bookmark_details_content">
+  <main class="content wide">
+    {{> comments for=bookmark }}
+    {{> recommendations for=bookmark }}
+  </main>
+</template>
