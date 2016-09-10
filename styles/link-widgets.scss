@@ -80,7 +80,7 @@ $board-space: .5rem;
   &:hover > .cover {
     opacity: 1;
     background: rgba(0,0,0,.8);
-    transition: opacity .5s ease, background 2s ease 1s;
+    transition: opacity .5s ease, background 1.25s ease .25s;
   }
 
   > .main {
