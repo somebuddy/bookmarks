@@ -9,30 +9,29 @@ $secondary-opacity: .6;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: $line-height * 3 $column-width;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   background: white;
-  margin: $line-height $column-width;
+  margin: (-$line-height) (-$column-width);
+
+  @media (min-width: 40rem) {
+    padding: 0 $column-width $line-height*3;
+    margin: 0;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
 
   > nav {
     @include flex-row;
-    @include absolute(0, 0, null, 0);
-
-    > .close-button {
-      margin-left: auto;
-    }
+    > .close-button { margin-left: auto; }
   }
 
   > header,
   > main.content {
     @include flex-column;
 
-    > section {
-      // flex: 1 1 100%;
-      padding: ($line-height / 2) $column-width;
-    }
+    > section { padding: ($line-height / 2) $column-width; }
 
     section.webshot {
+      padding: 0;
+      margin-bottom: $line-height;
       align-self: center;
     }
 
