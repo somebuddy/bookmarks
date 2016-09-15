@@ -23,7 +23,12 @@
       <section class="info">
         <div class="title">{{ title }}</div>
         <div class="url">{{ url }}</div>
-        <div class="user">added by <strong> {{ getUser createdBy }} </strong></div>
+        <div class="created">
+          <div class="title">added</div>
+          <div class="date">{{ timePassed createdOn }}</div>
+          <div class="title">by</div>
+          <div class="author">{{ getUser createdBy }}</div>
+        </div>
         <div class="description">{{ description }}</div>
         <div class="category tags">
           <header>category: </header>
@@ -31,9 +36,11 @@
         </div>
         {{ > tags }}
         <div class="row statistics">
-          <div class="date"><strong>added: </strong> {{ timePassed createdOn }}</div>
           {{#if getLastVisit }}
-          <div class="date"><strong>last visit: </strong> {{ timePassed getLastVisit }}</div>
+          <div class="created">
+            <div class="title">last visited</div>
+            <div class="date">{{ timePassed getLastVisit }}</div>
+          </div>
           {{/if}}
           {{ > visits_counter }}
           <div class="splitter"></div>
