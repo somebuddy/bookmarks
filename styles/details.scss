@@ -39,6 +39,7 @@ $url-color: #0277BD;
 
       img {
         max-width: 100%;
+        width: 100%;
       }
     }
 
@@ -318,6 +319,10 @@ $url-color: #0277BD;
   font-size: 1.125rem;
   line-height: $line-height;
   margin: ($line-height * 2) 0;
+
+  & + .no-comments {
+    margin-top: -$line-height * 2;
+  }
 }
 
 .add-comment {
