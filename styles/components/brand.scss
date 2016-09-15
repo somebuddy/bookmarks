@@ -32,4 +32,14 @@ $column-width: 1rem !default;
   }
 }
 
+.brand {
+  > .name {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    > .name { display: inline-flex; }
+  }
+}
+
 @include reset-link(brand);
