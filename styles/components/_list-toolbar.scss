@@ -1,0 +1,24 @@
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+
+.row.list-toolbar {
+  flex-wrap: wrap;
+  margin: $line-height (-$column-width);
+
+  .splitter, .filler,
+  .grid-list-switcher {
+    display: none;
+  }
+
+  .cell {
+    width: auto;
+    min-height: $line-height * 2;
+  }
+
+  @media (min-width: 40rem) {
+    flex-wrap: nowrap;
+    .splitter, .filler, .grid-list-switcher {
+      display: inline-flex;
+    }
+  }
+}
