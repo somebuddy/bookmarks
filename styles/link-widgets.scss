@@ -3,8 +3,9 @@
 $line-height: 1.5rem !default;
 $widget-height: 12rem + $line-height * 5;
 $column-width: 1rem !default;
-$widget-width: 25rem;
-$board-space: .5rem;
+$widget-width: 25rem !default;
+$board-space: .5rem !default;
+$secondary-opacity: .6 !default;
 
 .websites.grid {
   @include board-grid($widget-width, $board-space);
@@ -12,10 +13,6 @@ $board-space: .5rem;
   > header {
     margin-top: -$line-height/4;
     margin-bottom: 0;
-  }
-
-  > header.filter {
-    margin: $line-height 0;
   }
 }
 
@@ -84,7 +81,7 @@ $board-space: .5rem;
   &:hover > .cover {
     opacity: 1;
     background: rgba(0,0,0,.8);
-    transition: opacity .5s ease, background 2s ease 1s;
+    transition: opacity .5s ease, background 1.25s ease .25s;
   }
 
   > .main {
@@ -132,18 +129,21 @@ $board-space: .5rem;
   }
 
   > .secondary.rating {
-    padding: 0 .5rem;
+    flex-wrap: wrap;
 
-    > .date {
-      display: inline;
-      align-self: center;
+    > .created {
+      flex: 1 1 100%;
+      height: $line-height * 2;
+      @include flex-inline;
       white-space: nowrap;
       margin-right: auto;
-      color: rgba(0,0,0,0.6);
-      padding: 0 .5rem;
+      color: rgba(black, $secondary-opacity);
       font-size: .75rem;
       line-height: $line-height;
-      font-weight: 400;
+
+      > .date, > .author {
+        margin-right: $column-width/4;
+      }
     }
 
     > .button {
@@ -156,6 +156,16 @@ $board-space: .5rem;
       order: 99;
       margin-left: 0;
       margin-right: 0;
+    }
+
+    > .js-upvote {
+      margin-left: auto;
+    }
+
+    @media (min-width: 25rem) {
+      > .created {
+        flex: 0 0 auto;
+      }
     }
   }
 

@@ -20,7 +20,10 @@
       {{ > tags }}
     </div>
     <div class="row secondary rating">
-      <div class="date">{{ timePassed createdOn }} by <strong>{{ getUser createdBy }}</strong></div>
+      <div class="created">
+        <div class="date">{{ timePassed createdOn }}</div>
+        <div class="author">by <strong class="user-name">{{ getUser createdBy }}</strong></div>
+      </div>
       {{> website_votes }}
       {{> comment_indicator site=_id }}
     </div>

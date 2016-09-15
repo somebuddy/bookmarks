@@ -12,7 +12,11 @@
     {{else}}
       <div class="text-center no-comments">No comments here yet.</div>
     {{/each}}
-    {{> comment_add_form site=for }}
+    {{#if currentUser }}
+      {{> comment_add_form site=for }}
+    {{else}}
+      <div class="text-center no-comments">You must sign in to comment.</div>
+    {{/if}}
   </section>
 </template>
 

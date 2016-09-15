@@ -1,0 +1,267 @@
+@import '../layout/flex';
+@import '../layout/mixins';
+@import '../helpers/sqrt';
+@import '../helpers/placeholder';
+
+$line-height: 1.5rem !default;
+$column-width: 1rem !default;
+$secondary-opacity: .6 !default;
+
+$error-color: #a30000;
+$success-color: #cbff8f;
+$info-color: #295970;
+
+$search-bkg-color: white;
+$search-color: #47526E;
+
+$add-bkg-color: #47526E;
+$add-disabled-color: #37474F;
+$add-color: white;
+
+// Layout and components
+.search-add-inputs {
+  position: relative;
+  @include flex-row;
+
+  // switcher
+  .state {
+    @include absolute(0, null, 0, null);
+    width: 100%;
+    z-index: 0;
+    transition: all .5s ease;
+
+    &.search { left: 0; }
+    &.add { right: 0; }
+
+    .icon {
+      @include flex-center;
+      opacity: $secondary-opacity;
+      cursor: pointer;
+      transition: all .5s ease;
+    }
+
+    &.add > .icon { margin-left: auto; }
+
+    &.disabled {
+      opacity: .2 !important;
+      cursor: not-allowed;
+    }
+  }
+
+  &.search > .state.search,
+  &.add > .state.add {
+    max-width: 100%;
+    .icon { opacity: 1; }
+  }
+
+  // input
+  .input {
+    z-index: 1;
+    width: 100%;
+
+    input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-weight: 300;
+      text-align: center;
+      transition: transform .3s ease;
+    }
+
+    .feedback {
+      @include absolute(auto, 0, 0, 0);
+      padding: .125rem .5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      font-size: $line-height / 3;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-align: center;
+
+      opacity: 0;
+      transition: opacity .5s ease;
+
+
+      &.error { color: $error-color; }
+      &.success { color: $success-color; }
+      &.hint { color: $info-color; }
+    }
+
+    &.has-feedback > input { transform: scale(.8) translateY(-25%); }
+    &.has-feedback > .feedback { opacity: 1; }
+  }
+}
+
+@mixin list-input-sizes($base: 1) {
+  $button-size: 2 * $line-height * $base;
+  $button-size: max($line-height * 2, $button-size);
+  $button-size: min($line-height * 3, $button-size);
+  $input-font-size: $base * 1rem;
+  $feedback-font-size: min($input-font-size / 2, $line-height / 2);
+
+  height: $button-size;
+  margin-left: ($button-size / 2);
+  margin-right: ($button-size / 2);
+
+  .state {
+    min-width: $button-size;
+    max-width: $button-size;
+
+    .icon { @include size($button-size, $button-size); }
+    &.search { margin-left: -$button-size / 2; }
+    &.add { margin-right: -$button-size / 2; }
+  }
+
+  .input {
+    margin: 0 $button-size/2;
+    padding: $line-height/2 $column-width;
+
+    input {
+      font-size: $input-font-size;
+      height: $button-size - $line-height;
+    }
+
+    .feedback { font-size: $feedback-font-size; }
+  }
+}
+
+// Icons
+
+.search-icon {
+  position: relative;
+  border: 3px solid rgba(0,0,0,.7);
+  border-radius: 50%;
+  box-sizing: content-box;
+
+  &:before {
+    content: '';
+    position: absolute;
+    height: 0;
+    border: 2px solid rgba(0,0,0,.4);
+    background: rgba(0,0,0,.5);
+    transform: rotate(45deg);
+    transform-origin: 0 0;
+    box-sizing: content-box;
+  }
+}
+
+@mixin search-icon-colorize($color: black) {
+  .search-icon {
+    border-color: rgba($color, .7);
+
+    &:before {
+      border-color: rgba($color, .4);
+      background: rgba($color, .5);
+    }
+  }
+}
+
+@mixin search-icon-size($size: 2rem) {
+  @include size($size, $size);
+
+  &:before {
+    left: (1 + sqrt(0.5)) * $size / 2;
+    top: (1 + sqrt(0.5)) * $size / 2;
+    width: $size / 2;
+  }
+}
+
+.state.add > .icon {
+  position: relative;
+
+  &:after, &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+  }
+
+  &:before {
+    height: 50%;
+    width: 2px;
+  }
+
+  &:after {
+    width: 50%;
+    height: 2px;
+  }
+}
+
+@mixin add-icon-colorize($color: black) {
+  &:after, &:before { background:  $color };
+}
+
+.search-add-inputs {
+  @include list-input-sizes(1);
+  .search-icon { @include search-icon-size(.75rem); }
+}
+
+
+.search-add-inputs {
+  @media (min-width: 40rem) {
+    @include list-input-sizes(1.5);
+    .search-icon { @include search-icon-size(1.25rem); }
+  }
+
+  @media (min-width: 60rem) {
+    @include list-input-sizes(2.25);
+    .search-icon { @include search-icon-size(1.5rem); }
+  }
+}
+
+// Color schema
+.search-add-inputs {
+  .state.search {
+    background: rgba($search-bkg-color, .4);
+    color: rgba($search-color, .7);
+
+    .icon {
+      background: rgba($search-bkg-color, .9);
+      @include search-icon-colorize($search-color);
+    }
+  }
+
+  &.search {
+    input {
+      color: rgba($search-color, .9);
+
+      @include placeholder {
+        color: rgba($search-color, .9);
+        transition: color .1s ease .2s;
+      }
+    }
+  }
+
+  .state.add {
+    background: rgba($add-bkg-color, .4);
+    // background: rgba(#47526E, .5);
+    color: rgba($add-color, 1);
+
+    .icon {
+      background: rgba($add-bkg-color, 1);
+      @include add-icon-colorize($add-color);
+    }
+
+    &.disabled {
+      background: rgba($add-disabled-color, .4);
+      .icon { background: rgba($add-disabled-color, .9); }
+    }
+  }
+
+  &.add {
+    input {
+      color: rgba($add-color,.9);
+
+      @include placeholder {
+        color: rgba($add-color,.9);
+        transition: color .1s ease .2s;
+      }
+    }
+  }
+}

@@ -1,19 +1,27 @@
 <template name="list_filter">
   <div class="filler"></div>
-  <div class="static">Filter:</div>
-  <div class="cell">&lt; None &gt;</div>
-  <div class="splitter"></div>
-  <div class="static">Order:</div>
-  <div class="cell">&lt; Votes Up &gt;</div>
-  <div class="splitter"></div>
-  <div class="button disabled">
-    <div class="glyphicon glyphicon-th-large"></div>
-  </div>
-  <div class="button disabled">
-    <div class="glyphicon glyphicon-th-list"></div>
+  <div class="cell row variable">
+    <div class="static">Filter:</div>
+    <div class="cell">&lt; None &gt;</div>
   </div>
   <div class="splitter"></div>
-  <div class="button disabled">
-    <div class="glyphicon glyphicon-cog"></div>
+  <div class="cell row variable">
+    <div class="static">Order:</div>
+    <div class="cell">&lt; Votes Up &gt;</div>
+  </div>
+  <div class="splitter"></div>
+  <div class="cell row toolbar grid-list-switcher">
+    <div class="button disabled">
+      <div class="glyphicon glyphicon-th-large"></div>
+    </div>
+    <div class="button disabled">
+      <div class="glyphicon glyphicon-th-list"></div>
+    </div>
+  </div>
+  <div class="splitter"></div>
+  <div class="cell row toolbar">
+    <div class="button disabled">
+      <div class="glyphicon glyphicon-cog"></div>
+    </div>
   </div>
 </template>
