@@ -19,7 +19,9 @@ $url-color: #0277BD;
 
   > nav {
     @include flex-row;
-    > .close-button { margin-left: auto; }
+    > .close-button {
+      margin: $line-height/2 $column-width;
+    }
   }
 
   > header,
@@ -30,6 +32,7 @@ $url-color: #0277BD;
 
     section.webshot {
       max-width: 100%;
+      width: 100%;
       padding: 0;
       margin-bottom: $line-height;
       align-self: center;
@@ -86,8 +89,18 @@ $url-color: #0277BD;
     margin: 0;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
+    > nav {
+      > .close-button {
+        margin-left: auto;
+      }
+    }
+
     > header {
       padding-top: $line-height;
+
+      section.webshot {
+        width: auto;
+      }
     }
   }
 }
@@ -157,6 +170,7 @@ $url-color: #0277BD;
 
   .category.tags > .tag {
     background: #EF6C00;
+    color: white;
     border-color: #DD2C00;
   }
 
@@ -210,32 +224,65 @@ $url-color: #0277BD;
 }
 
 .close-button {
-  display: inline-flex;
-  cursor: pointer;
   position: relative;
-  margin: 0.75rem 1rem;
-  width: 3rem;
-  height: 3rem;
-  opacity: .4;
+  display: inline-flex;
+  opacity: $secondary-opacity;
+  transform: scale(1.25);
   transition: all .3s ease;
+  cursor: pointer;
 
-  &:after, &:before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    background: rgba(0,0,0,.3);
-    transform: translate(-50%, -50%) rotate(45deg);
-    transform-origin: 50% 50%;
-    transition: all .3s ease;
+  > .lines {
+    position: relative;
+    margin-top: $line-height;
+    margin-bottom: calc(#{$line-height} - 3px);
+    transform: rotate(0deg) scale(0.6);
+
+    &, &:after, &:before {
+      @include size($line-height, 3px);
+      border-radius: 2px;
+      background-color: rgba($header-color, $secondary-opacity);
+      transition: all .5s ease;
+    }
+
+    &:after, &:before {
+      content: '';
+      @include absolute($left: 0, $right: 0);
+      transform-origin: 2px center;
+      width: 1em;
+    }
+
+    &:after {
+      transform: rotate(35deg);
+      top: 1px;
+    }
+
+    &:before {
+      transform: rotate(-35deg);
+      top: -1px;
+    }
+
+    @media (min-width: 40rem) {
+      background: transparent;
+
+      &:after, &:before {
+        top: 0;
+        transform-origin: center center;
+        width: $line-height * 2;
+      }
+
+      &:after {
+        transform: rotate(45deg);
+      }
+
+      &:before {
+        transform: rotate(-45deg);
+      }
+    }
   }
-
-  &:before { @include size(2px, 75%); }
-  &:after { @include size(75%, 2px); }
 
   &:hover {
     opacity: 1;
-    transform: scale(1.25);
+    transform: scale(1.5);
   }
 }
 
