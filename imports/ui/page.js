@@ -14,7 +14,6 @@ let lastScrollTop = 0;
 
 Template.page.onRendered( () => {
   $(".page").scroll( function (event) {
-    console.log('scrolling...');
     if ($(this).scrollTop() + $(this).height() >= $(this).prop('scrollHeight')) {
       let scrollTop = $(this).scrollTop();
       if (scrollTop > lastScrollTop) {

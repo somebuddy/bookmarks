@@ -6,5 +6,4 @@ export const getWebshotFileName = function(id) {
   Meteor.subscribe('webshot', id);
   var webshot = Webshots.findOne({ for_site: id });
   return webshot ? webshot.image_name : null;
-  return null;
 };

@@ -42,7 +42,6 @@ let saveUserVote = (id, up, down) => {
 Meteor.methods({
   trackVisit (id) {
     var doc = UserWebsites.findOne({user: Meteor.userId(), site: id});
-    console.log(doc, Websites.findOne({_id: id}));
     if (doc) {
       // update early voted
       UserWebsites.update({ _id: doc._id }, { $set: { lastVisit: new Date() } } );
