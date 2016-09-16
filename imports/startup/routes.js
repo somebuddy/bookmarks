@@ -1,13 +1,21 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
+import '../ui/page.js';
+import '../ui/components/nav.js';
+import '../ui/views/about.js';
+import '../ui/views/home.js';
+import '../ui/views/coursera.js';
+import '../ui/views/roadmap.js';
+import '../ui/components/details.js';
+
 FlowRouter.route('/', {
-  name: 'root',
+  name: 'home',
   action() {
     BlazeLayout.render('page', {
       nav: 'nav',
-      header: 'page_header',
-      content: 'bookmarks_list',
+      header: 'home_header',
+      content: 'home_content',
     });
   },
 });
@@ -24,13 +32,32 @@ FlowRouter.route('/bookmark/:_id', {
 FlowRouter.route('/about', {
   name: 'about',
   action(params, queryParams) {
-    console.log('About route', params, queryParams);
+    BlazeLayout.render('page', {
+      nav: 'nav',
+      header: 'about_header',
+      content: 'about_content',
+    });
   },
 });
 
 FlowRouter.route('/coursera-mates', {
   name: 'coursera',
   action(params, queryParams) {
-    console.log('Coursera Mates Notes route', params, queryParams);
+    BlazeLayout.render('page', {
+      nav: 'nav',
+      header: 'coursera_header',
+      content: 'coursera_content',
+    });
+  },
+});
+
+FlowRouter.route('/roadmap', {
+  name: 'roadmap',
+  action(params, queryParams) {
+    BlazeLayout.render('page', {
+      nav: 'nav',
+      header: 'roadmap_header',
+      content: 'roadmap_content',
+    });
   },
 });

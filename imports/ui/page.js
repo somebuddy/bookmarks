@@ -2,11 +2,6 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { $ } from 'meteor/jquery';
 
-import './components/nav.js';
-import './components/page-header.js';
-import './components/list.js';
-import './components/details.js';
-
 import './page.html';
 
 // Infinite scroll
