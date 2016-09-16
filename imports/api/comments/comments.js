@@ -1,3 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 
-export const Comments = new Mongo.Collection("comments");
+const Comments = new Mongo.Collection('comments');
+
+export { Comments as default };

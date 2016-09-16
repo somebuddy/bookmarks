@@ -1,1 +1,3 @@
-export { Comments } from './comments.js';
+import Comments from './comments.js';
+
+export { Comments };

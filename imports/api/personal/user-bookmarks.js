@@ -1,3 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 
-export const UserWebsites = new Mongo.Collection("userWebsites");
+const UserWebsites = new Mongo.Collection('userWebsites');
+
+export { UserWebsites as default };

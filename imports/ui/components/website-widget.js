@@ -10,7 +10,7 @@ import '../elements/indicators/visit-counter.js';
 
 // action buttons
 import '../elements/actions/open-bookmark.js';
-import { openWebsiteDetails } from '../elements/actions/open-details.js';
+import openWebsiteDetails from '../elements/actions/open-details.js';
 
 Template.website_widget.events({
   'click .main': openWebsiteDetails,

@@ -1,1 +1,3 @@
-export { UserWebsites } from './user-bookmarks.js';
+import UserWebsites from './user-bookmarks.js';
+
+export { UserWebsites };

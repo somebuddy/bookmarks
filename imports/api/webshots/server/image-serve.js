@@ -1,24 +1,25 @@
 import fs from 'fs';
 import { WebApp } from 'meteor/webapp';
-import { getWebshotsPath } from './methods.js';
+import getWebshotsPath from './methods.js';
 
-WebApp.connectHandlers.use('/webshots/', function(req, res, next) {
-  let re = /^\/(.*)$/;
-  let fn = re.exec(req.url);
+WebApp.connectHandlers.use('/webshots/', (req, res) => {
+  const re = /^\/(.*)$/;
+  const fn = re.exec(req.url);
+  const result = res;
   if (fn[1]) {
-    let filePath = getWebshotsPath() + fn[1];
-    fs.stat(filePath, function(err) {
+    const filePath = getWebshotsPath() + fn[1];
+    fs.stat(filePath, (err) => {
       if (err) {
-        res.writeHead(404);
+        result.writeHead(404);
       } else {
-        res.writeHead(200, { 'Content-Type': 'image' });
-        res.write(fs.readFileSync(filePath));
+        result.writeHead(200, { 'Content-Type': 'image' });
+        result.write(fs.readFileSync(filePath));
       }
-      res.end();
+      result.end();
     });
   } else {
-    res.writeHead(404);
-    res.statusCode = 404;
-    res.end();
+    result.writeHead(404);
+    result.statusCode = 404;
+    result.end();
   }
 });

@@ -1,4 +1,5 @@
-/*global phantom */
+/* eslint-disable */
+/* global phantom */
 
 var page = require('webpage').create();
 var system = require('system');
@@ -16,13 +17,13 @@ var getLogger = function (prefix) {
   return function (msg) { console.log('[' + prefix + '] ', msg); }
 }
 
-page.onConsoleMessage = getLogger("PHANTOMJS CONSOLE");
-page.onError = getLogger("PHANTOMJS ERROR");
-page.onLoadStarted = getLogger("PHANTOMJS LOAD STARTED");
-page.onLoadFinished = getLogger("PHANTOMJS LOAD FINISHED");
+page.onConsoleMessage = getLogger('PHANTOMJS CONSOLE');
+page.onError = getLogger('PHANTOMJS ERROR');
+page.onLoadStarted = getLogger('PHANTOMJS LOAD STARTED');
+page.onLoadFinished = getLogger('PHANTOMJS LOAD FINISHED');
 
 page.open(url, function (){
-  setTimeout(function() {
+  setTimeout(function () {
     page.render(filename, {format: 'png', quality: '100'});
     console.log('Render finished');
     phantom.exit();

@@ -1,7 +1,3 @@
-import { Websites } from '/imports/api/bookmarks/client.js';
-import { UserWebsites } from '/imports/api/personal/client.js';
-import { Comments } from '/imports/api/comments/client.js';
+import { Meteor } from 'meteor/meteor';
 
-Meteor.publish('userName', function(id) {
-  return Meteor.users.find({ _id: id }, { fields: { 'username': 1 } });
-});
+Meteor.publish('userName', id => Meteor.users.find({ _id: id }, { fields: { username: 1 } }));

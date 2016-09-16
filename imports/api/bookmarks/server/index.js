@@ -1,4 +1,6 @@
 import './methods.js';
 import './publications.js';
 
-export { Websites } from '../websites.js';
+import Websites from '../websites.js';
+
+export { Websites };

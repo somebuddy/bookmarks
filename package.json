@@ -2,12 +2,85 @@
   "name": "met14",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "lint": "eslint .",
+    "pretest": "npm run lint --silent"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "allowImportExportEverywhere": true,
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "meteor"
+    ],
+    "extends": [
+      "airbnb",
+      "plugin:meteor/recommended"
+    ],
+    "settings": {
+      "import/resolver": "meteor"
+    },
+    "rules": {
+      "no-console": "off",
+      "import/prefer-default-export": "off",
+      "meteor/no-session": "off",
+      "meteor/audit-argument-checks": "off",
+      "linebreak-style": "off",
+      "func-names": "off",
+      "consistent-return": "off",
+
+      "prefer-template": "off",
+      "no-underscore-dangle": "off",
+      "import/no-extraneous-dependencies": "off",
+      "meteor/template-names": [
+        2,
+        "snake-case"
+      ],
+      "max-len": [
+        "error",
+        {
+          "code": 120,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true,
+          "ignoreUrls": true
+        }
+      ],
+      "no-unused-expressions": [
+        "error",
+        {
+          "allowShortCircuit": true,
+          "allowTernary": true
+        }
+      ],
+      "no-plusplus": [
+        "error",
+        { "allowForLoopAfterthoughts": true }
+      ]
+    },
+    "env": {
+      "es6": true,
+      "browser": true,
+      "node": true,
+      "meteor": true
+    }
   },
   "dependencies": {
     "cheerio": "^0.22.0",
     "meteor-node-stubs": "~0.2.0",
     "phantomjs-prebuilt": "^2.1.12",
     "sharp": "^0.16.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-import-resolver-meteor": "^0.3.3",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-meteor": "^4.0.0",
+    "eslint-plugin-react": "^6.2.2"
   }
 }

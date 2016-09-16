@@ -3,40 +3,40 @@ import { Template } from 'meteor/templating';
 import { UserWebsites } from '/imports/api/personal/client.js';
 import './votes.html';
 
-let isVoted = (site, prop) => {
-  let doc = UserWebsites.findOne({ user: Meteor.userId(), site: site });
+const isVoted = (site, prop) => {
+  const doc = UserWebsites.findOne({ user: Meteor.userId(), site });
   return doc && doc[prop];
 };
 
-Template.website_votes.onCreated( function () {
-  let self = this;
+Template.website_votes.onCreated(function () {
+  const self = this;
 
-  self.autorun(function() {
+  self.autorun(() => {
     self.subscribe('bookmarkUserData', self.data._id);
   });
 });
 
 Template.website_votes.onRendered(function () {
-  var self = this;
+  const self = this;
   self.autorun(() => {
-    var btn = self.$('.button');
+    const btn = self.$('.button');
     Meteor.user() ? btn.tooltip('destroy') : btn.tooltip({ title: 'You must sign in to vote' });
   });
 });
 
-Template.website_votes.helpers ({
-  checkEmpty (votes) { return votes ? '' : 'empty'; },
-  isVotedUp () { return isVoted (this._id, 'voteUp'); },
-  isVotedDown () { return isVoted (this._id, 'voteDown'); }
+Template.website_votes.helpers({
+  checkEmpty(votes) { return votes ? '' : 'empty'; },
+  isVotedUp() { return isVoted(this._id, 'voteUp'); },
+  isVotedDown() { return isVoted(this._id, 'voteDown'); },
 });
 
-Template.website_votes.events ({
-  'click .js-upvote' (event) {
-    Meteor.call("voteUp", this._id);
+Template.website_votes.events({
+  'click .js-upvote': function voteUp() {
+    Meteor.call('voteUp', this._id);
     return false;
   },
-  'click .js-downvote' (event) {
-    Meteor.call("voteDown", this._id);
+  'click .js-downvote': function voteDown() {
+    Meteor.call('voteDown', this._id);
     return false;
-  }
-})
+  },
+});

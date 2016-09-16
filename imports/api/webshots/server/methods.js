@@ -1,22 +1,22 @@
 import { Meteor } from 'meteor/meteor';
-import { Webshots } from '../webshots.js';
 import { Random } from 'meteor/random';
-
 import phantomjs from 'phantomjs-prebuilt';
 import fs from 'fs';
 import sharp from 'sharp';
 import { spawn } from 'child_process';
 
-export const getWebshotsPath = function () {
+import { Webshots } from '../webshots.js';
+
+const getWebshotsPath = function () {
   // if no path - choose current directory
-  var path = process.env.PWD || './';
+  let path = process.env.PWD || './';
   if (path.length <= 1) {
     path = './';
   }
   if (path[path.length - 1] !== '/') {
     path += '/';
   }
-  path += 'webshots/'
+  path += 'webshots/';
 
   // create directory if not exists
   if (!fs.existsSync(path)) {
@@ -24,106 +24,119 @@ export const getWebshotsPath = function () {
   }
 
   return path;
-}
+};
 
-
-var prepareImage = function (filename) {
+const prepareImage = function (filename) {
   return sharp(filename).resize(480, null)
-    .background({r: 255, g: 255, b: 255, a: 1})
+    .background({ r: 255, g: 255, b: 255, a: 1 })
     .flatten();
-}
+};
 
-var loadImage = function (filename) {
+const loadImage = function (filename) {
   return prepareImage(filename)
     .grayscale()
     .raw()
     .toBuffer()
-    .then(function(outputBuffer) {
+    .then((outputBuffer) => {
       if (!outputBuffer || !outputBuffer.length) {
         return 'light';
       }
-      var val = 0;
-      var color = outputBuffer[0];
-      var mono = true;
-      for (var i = 0; i < outputBuffer.length; i++) {
+      let val = 0;
+      const color = outputBuffer[0];
+      let mono = true;
+      for (let i = 0; i < outputBuffer.length; i++) {
         mono = mono && (color === outputBuffer[i]);
         val += outputBuffer[i];
       }
-      var avgColor = val / outputBuffer.length;
+      const avgColor = val / outputBuffer.length;
       return {
         brightness: avgColor >= 128 ? 'light' : 'dark',
-        mono: mono
-      }
+        mono,
+      };
     });
 };
 
-var saveImageToFile = function (fromFile, toFile) {
+const saveImageToFile = function (fromFile, toFile) {
   console.log('Compressing image: ', fromFile, ' to ', toFile);
   return prepareImage(fromFile)
     .png()
     .compressionLevel(9)
     .toFile(toFile)
-    .then(function (info) {
-      return info.size;
-    });
+    .then(info => info.size);
 };
 
 Meteor.methods({
-  webshot: function (site_id, url) {
-    let file_id = Random.id();
-    let filename = file_id + '.png';
+  webshot(siteId, url) {
+    const fileId = Random.id();
+    const filename = fileId + '.png';
 
-    let path = getWebshotsPath();
-    let filepath = path + filename;
-    let tmpfile = '/tmp/' + filename;
+    const path = getWebshotsPath();
+    const filepath = path + filename;
+    const tmpfile = '/tmp/' + filename;
 
-    let command = spawn(phantomjs.path, [
+    console.log('Creating webshot for: ', url);
+
+    const command = spawn(phantomjs.path, [
       '--ignore-ssl-errors=true',
       '--ssl-protocol=any',
       '--debug=true',
       '--web-security=false',
       'assets/app/phantomDriver.js',
-      url, tmpfile]);
+      url,
+      tmpfile,
+    ]);
 
-      command.stdout.on('data', function (data) {
-        // todo: save in log
-        // console.log('[STDOUT]' + data);
-      });
-      command.stderr.on('data', function (data) {
-        // todo: save in log
-        // console.log('[STDERR]' + data);
-      });
+    /* eslint-disable */
 
-      command.on('exit', Meteor.bindEnvironment(function (code) {
-        if (code == 0) {
-          fs.stat(tmpfile, Meteor.bindEnvironment(function(err, stat) {
-            if (!err) {
-              Promise.all([
-                loadImage(tmpfile),
-                saveImageToFile(tmpfile, filepath)
-              ]).then(Meteor.bindEnvironment(function(values) {
-                // saving imformation about file
-                if (!values[0].mono) {
-                  Webshots.insert({
-                    for_site: site_id,
-                    image_name: filename,
-                    createAt: new Date(),
-                    colorSchema: values[0].brightness
-                  });
-                } else {
-                  fs.unlinkSync(filepath);
-                  console.error('Image for ', url ,' was not saved because it is empty');
-                }
+    // Next callbacks are required
+    // if they will be undefined, phantomjs will not make webshots
 
-                // deleting temporary file
-                fs.unlinkSync(tmpfile);
-              }));
-            }
-          }));
-        } else {
-          // todo: save errors in log
-          console.log('Making screenshot for url [' + url + '] finished with code ' + code);
-        }
-      }));
-  }
+    // todo: save in log
+    command.stdout.on('data', (data) => {
+      // console.log('[STDOUT]' + data);
+    });
+
+    // todo: save in log
+    command.stderr.on('data', (data) => {
+      // console.log('[STDERR]' + data);
+    });
+
+    /* eslint-enable */
+
+    command.on('exit', Meteor.bindEnvironment((code) => {
+      if (code === 0) {
+        fs.stat(tmpfile, Meteor.bindEnvironment((err, stat) => {
+          if (!err) {
+            Promise.all([
+              loadImage(tmpfile),
+              saveImageToFile(tmpfile, filepath),
+            ]).then(Meteor.bindEnvironment((values) => {
+              // saving imformation about file
+              if (!values[0].mono) {
+                Webshots.insert({
+                  for_site: siteId,
+                  image_name: filename,
+                  createAt: new Date(),
+                  colorSchema: values[0].brightness,
+                });
+              } else {
+                fs.unlinkSync(filepath);
+                console.error('Image for ', url, ' was not saved because it is empty');
+              }
+
+              // deleting temporary file
+              fs.unlinkSync(tmpfile);
+            }));
+          } else {
+            console.log('Creating temporary file error catched: ', err, stat);
+          }
+        }));
+      } else {
+        // todo: save errors in log
+        console.log('Making screenshot for url [' + url + '] finished with code ' + code);
+      }
+    }));
+  },
 });
+
+export { getWebshotsPath as default };
