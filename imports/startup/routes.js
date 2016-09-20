@@ -31,7 +31,7 @@ FlowRouter.route('/bookmark/:_id', {
 
 FlowRouter.route('/about', {
   name: 'about',
-  action(params, queryParams) {
+  action() {
     BlazeLayout.render('page', {
       nav: 'nav',
       header: 'about_header',
@@ -42,7 +42,7 @@ FlowRouter.route('/about', {
 
 FlowRouter.route('/coursera-mates', {
   name: 'coursera',
-  action(params, queryParams) {
+  action() {
     BlazeLayout.render('page', {
       nav: 'nav',
       header: 'coursera_header',
@@ -53,7 +53,7 @@ FlowRouter.route('/coursera-mates', {
 
 FlowRouter.route('/roadmap', {
   name: 'roadmap',
-  action(params, queryParams) {
+  action() {
     BlazeLayout.render('page', {
       nav: 'nav',
       header: 'roadmap_header',
