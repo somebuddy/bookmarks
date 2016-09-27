@@ -31,7 +31,6 @@
       "linebreak-style": "off",
       "func-names": "off",
       "consistent-return": "off",
-
       "prefer-template": "off",
       "no-underscore-dangle": "off",
       "import/no-extraneous-dependencies": "off",
@@ -57,7 +56,9 @@
       ],
       "no-plusplus": [
         "error",
-        { "allowForLoopAfterthoughts": true }
+        {
+          "allowForLoopAfterthoughts": true
+        }
       ]
     },
     "env": {
@@ -68,6 +69,7 @@
     }
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "cheerio": "^0.22.0",
     "meteor-node-stubs": "~0.2.0",
     "phantomjs-prebuilt": "^2.1.12",
