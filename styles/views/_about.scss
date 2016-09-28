@@ -8,6 +8,7 @@ $brand-color: #FF3C00 !default;
 $text-color: rgba(#333, .8) !default;
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
+$secondary-opacity: .6 !default;
 
 .page > header.product-intro {
   @include flex-rows;
@@ -45,5 +46,102 @@ $column-width: 1rem !default;
     text-align: center;
     font-size: 1.25rem;
     font-weight: 300;
+  }
+}
+
+.page > .content .product-features {
+  color: $text-color;
+  margin: 0 (-$column-width);
+
+  > .feature {
+    @include relative;
+    @include flex-column;
+    @include flex-align(center, center);
+    padding: $line-height * 2 $column-width;
+    border-top: 2px solid darken(#ffeb3b, 15%);
+    border-bottom: 2px solid darken(#ffeb3b, 15%);
+    padding-left: $column-width * 2 + $line-height * 2;
+
+    &:nth-child(2n+1) {
+      background: #ffeb3b;
+      border-color: dark(#ffeb3b, 15%);
+    }
+
+    &:nth-child(2n) {
+      background: #00CFD9;
+      border-color: dark(#00CFD9, 15%);
+    }
+
+    > .feature-icon {
+      @include absolute(-4px, null, null, $column-width);
+      @include size($line-height * 2, $line-height * 3);
+      @include flex-center;
+      font-size: $line-height;
+      color: white;
+
+      &:before {
+        content: '';
+        @include absolute(0, 0, 0, 0);
+        z-index: 0;
+        border-left: $line-height solid $brand-color;
+        border-right: $line-height solid $brand-color;
+        border-bottom: $line-height/2 solid transparent;
+        border-radius: 0 0 $line-height/6 $line-height/6;
+      }
+
+      > * {
+        z-index: 1;
+      }
+    }
+
+    > .feature-title {
+      font-size: $line-height;
+      font-weight: 300;
+      margin-bottom: $line-height;
+      text-align: center;
+    }
+
+    >  .feature-description {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .inner-features {
+      @include flex-rows;
+      justify-content: flex-end;
+      width: 100%;
+
+      .feature {
+        margin: $line-height/2 $column-width/2;
+        opacity: $secondary-opacity;
+
+        > .feature-title,
+        > .feature-description {
+          display: none;
+        }
+
+        > .feature-icon {
+          @include size($line-height*2, $line-height*2);
+          @include flex-center;
+          border: 2px solid rgba($text-color, .15);
+          background: rgba($text-color, .05);
+          border-radius: 50%;
+          font-size: $line-height;
+        }
+
+        &.current {
+          order: -1;
+          opacity: 1;
+          margin-left: -$line-height * 2 - $column-width;
+          margin-right: auto;
+
+          > .feature-icon {
+            border: 2px solid rgba(white, .7);
+            background: rgba(white, .3);
+          }
+        }
+      }
+    }
   }
 }
