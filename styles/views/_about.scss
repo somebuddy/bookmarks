@@ -59,6 +59,7 @@ $child-feature-icon-size: $line-height * 2;
 .page > .content .product-features {
   color: $text-color;
   margin: 0 (-$column-width);
+  min-height: 100vh;
 
   > .feature {
     @include relative;
@@ -68,6 +69,8 @@ $child-feature-icon-size: $line-height * 2;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
     padding-left: $badge-size + 2*$column-width;
+    margin-bottom: $line-height;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
     > .feature-icon {
       @include absolute(-4px, null, null, $column-width);
@@ -105,7 +108,7 @@ $child-feature-icon-size: $line-height * 2;
       color: $secondary-text-color;
     }
 
-    .inner-features {
+    > .inner-features {
       @include flex-rows;
       justify-content: flex-end;
       width: 100%;
@@ -115,7 +118,8 @@ $child-feature-icon-size: $line-height * 2;
         opacity: $secondary-opacity;
 
         > .feature-title,
-        > .feature-description {
+        > .feature-description,
+        > .inner-features {
           display: none;
         }
 
