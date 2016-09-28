@@ -8,6 +8,8 @@ $nav-height: 4.5rem;
 .page > nav {
   margin-bottom: 0;
   border-radius: 0;
+  border: none;
+  min-height: auto;
 
   > .container-fluid {
     min-height: $nav-height;

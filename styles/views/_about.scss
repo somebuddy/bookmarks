@@ -3,20 +3,26 @@
 @import '../layout/mixins';
 @import '../layout/flex';
 
-
-$brand-color: #FF3C00 !default;
-$text-color: rgba(#333, .8) !default;
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
 $secondary-opacity: .6 !default;
 
+$brand-color: #FF3C00 !default;
+$text-color: rgba(#333, .8) !default;
+$intense-text-color: rgba($text-color, 1);
+$secondary-text-color: rgba($text-color, $secondary-opacity);
+
+$nav-height: $line-height * 3 !default;
+$badge-size: $line-height * 2;
+$child-feature-icon-size: $line-height * 2;
+
 .page > header.product-intro {
   @include flex-rows;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  @include flex-align(center, center, center);
+  @include size(100%, 100vh);
   padding: $line-height*2 $column-width;
-  margin-bottom: $line-height * 4;
+  margin-top: -$line-height * 3;
+  margin-bottom: $line-height * 5;
   color: $text-color;
 
   .product-icon, .product-name {
@@ -25,7 +31,7 @@ $secondary-opacity: .6 !default;
   }
 
   .product-icon {
-    @include size($line-height*2, $line-height*2);
+    @include size($badge-size, $badge-size);
     @include flex-center;
     color: $brand-color;
     border: 2px solid;
@@ -36,6 +42,7 @@ $secondary-opacity: .6 !default;
   .product-name {
     font-family: 'Titillium Web', sans-serif;
     font-size: $line-height * 2;
+    line-height: $line-height * 2;
     font-weight: 900;
     text-transform: uppercase;
   }
@@ -43,9 +50,9 @@ $secondary-opacity: .6 !default;
   .product-description {
     flex: 1 1 100%;
     margin-top: $line-height;
+    font-size: .8 * $line-height;
     text-align: center;
-    font-size: 1.25rem;
-    font-weight: 300;
+    opacity: $secondary-opacity;
   }
 }
 
@@ -57,25 +64,16 @@ $secondary-opacity: .6 !default;
     @include relative;
     @include flex-column;
     @include flex-align(center, center);
-    padding: $line-height * 2 $column-width;
-    border-top: 2px solid darken(#ffeb3b, 15%);
-    border-bottom: 2px solid darken(#ffeb3b, 15%);
-    padding-left: $column-width * 2 + $line-height * 2;
-
-    &:nth-child(2n+1) {
-      background: #ffeb3b;
-      border-color: dark(#ffeb3b, 15%);
-    }
-
-    &:nth-child(2n) {
-      background: #00CFD9;
-      border-color: dark(#00CFD9, 15%);
-    }
+    padding: 2*$line-height $column-width;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    padding-left: $badge-size + 2*$column-width;
 
     > .feature-icon {
       @include absolute(-4px, null, null, $column-width);
-      @include size($line-height * 2, $line-height * 3);
+      @include size($badge-size, $badge-size*1.5);
       @include flex-center;
+      z-index: 10;
       font-size: $line-height;
       color: white;
 
@@ -83,28 +81,28 @@ $secondary-opacity: .6 !default;
         content: '';
         @include absolute(0, 0, 0, 0);
         z-index: 0;
-        border-left: $line-height solid $brand-color;
-        border-right: $line-height solid $brand-color;
-        border-bottom: $line-height/2 solid transparent;
-        border-radius: 0 0 $line-height/6 $line-height/6;
+        border-left: $badge-size/2 solid $brand-color;
+        border-right: $badge-size/2 solid $brand-color;
+        border-bottom: $badge-size/4 solid transparent;
+        border-radius: 0 0 4px 4px;
       }
 
-      > * {
-        z-index: 1;
-      }
+      > * { z-index: 1; }
     }
 
-    > .feature-title {
-      font-size: $line-height;
-      font-weight: 300;
+    > .feature-title,
+    > .feature-description {
       margin-bottom: $line-height;
       text-align: center;
     }
 
+    > .feature-title {
+      color: $intense-text-color;
+      font-size: $line-height;
+    }
+
     >  .feature-description {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
+      color: $secondary-text-color;
     }
 
     .inner-features {
@@ -122,7 +120,7 @@ $secondary-opacity: .6 !default;
         }
 
         > .feature-icon {
-          @include size($line-height*2, $line-height*2);
+          @include size($child-feature-icon-size, $child-feature-icon-size);
           @include flex-center;
           border: 2px solid rgba($text-color, .15);
           background: rgba($text-color, .05);
@@ -133,7 +131,7 @@ $secondary-opacity: .6 !default;
         &.current {
           order: -1;
           opacity: 1;
-          margin-left: -$line-height * 2 - $column-width;
+          margin-left: -($badge-size + $child-feature-icon-size)/2 - $column-width;
           margin-right: auto;
 
           > .feature-icon {
@@ -142,6 +140,16 @@ $secondary-opacity: .6 !default;
           }
         }
       }
+    }
+
+    &:nth-child(2n+1) {
+      background: #ffeb3b;
+      border-color: darken(#ffeb3b, 15%);
+    }
+
+    &:nth-child(2n) {
+      background: #00CFD9;
+      border-color: darken(#00CFD9, 15%);
     }
   }
 }
