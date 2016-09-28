@@ -3,6 +3,7 @@ import { Websites } from '/imports/api/bookmarks/server';
 import '/imports/api/comments/server';
 import '/imports/api/personal/server';
 import '/imports/api/webshots/server';
+import '/imports/api/docs/server';
 import '/imports/api/collections.js';
 
 Meteor.startup(() => {
