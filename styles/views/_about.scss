@@ -169,28 +169,15 @@ $feature-max-width: 40rem;
   }
 
   @media (min-width: #{$feature-max-width * 1.5}) {
-    max-width: 100%;
-
     > .feature {
-      flex-wrap: wrap;
+      @include flex-align(stretch, stretch, flex-start);
       background: transparent;
       border: none;
       box-shadow: none;
-      padding: $line-height * 4 $column-width;
-      height: 100vh;
-
-      > .feature-title,
-      > .feature-description,
-      > .inner-features {
-        width: 50%;
-        order: 0;
-      }
+      padding: 2*$line-height $column-width;
+      margin-bottom: $line-height * 8;
 
       > .feature-icon {
-        order: -1;
-        position: relative;
-        flex: 1 1 100%;
-        width: 40%;
         font-size: $line-height * 8;
         opacity: .3;
 
@@ -200,8 +187,7 @@ $feature-max-width: 40rem;
       > .feature-title {
         font-size: $line-height*1.5;
         line-height: $line-height*2;
-        font-weight: 100;
-        margin-bottom: $line-height;
+        font-weight: 300;
       }
 
       > .feature-description {
@@ -212,16 +198,34 @@ $feature-max-width: 40rem;
 
       > .inner-features > .feature.current {
         margin-left: 0;
+
+        > .feature-icon {
+          border-width: 3px;
+          background-color: $text-color;
+          color: #FFC801;
+          border-color: white;
+          box-shadow: 2px 2px 6px rgba(0,0,0,.3);
+        }
+      }
+
+      > .inner-features > .feature > .feature-icon {
+        @include size($child-feature-icon-size * 1.5, $child-feature-icon-size * 1.5);
+        font-size: $line-height * 1.25;
       }
 
       &:nth-child(2n+1) {
         background: transparent;
 
+        > .feature-icon,
+        > .feature-title {
+          color: #FFC801;
+          color: #52D3B4;
+        }
+
         > .feature-icon {
-          order: -1;
           color: #ffeb3b;
-          margin-right: 10%;
-          @include flex-align(flex-start, flex-start, flex-end);
+          right: -4rem;
+          left: auto;
         }
 
         > .feature-title,
@@ -233,11 +237,17 @@ $feature-max-width: 40rem;
       &:nth-child(2n) {
         background: transparent;
 
+        > .feature-icon,
+        > .feature-title {
+          color: #F36E67;
+        }
+
         > .feature-icon {
-          order: 1;
           color: #00CFD9;
-          margin-left: 10%;
-          @include flex-align(flex-start, flex-start, flex-start);
+          left: -4rem;
+          right: auto;
+          // margin-left: 10%;
+          // @include flex-align(flex-start, flex-start, flex-start);
         }
 
         > .feature-title,
