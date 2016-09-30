@@ -1,9 +1,10 @@
 const Product = {
   features: [{
-    name: 'store',
+    name: 'keep',
     title: 'Keep interesting websites<br/>in one place.',
     description: 'Add and save interesting websites.<br/>Import/export bookmarks from browser.',
     iconClass: 'fa fa-star-o',
+    cssClass: 'keep',
     innerFeatures: [{
       iconClass: 'fa fa-chrome',
       stateClass: 'current',
@@ -27,6 +28,7 @@ const Product = {
     title: 'Organize<br/> your bookmarks',
     description: 'Create collections, use categories, tags, colors to make search easier',
     iconClass: 'fa fa-random',
+    cssClass: 'organize',
     innerFeatures: [{
       iconClass: 'fa fa-sitemap',
       title: 'Collections',
@@ -46,6 +48,7 @@ const Product = {
     title: 'Personal storage',
     description: 'Use Google Drive, Dropbox, OneDrive to store, backup your bookmark collections and never lose them',
     iconClass: 'fa fa-hdd-o',
+    cssClass: 'storage',
     innerFeatures: [{
       iconClass: 'fa fa-google',
       stateClass: 'current',
@@ -73,6 +76,7 @@ const Product = {
     title: 'Share bookmarks and collections',
     description: 'Make your bookmarks and collections public, discover other user\'s collections',
     iconClass: 'fa fa-share-alt',
+    cssClass: 'share',
     innerFeatures: [{
       iconClass: 'fa fa-bookmark',
       title: 'Public bookmarks',

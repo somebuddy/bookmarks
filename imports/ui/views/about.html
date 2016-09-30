@@ -14,7 +14,7 @@
 </template>
 
 <template name="feature_template">
-  <article class="feature {{#if stateClass}}{{ stateClass }}{{/if}}">
+  <article class="feature {{ cssClass }} {{ stateClass }}">
     <div class="feature-icon"><span class="{{ iconClass }}"></span></div>
     <div class="feature-title">{{{ title }}}</div>
     <div class="feature-description">{{{ description }}}</div>

@@ -61,7 +61,7 @@ $feature-max-width: 40rem;
   }
 }
 
-.page > .content .product-features {
+.product-features {
   @include flex-column;
   color: $text-color;
   margin: 0 (-$column-width);
@@ -74,7 +74,6 @@ $feature-max-width: 40rem;
     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
     padding-left: $badge-size + 2*$column-width;
-    margin-bottom: $line-height;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
     > .feature-icon {
@@ -105,12 +104,7 @@ $feature-max-width: 40rem;
     }
 
     > .feature-title {
-      color: $intense-text-color;
       font-size: $line-height;
-    }
-
-    >  .feature-description {
-      color: $secondary-text-color;
     }
 
     > .inner-features {
@@ -150,16 +144,6 @@ $feature-max-width: 40rem;
         }
       }
     }
-
-    &:nth-child(2n+1) {
-      background: #ffeb3b;
-      border-color: darken(#ffeb3b, 15%);
-    }
-
-    &:nth-child(2n) {
-      background: #00CFD9;
-      border-color: darken(#00CFD9, 15%);
-    }
   }
 
   @media (min-width: #{$feature-max-width + $column-width * 2}) {
@@ -170,7 +154,6 @@ $feature-max-width: 40rem;
   @media (min-width: #{$feature-max-width * 1.5}) {
     > .feature {
       @include flex-align(stretch, stretch, flex-start);
-      background: transparent;
       border: none;
       box-shadow: none;
       padding: 2*$line-height $column-width;
@@ -252,3 +235,28 @@ $feature-max-width: 40rem;
     }
   }
 }
+
+@mixin feature-card-colorization($cls, $feature-color, $color) {
+  $selector: if($cls, #{".feature." + $cls}, ".feature");
+  .product-features > #{$selector} {
+    background: $feature-color;
+    color: $color;
+
+    > .feature-title { color: rgba($color, 1); }
+    > .feature-description { color: rgba($color, $secondary-opacity); }
+
+    @media (min-width: #{$feature-max-width * 1.5}) {
+      background: transparent;
+      color: $text-color;
+
+      > .feature-icon { color: $feature-color; }
+      > .feature-title { color: $brand-color; }
+      > .feature-description { color: rgba($text-color, $secondary-opacity); }
+    }
+  }
+}
+
+@include feature-card-colorization(keep, #ffeb3b, $text-color);
+@include feature-card-colorization(organize, #32D390, $text-color);
+@include feature-card-colorization(storage, #B1D5EB, $text-color);
+@include feature-card-colorization(share, #846DB1, white);
