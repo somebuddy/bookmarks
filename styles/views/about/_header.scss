@@ -1,0 +1,46 @@
+$nav-height: $line-height * 3 !default;
+$page-content-overlap: $line-height * 5 !default;
+
+.page > header.product-intro {
+  @include flex-rows;
+  @include flex-align(center, center, center);
+  @include size(100%, 100vh);
+  padding: $line-height*2 $column-width;
+  margin-top: -$nav-height;
+  margin-bottom: $page-content-overlap;
+  color: $text-color;
+
+  @media (min-height: 60rem) {
+    margin-top: 0;
+  }
+
+  .product-icon, .product-name {
+    font-size: $line-height;
+    align-self: center;
+  }
+
+  .product-icon {
+    @include size($badge-size, $badge-size);
+    @include flex-center;
+    color: $brand-color;
+    border: 2px solid;
+    border-radius: 50%;
+    margin-right: $column-width;
+  }
+
+  .product-name {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: $line-height * 2;
+    line-height: $line-height * 2;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .product-description {
+    flex: 1 1 100%;
+    margin-top: $line-height;
+    font-size: .8 * $line-height;
+    text-align: center;
+    opacity: $secondary-opacity;
+  }
+}

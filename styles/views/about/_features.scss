@@ -1,0 +1,201 @@
+$feature-max-width: 40rem !default;
+
+.product-features {
+  @include flex-column;
+  color: $text-color;
+  margin: 0 (-$column-width);
+
+  > .feature {
+    @include relative;
+    @include flex-column;
+    @include flex-align(center, center);
+    padding: 2*$line-height $column-width;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    padding-left: $badge-size + 2*$column-width;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+    > .feature-icon {
+      @include absolute(-4px, null, null, $column-width);
+      @include size($badge-size, $badge-size*1.5);
+      @include flex-center;
+      z-index: 10;
+      font-size: 1rem;
+      color: white;
+
+      &:before {
+        content: '';
+        @include absolute(0, 0, 0, 0);
+        z-index: 0;
+        border-left: $badge-size/2 solid $brand-color;
+        border-right: $badge-size/2 solid $brand-color;
+        border-bottom: $badge-size/4 solid transparent;
+        border-radius: 0 0 4px 4px;
+      }
+
+      > * { z-index: 1; }
+    }
+
+    > .feature-title,
+    > .feature-description {
+      margin-bottom: $line-height;
+      text-align: center;
+    }
+
+    > .feature-title {
+      font-size: $line-height;
+    }
+
+    > .inner-features {
+      @include flex-rows;
+      justify-content: flex-end;
+      width: 100%;
+
+      .feature {
+        margin: $line-height/2 $column-width/2;
+        opacity: $secondary-opacity;
+
+        > .feature-title,
+        > .feature-description,
+        > .inner-features {
+          display: none;
+        }
+
+        > .feature-icon {
+          @include size($child-feature-icon-size, $child-feature-icon-size);
+          @include flex-center;
+          border: 2px solid rgba($text-color, .15);
+          background: rgba($text-color, .05);
+          border-radius: 50%;
+          font-size: $line-height;
+        }
+
+        &.current {
+          order: -1;
+          opacity: 1;
+          margin-left: -($badge-size + $child-feature-icon-size)/2 - $column-width;
+          margin-right: auto;
+
+          > .feature-icon {
+            border: 2px solid rgba(white, .7);
+            background: rgba(white, .3);
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: #{$feature-max-width + $column-width * 2}) {
+    max-width: $feature-max-width;
+    margin: 0 auto;
+  }
+
+  @media (min-width: #{$feature-max-width * 1.5}) {
+    > .feature {
+      @include flex-align(stretch, stretch, flex-start);
+      border: none;
+      box-shadow: none;
+      padding: 2*$line-height $column-width;
+      margin-top: 2*$line-height;
+      margin-bottom: 6*$line-height;
+
+      > .feature-icon {
+        @include size($line-height * 8, $line-height * 8);
+        top: -2*$line-height;
+        font-size: $line-height * 8;
+        opacity: .3;
+
+        &:before { content: none; }
+      }
+
+      > .feature-title {
+        font-size: $line-height*1.5;
+        line-height: $line-height*2;
+        font-weight: 300;
+      }
+
+      > .feature-description {
+        font-size: $line-height;
+        font-weight: 300;
+        margin-bottom: $line-height * 2;
+      }
+
+      > .inner-features > .feature.current {
+        margin-left: 0;
+
+        > .feature-icon {
+          border-width: 3px;
+          background-color: $text-color;
+          color: #FFC801;
+          border-color: white;
+          box-shadow: 2px 2px 6px rgba(0,0,0,.3);
+        }
+      }
+
+      > .inner-features > .feature > .feature-icon {
+        @include size($child-feature-icon-size * 1.5, $child-feature-icon-size * 1.5);
+        font-size: $line-height * 1.25;
+      }
+
+      &:nth-child(2n+1) {
+        background: transparent;
+
+        > .feature-icon,
+        > .feature-title {
+          color: #FFC801;
+          color: #52D3B4;
+        }
+
+        > .feature-icon {
+          color: #ffeb3b;
+          right: -10rem;
+          left: auto;
+        }
+
+        > .feature-title, > .feature-description { text-align: left; }
+      }
+
+      &:nth-child(2n) {
+        background: transparent;
+
+        > .feature-icon,
+        > .feature-title {
+          color: #F36E67;
+        }
+
+        > .feature-icon {
+          color: #00CFD9;
+          left: -10rem;
+          right: auto;
+        }
+
+        > .feature-title, > .feature-description { text-align: right; }
+      }
+    }
+  }
+}
+
+@mixin feature-card-colorization($cls, $feature-color, $color) {
+  $selector: if($cls, #{".feature." + $cls}, ".feature");
+  .product-features > #{$selector} {
+    background: $feature-color;
+    color: $color;
+
+    > .feature-title { color: rgba($color, 1); }
+    > .feature-description { color: rgba($color, $secondary-opacity); }
+
+    @media (min-width: #{$feature-max-width * 1.5}) {
+      background: transparent;
+      color: $text-color;
+
+      > .feature-icon { color: $feature-color; }
+      > .feature-title { color: $brand-color; }
+      > .feature-description { color: rgba($text-color, $secondary-opacity); }
+    }
+  }
+}
+
+@include feature-card-colorization(keep, #ffeb3b, $text-color);
+@include feature-card-colorization(organize, #32D390, $text-color);
+@include feature-card-colorization(storage, #B1D5EB, $text-color);
+@include feature-card-colorization(share, #846DB1, white);
