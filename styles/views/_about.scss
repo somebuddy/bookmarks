@@ -266,11 +266,12 @@ $feature-max-width: 40rem;
   @include flex-column;
   @include flex-align(center, center);
   position: relative;
-  margin: $line-height * 10 auto;
+  margin: 6*$line-height auto 2*$line-height;
   max-width: 40rem;
   color: $text-color;
   font-size: 1rem;
   line-height: $line-height;
+  z-index: 10;
 
   > header {
     text-align: center;
@@ -373,14 +374,15 @@ $feature-max-width: 40rem;
   }
 
   @media (min-width: 60rem) {
-    margin: 0 (-2*$column-width);
+    margin: 0 (-$column-width);
     max-width: 200%;
     padding: 6*$line-height 2*$column-width 3*$line-height;
 
     &:before, &:after {
       content: '';
       @include absolute(0, 0, 0, 0);
-      border: 5px solid rgba(255,255,255, 1);
+      border-top: 4px solid rgba(255,255,255, .8);
+      border-bottom: 4px solid rgba(255,255,255, .8);
       box-shadow: 0 -3px 6px rgba(0,0,0,0.16), 0 -3px 6px rgba(0,0,0,0.23),
                   0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
@@ -398,14 +400,14 @@ $feature-max-width: 40rem;
     }
 
     > * { z-index: 2; }
-    
+
     > header .product-name { color: #000; }
-    
+
     section.donate {
       .sum, .users {
         color: white;
       }
-      
+
       .make-donation {
         color: black;
         background: white;
@@ -413,16 +415,122 @@ $feature-max-width: 40rem;
         color: white;
       }
     }
-    
+
     section.roadmap {
       > header {
         font-size: 1rem;
         font-weight: 900;
       }
-      
+
       .features .feature > .feature-icon {
         background: black;
       }
+    }
+  }
+}
+
+.feedback {
+  text-align: center;
+  padding: 2*$line-height 0;
+
+  > header, .submit-feedback {
+    max-width: 40rem;
+    margin: $line-height auto 2*$line-height;
+  }
+
+  header {
+    font-size: 2.25rem;
+    line-height: 2*$line-height;
+    font-weight: 900;
+    font-family: 'Titillium Web', sans-serif;
+    text-transform: uppercase;
+    color: $text-color;
+  }
+
+  .submit-feedback {
+    @include flex-column;
+  }
+
+  .input-field {
+    margin: 0 $column-width $line-height;
+    text-align: left;
+
+    label, input, textarea {
+      display: block;
+      margin: 0;
+    }
+
+    label {
+      font-size: .75rem;
+      text-transform: uppercase;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+      line-height: $line-height;
+      background: rgba(255,255,255,.1);
+      border-bottom: 2px solid rgba($text-color, .1);
+      padding: $line-height/2 $column-width;
+      transition: all .3s ease;
+
+      &, &:hover, &:focus {
+        outline: none;
+      }
+
+      &:hover, &:focus {
+        color: $brand-color;
+        border-color: rgba($brand-color, .3);
+      }
+    }
+  }
+
+  .submit-button {
+    padding: $line-height/2 2*$column-width;
+    border: 2px solid;
+    color: $brand-color;
+    text-transform: uppercase;
+    font-size: .75rem;
+    margin: $line-height/2 auto $line-height $column-width;
+    letter-spacing: 2px;
+    opacity: $secondary-opacity;
+    transition: all .3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 60rem) {
+    padding-top: 4*$line-height;
+    background: #333;
+    z-index: 0;
+    margin: 0 (-$column-width) (-$line-height);
+    color: rgba(white, $secondary-opacity);
+
+    header {
+      color: white;
+    }
+
+    .input-field {
+      input, textarea {
+        border-color: rgba(white, .3);
+        background: transparent;
+
+        &:hover, &:focus {
+          // background: rgba(white, .6);
+          color: white;
+          border-color: white;
+        }
+      }
+    }
+
+    .submit-button {
+      background: $brand-color;
+      border-color: white;
+      color: white;
     }
   }
 }
