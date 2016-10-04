@@ -2,14 +2,14 @@ import { Template } from 'meteor/templating';
 import { ProductFeatures } from '/imports/api/docs/client.js';
 import './about.html';
 
-Template.about_content.onCreated(function () {
+Template.product_features.onCreated(function () {
   const self = this;
   self.autorun(() => {
     self.subscribe('productFeatures');
   });
 });
 
-Template.about_content.helpers({
+Template.product_features.helpers({
   productFeatures() {
     return ProductFeatures.find({});
   }

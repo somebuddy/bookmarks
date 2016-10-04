@@ -26,12 +26,15 @@
   </article>
 </template>
 
-<template name="about_content">
+<template name="product_features">
   <section class="product-features">
     {{#each productFeatures }}
       {{ > feature_template }}
     {{/each}}
   </section>
+</template>
+
+<template name="product_funds">
   <section class="funds">
     <header class="title">
       <div class="product-name">Site Ace</div>
@@ -69,10 +72,11 @@
       </div>
     </section>
   </section>
+</template>
+
+<template name="product_feedback">
   <section class="feedback">
-    <header>
-      Feedback
-    </header>
+    <header>Feedback</header>
     <form class="submit-feedback">
       <div class="input-field">
         <label>Name:</label>
@@ -88,5 +92,13 @@
       </div>
       <div class="submit-button">Send</div>
     </form>
+  </section>
+</template>
+
+<template name="about_content">
+  <section class="about-view-content">
+    {{ > product_features }}
+    {{ > product_funds }}
+    {{ > product_feedback }}
   </section>
 </template>
