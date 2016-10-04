@@ -1,19 +1,25 @@
-.funds {
-  @include flex-column;
-  @include flex-align(center, center);
-  position: relative;
-  margin: 6*$line-height auto 2*$line-height;
-  max-width: 40rem;
-  color: $text-color;
-  font-size: 1rem;
-  line-height: $line-height;
-  z-index: 10;
+@import 'features.scss';
 
+.about-view-content .funds {
+  width: $content-width;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 4*$line-height;
+  font-weight: 300;
+
+  @media (min-width: #{$desktop-breakpoint}) {
+    z-index: 10;
+    width: 100%;
+    margin: 0;
+  }
+
+  // Elements:
   > header {
     text-align: center;
     font-size: 1.2rem;
-    color: rgba($text-color, $secondary-opacity);
-    color: #000;
+    color: rgba($text-color, 1);
+    margin-bottom: 2*$line-height;
 
     .product-name {
       margin-bottom: $line-height/2;
@@ -30,23 +36,17 @@
   section.description,
   section.donate {
     font-size: 1.25rem;
-    line-height: $line-height;
     text-align: center;
-  }
-
-  section.description {
-    font-weight: 300;
-    margin: $line-height*2 0 0;
+    margin-bottom: $line-height;
   }
 
   section.donate {
     font-weight: 500;
     color: rgba($text-color, 1);
-    margin: $line-height 0;
 
     .sum, .users {
       font-weight: 700;
-      font-size: $line-height * 1.5;
+      font-size: 1.5em;
       line-height: 2*$line-height;
       margin: 0 $column-width;
       vertical-align: middle;
@@ -74,46 +74,38 @@
     }
   }
 
-  section.roadmap header {
-    text-align: center;
-    text-transform: uppercase;
-    font-size: .75rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    margin-bottom: $line-height/2;
-  }
+  section.roadmap {
+    header {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: $line-height/2;
+    }
 
-  section.roadmap .features {
-    @include flex-row;
-    margin-bottom: 2*$line-height;
+    .features {
+      @include flex-row;
+      margin-bottom: 2*$line-height;
 
-    .feature {
-      margin: $line-height/2 $column-width/2;
+      .feature {
+        @include feature-badge;
 
-      > .feature-title,
-      > .feature-description,
-      > .inner-features {
-        display: none;
-      }
+        &.current {
+          margin: 0 0 0 $column-width;
 
-      > .feature-icon {
-        @include size($child-feature-icon-size * 1.5, $child-feature-icon-size * 1.5);
-        @include flex-center;
-        font-size: $line-height * 1.25;
-        border: 3px solid rgba(white, 1);
-        border-radius: 50%;
-        background-color: $text-color;
-        color: #FFC801;
-        box-shadow: 2px 2px 6px rgba(0,0,0,.3);
+          & > .feature-icon {
+            @include size($feature-badge-size * 1.5, $feature-badge-size * 1.5);
+            font-size: $feature-badge-size * 0.625;
+          }
+
+          &:first-child { margin-left: 0; }
+        }
       }
     }
   }
 
-  @media (min-width: 60rem) {
-    margin: 0 (-$column-width);
-    max-width: 200%;
-    padding: 6*$line-height 2*$column-width 3*$line-height;
-
+  @media (min-width: #{$desktop-breakpoint}) {
     &:before, &:after {
       content: '';
       @include absolute(0, 0, 0, 0);
@@ -140,13 +132,9 @@
     > header .product-name { color: #000; }
 
     section.donate {
-      .sum, .users {
-        color: white;
-      }
+      .sum, .users { color: white; }
 
       .make-donation {
-        color: black;
-        background: white;
         background-color: black;
         color: white;
       }
@@ -158,7 +146,7 @@
         font-weight: 900;
       }
 
-      .features .feature > .feature-icon {
+      .features .feature.current > .feature-icon {
         background: black;
       }
     }

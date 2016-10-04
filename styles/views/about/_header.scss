@@ -10,7 +10,7 @@ $page-content-overlap: $line-height * 5 !default;
   margin-bottom: $page-content-overlap;
   color: $text-color;
 
-  @media (min-height: 60rem) {
+  @media (min-height: #{$desktop-breakpoint}) {
     margin-top: 0;
   }
 

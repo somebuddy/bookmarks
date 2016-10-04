@@ -13,10 +13,28 @@ $intense-text-color: rgba($text-color, 1);
 $secondary-text-color: rgba($text-color, $secondary-opacity);
 
 $badge-size: $line-height * 2;
-$child-feature-icon-size: $line-height * 2;
-$feature-max-width: 40rem;
+$feature-badge-size: $badge-size;
+
+$content-width: 40rem;
+$desktop-breakpoint: $content-width * 1.5;
 
 @import 'header.scss';
+
+.about-view-content {
+  margin: 0 (-$column-width);
+  font-size: 1rem;
+  line-height: $line-height;
+  color: $text-color;
+
+  > section {
+    @include flex-column;
+    @include flex-align(center, center);
+    position: relative;
+    padding: $line-height $column-width;
+    margin: 0 0 2*$line-height;
+  }
+}
+
 @import 'features.scss';
 @import 'funds.scss';
 @import 'feedback.scss';
