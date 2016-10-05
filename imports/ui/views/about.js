@@ -20,3 +20,17 @@ Template.feature_template.helpers({
     return ProductFeatures.findOne({ _id: id});
   },
 });
+
+Template.product_funds.onCreated(function () {
+  const self = this;
+  self.autorun(() => {
+    self.subscribe('productFeatures');
+  });
+});
+
+Template.product_funds.helpers({
+  currentFeatures() {
+    console.log(ProductFeatures.find({ stateClass: 'current' }).fetch());
+    return ProductFeatures.find({ stateClass: 'current' });
+  },
+});

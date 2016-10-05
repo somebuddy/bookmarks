@@ -7,7 +7,7 @@ const Product = {
     cssClass: 'keep',
     innerFeatures: [{
       title: 'Chrome',
-      description: 'Chrome browser extention to add, import, sync bookmarks',
+      description: 'Chrome browser extention to add, import, sync bookmarks.',
       iconClass: 'fa fa-chrome',
       stateClass: 'current',
     }, {
@@ -36,7 +36,7 @@ const Product = {
     }, {
       iconClass: 'fa fa-tags',
       title: 'Tags',
-      description: '',
+      description: 'Set tags to bookmarks, filter by tags.',
       stateClass: 'current',
     }, {
       iconClass: 'fa fa-search',
@@ -53,7 +53,7 @@ const Product = {
       iconClass: 'fa fa-google',
       stateClass: 'current',
       title: 'Google Drive storage',
-      description: ''
+      description: 'Use Google Drive as your personal storage for bookmark collections.'
     }, {
       iconClass: 'fa fa-dropbox',
       title: 'Dropbox storage',
