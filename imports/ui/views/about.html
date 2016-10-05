@@ -20,7 +20,7 @@
     <div class="feature-description">{{{ feature.description }}}</div>
     <section class="inner-features">
       {{#each feature.innerFeatures }}
-        {{ > feature_template feature=this widgetType="badge" }}
+        {{ > feature_template feature=(getProductFeature this) widgetType="badge" }}
       {{/each}}
     </section>
   </article>

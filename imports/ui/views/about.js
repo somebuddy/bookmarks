@@ -11,6 +11,12 @@ Template.product_features.onCreated(function () {
 
 Template.product_features.helpers({
   productFeatures() {
-    return ProductFeatures.find({});
-  }
+    return ProductFeatures.find({ parentId: { $exists: false }});
+  },
+});
+
+Template.feature_template.helpers({
+  getProductFeature(id) {
+    return ProductFeatures.findOne({ _id: id});
+  },
 });

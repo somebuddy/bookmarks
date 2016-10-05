@@ -6,22 +6,22 @@ const Product = {
     iconClass: 'fa fa-star-o',
     cssClass: 'keep',
     innerFeatures: [{
+      title: 'Chrome',
+      description: 'Chrome browser extention to add, import, sync bookmarks',
       iconClass: 'fa fa-chrome',
       stateClass: 'current',
-      title: 'Chrome',
-      description: 'Chrome browser extention to add, import, sync bookmarks'
     }, {
-      iconClass: 'fa fa-firefox',
       title: 'Firefox',
-      description: 'Firefox browser extention to add, import, sync bookmarks'
+      description: 'Firefox browser extention to add, import, sync bookmarks',
+      iconClass: 'fa fa-firefox',
     }, {
-      iconClass: 'fa fa-edge',
       title: 'Edge',
-      description: 'Edge browser extention to add, import, sync bookmarks'
+      description: 'Edge browser extention to add, import, sync bookmarks',
+      iconClass: 'fa fa-edge',
     }, {
-      iconClass: 'fa fa-safari',
       title: 'Safari',
-      description: 'Safari browser extention to add, import, sync bookmarks'
+      description: 'Safari browser extention to add, import, sync bookmarks',
+      iconClass: 'fa fa-safari',
     }],
   }, {
     name: 'organize',
