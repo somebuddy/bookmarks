@@ -2,7 +2,7 @@
 
 .about-view-content .feedback {
   overflow: hidden;
-  
+
   @media (min-width: #{$desktop-breakpoint}) {
     z-index: 0;
     padding-top: 4*$line-height;
@@ -12,14 +12,22 @@
   }
 
   // Elements:
+  &:after {
+    content: '';
+    @include absolute(0);
+    height: 2px;
+    width: $content-width;
+    background: rgba(0, 0, 0, .05);
+  }
+
   > header, .submit-feedback {
-    margin: $line-height 0 2*$line-height;
+    margin-top: 2*$line-height;
   }
 
   > header {
-    font-size: 1.5*$line-height;
-    line-height: 2*$line-height;
-    font-weight: 900;
+    font-size: $line-height;
+    line-height: $line-height;
+    font-weight: 700;
     font-family: 'Titillium Web', sans-serif;
     text-transform: uppercase;
   }
@@ -50,8 +58,9 @@
       border: none;
       font-size: inherit;
       line-height: inherit;
-      background: rgba(255,255,255,.1);
+      background: rgba(255,255,255,.2);
       border-bottom: 2px solid rgba($text-color, .1);
+      border-radius: 2px 2px 0 0;
       padding: $line-height/2 $column-width;
       transition: all .3s ease;
 

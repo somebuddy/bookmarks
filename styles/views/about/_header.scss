@@ -13,6 +13,16 @@ $page-content-overlap: $line-height * 5 !default;
   line-height: $line-height;
   text-align: center;
 
+  &:after {
+    content: '';
+    @include absolute($bottom: 3*$line-height, $left: 50%);
+    @include size(1em, 1em);
+    border-bottom: 3px solid rgba($brand-color, 0.75);
+    border-right: 3px solid rgba($brand-color, 0.75);
+    border-radius: 3px;
+    animation: scroll-down-indicator 10s infinite;
+  }
+
   .product-icon, .product-name {
     align-self: center;
     margin: $line-height 0;
@@ -50,5 +60,46 @@ $page-content-overlap: $line-height * 5 !default;
     font-size: 1.2 * $line-height;
     line-height: 2*$line-height;
     font-weight: 300;
+  }
+}
+
+@keyframes scroll-down-indicator {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -300%) rotate(45deg) scale(.1);
+  }
+  5% {
+    opacity: 1;
+  }
+  10% {
+    transform: translate(-50%, 0) rotate(45deg) scale(1);
+  }
+  11% {
+    opacity: 0;
+    transform: translate(-50%, -300%) rotate(45deg) scale(.1);
+  }
+  15% {
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-50%, 0) rotate(45deg) scale(1);
+  }
+  21% {
+    opacity: 0;
+    transform: translate(-50%, -300%) rotate(45deg) scale(.1);
+  }
+  25% {
+    opacity: 1;
+  }
+  30% {
+    transform: translate(-50%, 0) rotate(45deg) scale(1);
+  }
+  31% {
+    opacity: 0;
+    transform: translate(-50%, -300%) rotate(45deg) scale(.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -300%) rotate(45deg) scale(.1);
   }
 }

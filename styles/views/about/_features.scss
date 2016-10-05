@@ -22,6 +22,7 @@ $current-feature-color: #FFC801 !default;
   }
 
   // Elements:
+
   > .feature-icon {
     @include absolute(-1px, null, null, $column-width);
     @include size($badge-size, $badge-size*1.5);
@@ -61,6 +62,18 @@ $current-feature-color: #FFC801 !default;
     font-weight: 300;
     font-size: $line-height;
 
+    &:after {
+      content: '';
+      @include absolute($bottom: -2*$line-height);
+      height: 2px;
+      width: 100vw;
+      background: rgba(0, 0, 0, .025);
+    }
+
+    &:last-child:after {
+      content: none;
+    }
+
     > .feature-icon {
       @include size($feature-icon-desktop-size, $feature-icon-desktop-size);
       top: -.33333 * $feature-icon-desktop-size;
@@ -74,11 +87,13 @@ $current-feature-color: #FFC801 !default;
     > .feature-description { margin-bottom: $line-height * 2; }
 
     &:nth-child(2n+1) {
+      &:after { right: 0; }
       > .feature-icon { @include absolute(null, -10rem, null, auto); }
       > .feature-title, > .feature-description { text-align: left; }
     }
 
     &:nth-child(2n) {
+      &:after { left: 0; }
       > .feature-icon { @include absolute(null, auto, null, -10rem); }
       > .feature-title, > .feature-description { text-align: right; }
     }

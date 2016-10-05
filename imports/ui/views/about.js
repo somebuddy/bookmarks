@@ -30,7 +30,6 @@ Template.product_funds.onCreated(function () {
 
 Template.product_funds.helpers({
   currentFeatures() {
-    console.log(ProductFeatures.find({ stateClass: 'current' }).fetch());
     return ProductFeatures.find({ stateClass: 'current' });
   },
 });
