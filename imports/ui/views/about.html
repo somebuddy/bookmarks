@@ -14,13 +14,13 @@
 </template>
 
 <template name="feature_template">
-  <article class="feature {{ cssClass }} {{ stateClass }}">
-    <div class="feature-icon"><span class="{{ iconClass }}"></span></div>
-    <div class="feature-title">{{{ title }}}</div>
-    <div class="feature-description">{{{ description }}}</div>
+  <article class="feature {{ widgetType }} {{ feature.cssClass }} {{ feature.stateClass }}">
+    <div class="feature-icon"><span class="{{ feature.iconClass }}"></span></div>
+    <div class="feature-title">{{{ feature.title }}}</div>
+    <div class="feature-description">{{{ feature.description }}}</div>
     <section class="inner-features">
-      {{#each innerFeatures }}
-        {{ > feature_template }}
+      {{#each feature.innerFeatures }}
+        {{ > feature_template feature=this widgetType="badge" }}
       {{/each}}
     </section>
   </article>
@@ -29,7 +29,7 @@
 <template name="product_features">
   <section class="product-features">
     {{#each productFeatures }}
-      {{ > feature_template }}
+      {{ > feature_template feature=this widgetType="card" }}
     {{/each}}
   </section>
 </template>

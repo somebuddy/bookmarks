@@ -9,10 +9,10 @@ $current-feature-color: #FFC801 !default;
   @include flex-align(center, center);
   width: $content-width;
   max-width: 100%;
-  
+
   padding: 2*$line-height $column-width 2*$line-height ($badge-size + 2*$column-width);
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  
+
   @media (min-width: #{$desktop-breakpoint}) {
     @include flex-align(stretch);
     box-shadow: none;
@@ -20,7 +20,7 @@ $current-feature-color: #FFC801 !default;
     margin-top: 2*$line-height;
     margin-bottom: 6*$line-height;
   }
-  
+
   // Elements:
   > .feature-icon {
     @include absolute(-1px, null, null, $column-width);
@@ -50,11 +50,17 @@ $current-feature-color: #FFC801 !default;
 
   > .feature-title { font-size: 1.5em; }
   > .feature-description { font-size: 1em; }
-  
+
+  > .inner-features {
+    align-self: stretch;
+    @include flex-rows;
+    justify-content: flex-end;
+  }
+
   @media (min-width: #{$desktop-breakpoint}) {
     font-weight: 300;
     font-size: $line-height;
-    
+
     > .feature-icon {
       @include size($feature-icon-desktop-size, $feature-icon-desktop-size);
       top: -.33333 * $feature-icon-desktop-size;
@@ -66,7 +72,7 @@ $current-feature-color: #FFC801 !default;
 
     > .feature-title { line-height: $line-height*2; }
     > .feature-description { margin-bottom: $line-height * 2; }
-    
+
     &:nth-child(2n+1) {
       > .feature-icon { @include absolute(null, -10rem, null, auto); }
       > .feature-title, > .feature-description { text-align: left; }
@@ -80,7 +86,15 @@ $current-feature-color: #FFC801 !default;
 }
 
 @mixin feature-badge {
+  @include flex-column;
+  padding: 0;
   margin-left: $column-width;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  border-radius: 0;
   opacity: $secondary-opacity;
 
   > .feature-title,
@@ -111,13 +125,13 @@ $current-feature-color: #FFC801 !default;
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
   }
-  
+
   @media (min-width: #{$desktop-breakpoint}) {
     & > .feature-icon {
       @include size($feature-badge-size * 1.5, $feature-badge-size * 1.5);
       font-size: $feature-badge-size * 0.625;
     }
-    
+
     &.current { margin-left: 0; }
   }
 }
@@ -145,21 +159,10 @@ $current-feature-color: #FFC801 !default;
 
 .about-view-content .product-features {
   padding: 0;
-  
-  > .feature {
-    @include feature-card;
-    
-    > .inner-features {
-      align-self: stretch;
-      @include flex-rows;
-      justify-content: flex-end;
 
-      .feature {
-        @include feature-badge;
-      }
-    }
-  }
-  
+  .feature.card { @include feature-card; }
+  .feature.badge { @include feature-badge; }
+
   @include feature-card-colorization(keep, #ffeb3b, $text-color);
   @include feature-card-colorization(organize, #32D390, $text-color);
   @include feature-card-colorization(storage, #B1D5EB, $text-color);
