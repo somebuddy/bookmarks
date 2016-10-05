@@ -1,8 +1,12 @@
+@import 'buttons.scss';
+
 .about-view-content .feedback {
+  overflow: hidden;
+  
   @media (min-width: #{$desktop-breakpoint}) {
     z-index: 0;
     padding-top: 4*$line-height;
-    margin: 0 (-$column-width) (-$line-height);
+    margin: 0 0 (-$line-height);
     background: #333;
     color: rgba(white, $secondary-opacity);
   }
@@ -63,19 +67,10 @@
   }
 
   .submit-button {
-    padding: $line-height/2 2*$column-width;
-    border: 2px solid;
     color: $brand-color;
-    text-transform: uppercase;
-    font-size: .75rem;
+    background: rgba($brand-color, .1);
     margin: $line-height/2 auto $line-height 0;
-    letter-spacing: 2px;
-    opacity: $secondary-opacity;
-    transition: all .3s ease;
-
-    &:hover {
-      opacity: 1;
-    }
+    @include about-view-button;
   }
 
   @media (min-width: #{$desktop-breakpoint}) {
@@ -97,7 +92,6 @@
 
     .submit-button {
       background: $brand-color;
-      border-color: white;
       color: white;
     }
   }

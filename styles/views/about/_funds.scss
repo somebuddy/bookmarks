@@ -1,4 +1,5 @@
 @import 'features.scss';
+@import 'buttons.scss';
 
 .about-view-content .funds {
   width: $content-width;
@@ -7,7 +8,7 @@
   margin-right: auto;
   padding-top: 4*$line-height;
   font-weight: 300;
-
+  
   @media (min-width: #{$desktop-breakpoint}) {
     z-index: 10;
     width: 100%;
@@ -43,6 +44,7 @@
   section.donate {
     font-weight: 500;
     color: rgba($text-color, 1);
+    overflow: hidden;
 
     .sum, .users {
       font-weight: 700;
@@ -56,21 +58,10 @@
     .users { color: #36a7d7; }
 
     .make-donation {
-      display: inline-block;
       margin: $line-height*2 auto;
-      padding: $line-height/2 $column-width*2;
-      border: 2px solid;
       color: $brand-color;
-      font-size: .75rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      opacity: $secondary-opacity;
-      cursor: pointer;
-      transition: all .3s ease;
-
-      &:hover {
-        opacity: 1;
-      }
+      background: rgba($brand-color, .1);
+      @include about-view-button;
     }
   }
 

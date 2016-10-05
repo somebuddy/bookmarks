@@ -1,0 +1,47 @@
+@mixin about-view-button {
+  position: relative;
+  display: inline-block;
+  padding: $line-height/2 $column-width*2;
+  
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  
+  &:after,
+  &:before {
+    content: '';
+    @include absolute(0, 0, 0, 0);
+    z-index: 100;
+    opacity: 0;
+    background: transparent;
+    border: 2px solid;
+    visibility: hidden;
+    transition: transform 0.5s ease,
+                opacity 0.25s ease 0.25s;
+  }
+
+  &:after {
+    border-left: none;
+    border-right: none;
+    transform: skew(89deg);
+  }
+  &:before {
+    border-top: none;
+    border-bottom: none;
+    transform: skewY(-80deg);
+  }
+
+  &:hover {
+    &:after,
+    &:before {
+      opacity: 1;
+      visibility: visible;
+      transition: transform 0.5s ease,
+                  opacity 0.2s ease;
+    }
+
+    &:after { transform: skew(0deg); }
+    &:before { transform: skewY(0deg); }
+  }
+}
