@@ -112,7 +112,6 @@ $current-feature-color: #FFC801 !default;
   border-radius: 0;
   opacity: $secondary-opacity;
 
-  > .feature-title,
   > .feature-description,
   > .inner-features {
     display: none;
@@ -125,6 +124,15 @@ $current-feature-color: #FFC801 !default;
     background: rgba($text-color, .05);
     border-radius: 50%;
     font-size: $feature-badge-size/2;
+  }
+
+  > .feature-title {
+    font-size: .75rem;
+    padding-top: $line-height/2;
+    max-width: $feature-badge-size;
+    font-weight: 700;
+    word-break: break-word;
+    white-space: normal;
   }
 
   &.current {
@@ -145,6 +153,11 @@ $current-feature-color: #FFC801 !default;
     & > .feature-icon {
       @include size($feature-badge-size * 1.5, $feature-badge-size * 1.5);
       font-size: $feature-badge-size * 0.625;
+    }
+
+    & > .feature-title {
+      font-size: .875rem;
+      max-width: $feature-badge-size * 1.5;
     }
 
     &.current { margin-left: 0; }
