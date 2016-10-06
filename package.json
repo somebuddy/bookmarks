@@ -70,6 +70,7 @@
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "bip21": "^1.1.2",
     "cheerio": "^0.22.0",
     "meteor-node-stubs": "~0.2.0",
     "phantomjs-prebuilt": "^2.1.12",
