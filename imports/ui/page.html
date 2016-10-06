@@ -1,5 +1,5 @@
 <template name="page">
-  <div class="page overlap-header">
+  <div class="page overlap-header {{ currentRouteName }}">
     {{ > Template.dynamic template=nav }}
     {{ > Template.dynamic template=header }}
     <section class="content wide">
