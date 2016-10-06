@@ -6,20 +6,20 @@ const Product = {
     iconClass: 'fa fa-star-o',
     cssClass: 'keep',
     innerFeatures: [{
-      title: 'Chrome',
+      title: 'Chrome extention',
       description: 'Chrome browser extention to add, import, sync bookmarks.',
       iconClass: 'fa fa-chrome',
       stateClass: 'current',
     }, {
-      title: 'Firefox',
+      title: 'Firefox extention',
       description: 'Firefox browser extention to add, import, sync bookmarks',
       iconClass: 'fa fa-firefox',
     }, {
-      title: 'Edge',
+      title: 'Edge extention',
       description: 'Edge browser extention to add, import, sync bookmarks',
       iconClass: 'fa fa-edge',
     }, {
-      title: 'Safari',
+      title: 'Safari extention',
       description: 'Safari browser extention to add, import, sync bookmarks',
       iconClass: 'fa fa-safari',
     }],
@@ -52,15 +52,15 @@ const Product = {
     innerFeatures: [{
       iconClass: 'fa fa-google',
       stateClass: 'current',
-      title: 'Google Drive storage',
+      title: 'Google Drive',
       description: 'Use Google Drive as your personal storage for bookmark collections.'
     }, {
       iconClass: 'fa fa-dropbox',
-      title: 'Dropbox storage',
+      title: 'Dropbox',
       description: ''
     }, {
       iconClass: 'fa fa-windows',
-      title: 'OneDrive storage',
+      title: 'OneDrive',
       description: ''
     }, {
       iconClass: 'fa fa-database',
@@ -68,7 +68,7 @@ const Product = {
       description: ''
     }, {
       iconClass: 'fa fa-exchange',
-      title: 'Import/export bookmarks',
+      title: 'Import and export',
       description: ''
     }],
   }, {
@@ -87,15 +87,15 @@ const Product = {
       description: ''
     }, {
       iconClass: 'fa fa-envelope',
-      title: 'Subscribe public collection updates',
+      title: 'Collection subscription',
       description: ''
     }, {
       iconClass: 'fa fa-comments',
-      title: 'Comment bookmarks',
+      title: 'Comments',
       description: ''
     }, {
       iconClass: 'fa fa-star',
-      title: 'Vote for bookmarks',
+      title: 'Voting',
       description: ''
     }],
   }],

@@ -48,7 +48,7 @@ $page-content-overlap: $line-height * 5 !default;
 
   .product-description {
     flex: 1 1 100%;
-    font-size: .8em;
+    font-size: .75em;
     opacity: $secondary-opacity;
   }
 
@@ -57,7 +57,7 @@ $page-content-overlap: $line-height * 5 !default;
   }
 
   @media (min-width: #{$desktop-breakpoint}) {
-    font-size: 1.2 * $line-height;
+    font-size: 1.333333333 * $line-height;
     line-height: 2*$line-height;
     font-weight: 300;
   }
