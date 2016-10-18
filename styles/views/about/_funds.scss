@@ -1,21 +1,22 @@
+@import '{}/styles/helpers/no-select.scss';
+@import '{}/styles/resets/mixins.scss';
 @import 'features.scss';
 @import 'buttons.scss';
 
+$link-color: #36a7d7;
+
 .about-view-content .funds {
-  width: $content-width;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
+  width: 100%;
   padding-top: 4*$line-height;
   font-weight: 300;
-  
+
   @media (min-width: #{$desktop-breakpoint}) {
     z-index: 10;
-    width: 100%;
-    margin: 0;
   }
 
   // Elements:
+
   > header {
     text-align: center;
     font-size: 1.2rem;
@@ -44,7 +45,6 @@
   section.donate {
     font-weight: 500;
     color: rgba($text-color, 1);
-    overflow: hidden;
 
     .sum, .users {
       font-weight: 700;
@@ -55,14 +55,12 @@
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     }
     .sum { color: #FFC801; }
-    .users { color: #36a7d7; }
+    .users { color: $link-color; }
+  }
 
-    .make-donation {
-      margin: $line-height*2 auto;
-      color: $brand-color;
-      background: rgba($brand-color, .1);
-      @include about-view-button;
-    }
+  section.donation {
+    align-self: stretch;
+    margin: $line-height (-$column-width);
   }
 
   section.roadmap {
@@ -124,11 +122,6 @@
 
     section.donate {
       .sum, .users { color: white; }
-
-      .make-donation {
-        background-color: black;
-        color: white;
-      }
     }
 
     section.roadmap {
@@ -139,6 +132,347 @@
 
       .features .feature.current > .feature-icon {
         background: black;
+      }
+    }
+  }
+}
+
+// Components: Currency Options
+.currency-options {
+  font-size: $line-height/2;
+  font-weight: 400;
+
+  > header, .option {
+    display: inline-block;
+    vertical-align: middle;
+    padding: $line-height/2 0;
+    margin: 0 $column-width/2;
+  }
+
+  > header { font-weight: 500; }
+
+  .option {
+    opacity: $secondary-opacity;
+    @include no-select;
+    cursor: pointer;
+    transition: all .5s ease;
+  }
+
+  .option.selected {
+    font-size: 1.5rem;
+    color: $brand-color;
+    opacity: 1;
+  }
+}
+
+// Components: payment amount options
+.amount-options {
+  @include flex-rows;
+  justify-content: center;
+  padding: 0 $column-width;
+  margin: $line-height/2 0;
+
+  .value {
+    flex: 1 0 (7*$column-width);
+    font-size: $column-width;
+    padding: $line-height/2 $column-width/2;
+    border: 1px solid transparent;
+    text-align: center;
+    @include no-select;
+    cursor: pointer;
+    transition: box-shadow .2s ease, transform .2s ease, background .2s ease .2s, border-color .2s ease .5s;
+
+    .main {
+      font-size: 1.25em;
+      small { font-size: .75em; }
+    }
+
+    .secondary { font-size: .75em; }
+
+    &:hover {
+      transform: scale(1.2);
+      background: rgba(255,255,255, 1);
+      border-color: rgba($text-color, .2);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: border-color .1s ease, background .3s ease .15s, transform .3s ease .4s, box-shadow .3s ease .4s;
+    }
+
+    &.selected {
+      color: $brand-color;
+      border-color: $brand-color;
+      font-weight: 700;
+    }
+
+    @media (min-width: #{22*$column-width}) {
+      flex: 1 1 26%;
+    }
+
+    @media (min-width: #{44*$column-width}) {
+      flex: 0 0 (7*$column-width);
+    }
+
+    @media (min-width: #{60*$column-width}) {
+      flex: 0 0 (10*$column-width);
+      font-size: $line-height;
+      padding: $line-height $column-width;
+    }
+  }
+
+  @media (min-width: #{44*$column-width}) {
+    padding: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+    .value {
+      padding-top: $line-height;
+      padding-bottom: $line-height;
+      margin-top: -1px;
+      margin-bottom: -1px;
+      border-left-color: rgba(0,0,0,.1);
+      border-right-color: rgba(0,0,0,.1);
+
+      &:first-child { border-left: none; }
+      &:last-child { border-right: none; }
+    }
+  }
+}
+
+// Components: payment amount input
+.amount-input {
+  @include flex-column;
+  @include flex-align(center, center);
+  font-size: $line-height/2;
+  line-height: $line-height/2;
+
+  header {
+    @include relative;
+    margin: 0 0 $line-height;
+    font-weight: 400;
+
+    &.separator {
+      font-size: 1.25em;
+      line-height: $line-height;
+      text-transform: uppercase;
+      margin-bottom: $line-height/2;
+
+      &:after, &:before {
+        content: '';
+        @include absolute(50%);
+        @include size($column-width, 2px);
+        margin: -1px $column-width/2 0;
+        background: rgba(0,0,0,.3);
+      }
+
+      &:before { right: 100%; }
+      &:after { left: 100%; }
+    }
+
+  }
+
+  @media (min-width: 60rem) {
+    font-size: $line-height;
+    line-height: $line-height;
+    margin-top: $line-height;
+
+    header { font-weight: 300; }
+    header.separator { margin-bottom: $line-height; }
+  }
+
+  input {
+    align-self: stretch;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0 $column-width;
+    padding: $line-height/2 $column-width calc(#{$line-height/2} - 2px);
+    border: none;
+    border-bottom: 2px solid rgba($text-color, .1);
+
+    background: transparent;
+    font-size: $line-height;
+    font-weight: 500;
+    line-height: inherit;
+    background: rgba(255,255,255,.2);
+    border-radius: 2px 2px 0 0;
+
+    text-align: center;
+    transition: all .3s ease;
+
+    &, &:hover, &:focus { outline: none; }
+
+    &:hover, &:focus {
+      color: $link-color;
+      border-color: rgba($link-color, .3);
+    }
+
+    @media (min-width: #{$content-width + 2*$column-width}) {
+      align-self: center;
+      width: $content-width;
+    }
+  }
+}
+
+// Components: payment request
+.payment-request {
+  @include flex-column;
+  @include flex-align(center, center);
+  margin: 2*$line-height 0;
+
+  header {
+    margin-bottom: $line-height;
+    font-weight: 400;
+    font-size: 1rem;
+    font-size: 1.25rem;
+  }
+
+  .address {
+    @include flex-rows;
+    justify-content: center;
+    @include reset-link(value);
+
+    .value, .copy-button {
+      padding: $line-height/2 $column-width;
+      margin-bottom: $line-height;
+      border: 2px solid transparent;
+      font-size: $line-height/2;
+      font-weight: 700;
+
+      cursor: pointer;
+      @include no-select;
+      transition: all .3s ease;
+
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
+
+    .value {
+      background: rgba(255,255,255,.3);
+      border-radius: 4px;
+      margin-bottom: $line-height/2;
+
+      &:hover, &:focus {
+        background: rgba(255,255,255,.5);
+        color: $link-color;
+        border-color: white;
+      }
+    }
+
+    .copy-button {
+      background: rgba(255,255,255,.9);
+      border-radius: 4px;
+
+      .icon { font-size: 1rem; }
+
+      &:hover {
+        background: rgba(0,0,0,.7);
+        color: white;
+      }
+    }
+
+    @media (min-width: 22rem) {
+      flex-wrap: nowrap;
+
+      .value {
+        border-radius: 4px 0 0 4px;
+        margin-bottom: $line-height;
+      }
+
+      .copy-button {
+        border-radius: 0 4px 4px 0;
+        .title { display: none; }
+      }
+    }
+  }
+
+  .qr-code {
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 4px;
+    background: white;
+    border-radius: 4px;
+    transition: all .3s ease;
+
+    &:hover {
+      border-color: rgba(0,0,0,.7);
+    }
+  }
+
+  .waiting {
+    margin-top: $line-height/2;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba($text-color, $secondary-opacity);
+  }
+
+  @media (min-width: #{$desktop-breakpoint}) {
+    @include relative;
+    margin: $line-height*2 auto;
+    max-width: $content-width;
+    padding-left: calc(192px + #{$column-width});
+    padding-bottom: $line-height;
+    min-height: 192px;
+
+    .qr-code {
+      @include absolute(0, null, 0, 0);
+    }
+
+    .address {
+      align-self: stretch;
+
+      .value {
+        flex: 1 1 auto;
+      }
+
+      .copy-button .title {
+        margin-left: $column-width/2;
+        display: inline-block;
+      }
+    }
+
+    .waiting {
+      @include absolute(null, 0, 0);
+    }
+  }
+}
+
+.donation {
+  overflow: hidden;
+  text-align: center;
+
+  .make-donation {
+    margin: $line-height*2 auto;
+    color: $brand-color;
+    background: rgba($brand-color, .1);
+    @include about-view-button;
+  }
+
+  .payment-options {
+    @include flex-column;
+
+    > header {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: $line-height;
+    }
+  }
+
+  @media (min-width: #{$desktop-breakpoint}) {
+    .make-donation {
+      background-color: black;
+      color: white;
+    }
+
+    .payment-options {
+      .currency-options {
+        font-size: 1rem;
+        font-weight: 500;
+        header { font-weight: 700 };
+      }
+
+      > header {
+        font-size: 1.5rem;
+        font-weight: 300;
       }
     }
   }
