@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import bip21 from 'bip21';
 import { HTTP } from 'meteor/http';
 
@@ -37,7 +38,15 @@ Template.product_funds.helpers({
   },
 });
 
+Template.make_donation.onCreated(function makeDonationOnCreated() {
+  this.fundState = new ReactiveDict();
+  this.fundState.set('showPaymentForm', false);
+});
+
 Template.make_donation.helpers({
+  showPaymentForm() {
+    return Template.instance().fundState.get('showPaymentForm');
+  },
   paymentOptions() {
     // let sum;
     // HTTP.get('https://blockchain.info/tobtc?currency=USD&value=1', (error, result) => {
@@ -77,5 +86,11 @@ Template.make_donation.helpers({
       label: 'Site Ace',
       message: 'Donation for Site Ace service',
     }));
+  }
+});
+
+Template.make_donation.events({
+  'click .make-donation' () {
+    Template.instance().fundState.set('showPaymentForm', true);
   }
 });

@@ -64,6 +64,8 @@ $link-color: #36a7d7;
   }
 
   section.roadmap {
+    margin: $line-height 0;
+
     header {
       text-align: center;
       text-transform: uppercase;
@@ -440,14 +442,66 @@ $link-color: #36a7d7;
   text-align: center;
 
   .make-donation {
-    margin: $line-height*2 auto;
+    z-index: 10;
+    margin: $line-height auto;
     color: $brand-color;
     background: rgba($brand-color, .1);
     @include about-view-button;
+    transform: scale(.01);
+    opacity: 0;
+    transition: transform .3s ease, opacity .3s ease .3s;
+
+    &.visible {
+      opacity: 1;
+      transform: scale(1);
+      transition: transform .3s ease .3s, opacity .3s ease;
+    }
+  }
+
+  .payment-form {
+    @include relative;
+    overflow: hidden;
+    max-height: 1px;
+    margin-top: -2*$line-height;
+    margin-bottom: 2*$line-height;
+    opacity: 0;
+
+    &:after, &:before {
+      content: '';
+      opacity: 0;
+      background: red;
+      height: $line-height/2;
+    }
+
+    &:before {
+      @include absolute(0, 50%, null, 50%);
+      background: linear-gradient(to bottom, rgba(0,0,0, .3) 1px, rgba(0, 0, 0, .1) 1px, transparent);
+    }
+
+    &:after {
+      @include absolute(null, 50%, 0, 50%);
+      background: linear-gradient(to top, rgba(0,0,0, .3) 1px, rgba(0, 0, 0, .1) 1px, transparent);
+    }
+
+    &.visible {
+      // box-shadow: inset 0 3px 6px 9px rgba(0,0,0,0.05);
+      opacity: 1;
+      max-height: 52*$line-height;
+      background: rgba(0,0,0,.05);
+      transition: opacity .1s ease .2s, max-height 3s ease .7s, background .3s ease 2s;
+
+      &:after, &:before {
+        opacity: 1;
+        left: 0;
+        right: 0;
+        transition: opacity .1s ease .2s, left .5s ease .3s, right .5s ease .3s;
+      }
+    }
   }
 
   .payment-options {
     @include flex-column;
+    margin-top: $line-height;
 
     > header {
       text-align: center;

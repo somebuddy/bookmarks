@@ -36,8 +36,9 @@
 
 <template name="make_donation">
   <section class="donation">
-    <div class="make-donation">Donate bitcoin</div>
-    <div class="payment-options">
+    <div class="make-donation {{#unless showPaymentForm}}visible{{/unless}}">Donate bitcoin</div>
+    <div class="payment-form {{#if showPaymentForm}}visible{{/if}}">
+      <div class="payment-options">
       <header>Choose your donation:</header>
       <div class="currency-options">
         <header>in</header>
@@ -58,7 +59,7 @@
         <input name="donate-amount" type="number" step="0.002" min="0" placeholder="Please input amount bitcoins you want to donate..." value="0.025" />
       </div>
     </div>
-    <div class="payment-request">
+      <div class="payment-request">
       <header class="name">Please send <strong>{{ selectedAmount }} BTC</strong> to bitcoin address:</header>
       <div class="address">
         <a href="{{ getBitcoinURI 0.01 }}" class="value" target="_blank">184fyZejiSTBChJuQdf86yiDjBG7PYo5GN</a>
@@ -71,6 +72,7 @@
         <img src="https://chart.googleapis.com/chart?chs=180x180&chld=L|2&cht=qr&chl={{ getBitcoinQR 0.01 }}" />
       </a>
       <div class="waiting">10:00</div>
+    </div>
     </div>
   </section>
 </template>
