@@ -484,10 +484,9 @@ $link-color: #36a7d7;
     }
 
     &.visible {
-      // box-shadow: inset 0 3px 6px 9px rgba(0,0,0,0.05);
       opacity: 1;
       max-height: 52*$line-height;
-      background: rgba(0,0,0,.05);
+      background: rgba(0,0,0,.09);
       transition: opacity .1s ease .2s, max-height 3s ease .7s, background .3s ease 2s;
 
       &:after, &:before {

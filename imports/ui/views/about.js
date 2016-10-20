@@ -1,3 +1,5 @@
+/* global _ */
+
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import bip21 from 'bip21';
@@ -41,11 +43,16 @@ Template.product_funds.helpers({
 Template.make_donation.onCreated(function makeDonationOnCreated() {
   this.fundState = new ReactiveDict();
   this.fundState.set('showPaymentForm', false);
+  this.fundState.set('currency', 'BTC');
+  this.fundState.set('value', '0.005');
 });
 
 Template.make_donation.helpers({
   showPaymentForm() {
     return Template.instance().fundState.get('showPaymentForm');
+  },
+  currentValue() {
+    return Template.instance().fundState.get('value');
   },
   paymentOptions() {
     // let sum;
@@ -90,7 +97,14 @@ Template.make_donation.helpers({
 });
 
 Template.make_donation.events({
-  'click .make-donation' () {
-    Template.instance().fundState.set('showPaymentForm', true);
-  }
+  'click .make-donation'(event, templateInstance) {
+    templateInstance.fundState.set('showPaymentForm', true);
+  },
+  'click .amount-options > .value' (event, templateInstance) {
+    templateInstance.fundState.set('value', this.amount);
+  },
+  'input #donate-amount-input': _.debounce((event, templateInstance) => {
+    console.log('input:', event.currentTarget.value);
+    templateInstance.fundState.set('value', event.currentTarget.value);
+  }, 500)
 });
