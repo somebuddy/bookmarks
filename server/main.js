@@ -4,6 +4,7 @@ import '/imports/api/comments/server';
 import '/imports/api/personal/server';
 import '/imports/api/webshots/server';
 import '/imports/api/docs/server';
+import { Funders, FundTransactions } from '/imports/api/funds/server';
 import '/imports/api/collections.js';
 
 Meteor.startup(() => {
@@ -35,5 +36,14 @@ Meteor.startup(() => {
     Meteor.call('addWebsite', 'github.org');
     Meteor.call('addWebsite', 'bitbucket.org');
     Meteor.call('addWebsite', 'doctorwhotv.co.uk');
+  }
+
+  if (!Funders.findOne()) {
+    console.log('No funders');
+  }
+
+  if (!FundTransactions.findOne()) {
+    console.log('No fund transactions');
+    Meteor.call('addFundTransaction', { amount: 0.001, message: 'Product donation'});
   }
 });

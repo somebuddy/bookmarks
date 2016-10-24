@@ -500,7 +500,7 @@ $link-color: #36a7d7;
 
   .payment-options {
     @include flex-column;
-    margin-top: $line-height;
+    margin-top: 2*$line-height;
 
     > header {
       text-align: center;
