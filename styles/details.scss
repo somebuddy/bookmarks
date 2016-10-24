@@ -1,5 +1,6 @@
 @import 'layout/flex';
 @import 'layout/mixins';
+@import 'helpers/box-shadow';
 
 $line-height: 1.5rem !default;
 $column-width: 1rem !default;
@@ -88,7 +89,7 @@ $url-color: #0277BD;
   @media (min-width: 40rem) {
     padding: 0 $column-width $line-height*3;
     margin: 0;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    @include box_shadow(4);
 
     > nav {
       > .close-button {

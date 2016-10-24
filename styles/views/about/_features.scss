@@ -1,3 +1,5 @@
+@import '{}/styles/helpers/box-shadow.scss';
+
 $content-width: 40rem !default;
 $feature-icon-desktop-size: 8*$line-height;
 $feature-badge-size: 2*$line-height !default;
@@ -11,7 +13,7 @@ $current-feature-color: #FFC801 !default;
   max-width: 100%;
 
   padding: 2*$line-height $column-width 2*$line-height ($badge-size + 2*$column-width);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  @include box-shadow(2);
 
   @media (min-width: #{$desktop-breakpoint}) {
     @include flex-align(stretch);
@@ -173,7 +175,7 @@ $current-feature-color: #FFC801 !default;
       background-color: $text-color;
       color: $current-feature-color;
       border: 3px solid white;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      @include box-shadow(2);
     }
   }
 
