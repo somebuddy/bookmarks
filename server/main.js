@@ -4,8 +4,10 @@ import '/imports/api/comments/server';
 import '/imports/api/personal/server';
 import '/imports/api/webshots/server';
 import '/imports/api/docs/server';
+import { ProductFeedbacks } from '/imports/api/feedback/server';
 import { Funders, FundTransactions } from '/imports/api/funds/server';
 import '/imports/api/collections.js';
+
 
 Meteor.startup(() => {
   Websites._ensureIndex({ url: 1 });
@@ -45,5 +47,10 @@ Meteor.startup(() => {
   if (!FundTransactions.findOne()) {
     console.log('No fund transactions');
     Meteor.call('addFundTransaction', { amount: 0.001, message: 'Product donation'});
+  }
+
+  if (!ProductFeedbacks.findOne()) {
+    console.log('No feedback yet');
+    Meteor.call('addProductFeedback', { message: 'Initial Feedback' });
   }
 });
